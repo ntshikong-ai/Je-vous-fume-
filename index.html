@@ -138,7 +138,7 @@
         <h2>Présentation</h2>
         <p>Cette <strong>Série B</strong> est entièrement nouvelle et couvre, sans exception, les notions listées dans le programme Excellentia sur 15 jours (J1 → J13).</p>
         <ul>
-          <li><strong>Culture Générale</strong> — Nobel, UE, OTAN, UA, CIRGL, COMESA, SADC, CEPGL, UDEAC, ONU/SDN, OIF, RDC (provinces, constitutions, anciennes appellations), inventions, ICCN</li>
+          <li><strong>Culture Générale</strong> — La RDC (histoire, institutions, géographie), organisations internationales, l'Afrique et le monde</li>
           <li><strong>Français</strong> — Compréhension de texte, nature/fonction, subordonnées, figures, lexique, conjugaison difficile, participe passé, pluriels, expressions pièges, auteurs</li>
           <li><strong>Anglais</strong> — Compréhension de texte, relatives, conditionals, tags, modals, articles, prépositions, temps, gerund, for/since, few/little, reported speech, passive, reflexive, plurals, collocations, phrasal verbs</li>
           <li><strong>Mathématiques</strong> — Domaines, limites, L'Hôpital, asymptotes, parité, polynômes (Viète, Horner), logarithmes, dérivées composées, continuité, bijectivité, composition, relations, géométrie, <strong>logique complète</strong> (implication, contraposée, quantificateurs, modus ponens/tollens, biais)</li>
@@ -243,31 +243,31 @@ const ENGLISH_TEXT = `
 /* ===================== QUESTIONS ===================== */
 const QUESTIONS = [
   /* ---------- CULTURE GÉNÉRALE (25) ---------- */
-  {section:'culture',q:"Alfred Nobel a rédigé son testament instituant les prix en :",options:["1885","1890","1895","1901"],correct:2},
-  {section:'culture',q:"Le prix Nobel de la Paix est décerné par :",options:["L'Académie suédoise","Le Comité Nobel norvégien","Le Parlement européen","L'ONU"],correct:1},
-  {section:'culture',q:"Le prix Nobel d'économie a été ajouté par la Banque de Suède en :",options:["1945","1958","1968","1975"],correct:2},
-  {section:'culture',q:"Combien de membres compte actuellement l'Union européenne ?",options:["25","27","28","30"],correct:1},
-  {section:'culture',q:"Le traité de Lisbonne est entré en vigueur en :",options:["2007","2009","2011","2013"],correct:1},
-  {section:'culture',q:"L'article de l'OTAN prévoyant la défense collective est :",options:["Article 2","Article 3","Article 5","Article 7"],correct:2},
-  {section:'culture',q:"Combien de pays compte l'OTAN depuis 2024 ?",options:["28","30","32","34"],correct:2},
-  {section:'culture',q:"Le premier Secrétaire général de l'ONU était :",options:["Dag Hammarskjöld","Trygve Lie","U Thant","Kurt Waldheim"],correct:1},
-  {section:'culture',q:"La CIRGL a été créée en :",options:["1999","2004","2008","2012"],correct:1},
-  {section:'culture',q:"Le COMESA a été créé en :",options:["1981","1994","2000","2005"],correct:1},
-  {section:'culture',q:"Le siège du COMESA est à :",options:["Gaborone","Lusaka","Nairobi","Kampala"],correct:1},
-  {section:'culture',q:"La SADC est l'héritière de :",options:["La SADCC","Le COMESA","L'UDEAC","La CEEAC"],correct:0},
-  {section:'culture',q:"Le CEPGL a été créé en :",options:["1966","1976","1986","1996"],correct:1},
-  {section:'culture',q:"L'UDEAC a été remplacée par :",options:["La CEMAC","La CEEAC","La SADC","Le COMESA"],correct:0},
-  {section:'culture',q:"Combien de provinces la RDC compte-t-elle depuis 2015 ?",options:["11","21","26","30"],correct:2},
-  {section:'culture',q:"Le chef-lieu de la province du Kongo-Central est :",options:["Boma","Matadi","Muanda","Inkisi"],correct:1},
-  {section:'culture',q:"La Constitution de Luluabourg date de :",options:["1960","1964","1967","1974"],correct:1},
-  {section:'culture',q:"L'ICCN a été créé en :",options:["1985","1994","2001","2010"],correct:1},
+  {section:'culture',q:"De 1885 à 1908, le Congo portait le nom de :",options:["République Démocratique du Congo","État Indépendant du Congo","République du Zaïre","République du Congo"],correct:1},
+  {section:'culture',q:"L'organisme de l'ONU qui s'occupe essentiellement de l'enfance est :",options:["UNESCO","OMS","UNICEF","FAO"],correct:2},
+  {section:'culture',q:"L'organisme des Nations Unies qui s'occupe de l'éducation, la science et la culture s'appelle :",options:["OMS","FAO","UNESCO","FMI"],correct:2},
+  {section:'culture',q:"L'attribution qui est exclusivement réservée au Parlement est :",options:["Désigner les députés","Respecter la constitution","Voter des lois","Organiser les élections"],correct:2},
+  {section:'culture',q:"Le facilitateur Eden Kodjo, désigné par l'Union Africaine en vue d'amorcer le dialogue national inclusif en RDC, est de nationalité :",options:["camerounaise","ivoirienne","togolaise","ougandaise"],correct:2},
+  {section:'culture',q:"Le pays d'origine de Moussa Faki, Président de la Commission de l'Union Africaine, est :",options:["Tchad","Mali","Gabon","Côte d'Ivoire"],correct:0},
+  {section:'culture',q:"L'élément constitutif du nationalisme est :",options:["La croyance à une histoire commune","Le loyalisme envers les autorités","L'amour de la patrie","Le respect du bien d'autrui"],correct:0},
+  {section:'culture',q:"Le seul pays au monde qui a supprimé son armée en 1949 est :",options:["Panama","Mexique","Cuba","Costa-Rica"],correct:3},
+  {section:'culture',q:"La capitale de la province du Kasaï-Oriental est :",options:["Kananga","Mbuji-Mayi","Tshikapa","Luebo"],correct:1},
   {section:'culture',q:"Le premier parc national créé en Afrique est :",options:["Le parc Kruger","Le parc Albert (Virunga)","Le parc Serengeti","Le parc de Yellow Stone"],correct:1},
-  {section:'culture',q:"L'inventeur du vaccin contre la variole est :",options:["Louis Pasteur","Edward Jenner","Alexander Fleming","Robert Koch"],correct:1},
-  {section:'culture',q:"La première Conférence des Nations unies sur l'environnement s'est tenue à Stockholm en :",options:["1965","1972","1982","1992"],correct:1},
-  {section:'culture',q:"L'Accord de Paris sur le climat a été adopté en :",options:["2009","2012","2015","2018"],correct:2},
-  {section:'culture',q:"Le WWF a été fondé en :",options:["1948","1961","1972","1985"],correct:1},
+  {section:'culture',q:"L'ancienne appellation de la ville de Kisangani était :",options:["Coquilhatville","Stanleyville","Élisabethville","Léopoldville"],correct:1},
   {section:'culture',q:"L'ancienne appellation de la ville de Mbandaka était :",options:["Coquilhatville","Stanleyville","Élisabethville","Léopoldville"],correct:0},
-  {section:'culture',q:"Le Secrétaire général actuel de l'ONU est :",options:["Ban Ki-moon","Kofi Annan","António Guterres","Boutros Boutros-Ghali"],correct:2},
+  {section:'culture',q:"L'ancienne appellation de la ville de Lubumbashi était :",options:["Coquilhatville","Stanleyville","Élisabethville","Léopoldville"],correct:2},
+  {section:'culture',q:"L'ancienne appellation de la ville de Kinshasa était :",options:["Coquilhatville","Stanleyville","Élisabethville","Léopoldville"],correct:3},
+  {section:'culture',q:"Le siège de la Commission de l'Union Africaine se trouve à :",options:["Addis-Abeba","Johannesburg","Le Caire","Abuja"],correct:0},
+  {section:'culture',q:"L'Union Africaine a succédé à :",options:["L'OUA","La SADC","La CEEAC","L'ONU"],correct:0},
+  {section:'culture',q:"La RDC est membre de quelle organisation sous-régionale créée en 1983 ?",options:["SADC","CEEAC","CEDEAO","UMA"],correct:1},
+  {section:'culture',q:"Le CEPGL regroupe la RDC, le Rwanda et :",options:["L'Ouganda","Le Burundi","La Tanzanie","La Zambie"],correct:1},
+  {section:'culture',q:"Le siège de la SADC se trouve à :",options:["Gaborone","Lusaka","Pretoria","Windhoek"],correct:0},
+  {section:'culture',q:"Le siège du COMESA se trouve à :",options:["Gaborone","Lusaka","Nairobi","Kampala"],correct:1},
+  {section:'culture',q:"Le premier président de la RDC (1960) est :",options:["Patrice Lumumba","Joseph Kasa-Vubu","Mobutu Sese Seko","Cyrille Adoula"],correct:1},
+  {section:'culture',q:"Le nombre actuel de provinces en RDC est :",options:["11","21","26","30"],correct:2},
+  {section:'culture',q:"La Constitution actuellement en vigueur en RDC date de :",options:["2003","2006","2011","2015"],correct:1},
+  {section:'culture',q:"L'ICCN est chargé de :",options:["La gestion des parcs nationaux de la RDC","Le contrôle des frontières","La conservation des archives","La promotion du tourisme uniquement"],correct:0},
+  {section:'culture',q:"Le siège de l'OMS se trouve à :",options:["New York","Genève","Paris","Vienne"],correct:1},
 
   /* ---------- FRANÇAIS (25) ---------- */
   {section:'francais',q:"Quelle est la thèse principale de l'auteur ?",options:["Les bibliothèques sont dépassées","La lecture longue forge la réflexion et la littérature africaine est un combat","Le numérique remplace tout","Seuls les classiques comptent"],correct:1},
