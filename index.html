@@ -2,1407 +2,1112 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Prépa Excellentia Wantanshi — Nathan</title>
-
 <style>
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#9d0000;
-    color:white;
-}
-
-#app{
-    max-width:1000px;
-    margin:auto;
-    min-height:100vh;
-    padding:20px;
-}
-
-.home{
-    min-height:90vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-
-.watermark{
-    position:absolute;
-    font-size:clamp(80px,18vw,190px);
-    font-weight:900;
-    opacity:.10;
-    z-index:0;
-}
-
-.home-content{
-    position:relative;
-    z-index:1;
-}
-
-.home h1{
-    font-size:clamp(28px,5vw,50px);
-}
-
-input{
-    width:min(500px,95%);
-    padding:16px;
-    border:none;
-    border-radius:10px;
-    font-size:17px;
-    margin:15px 0;
-}
-
-button{
-    border:none;
-    border-radius:9px;
-    padding:13px 18px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.start{
-    background:white;
-    color:#9d0000;
-}
-
-.card{
-    background:white;
-    color:#151515;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 5px 20px #0004;
-}
-
-.reading{
-    text-align:center;
-}
-
-.reading-text{
-    text-align:left;
-    line-height:1.8;
-    white-space:pre-line;
-    margin-top:25px;
-}
-
-.timer{
-    font-size:55px;
-    font-weight:900;
-    margin:15px;
-}
-
-.reading-info{
-    font-size:17px;
-}
-
-.skip{
-    background:white;
-    color:#9d0000;
-    margin:15px;
-}
-
-.question-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.question-timer{
-    font-size:28px;
-    font-weight:900;
-}
-
-.progress{
-    width:100%;
-    height:8px;
-    background:#ffffff55;
-    border-radius:20px;
-    margin:15px 0;
-}
-
-.progress-bar{
-    height:100%;
-    background:white;
-    border-radius:20px;
-}
-
-.options button{
-    width:100%;
-    text-align:left;
-    margin:8px 0;
-    background:white;
-    border:2px solid #ddd;
-    color:#111;
-}
-
-.options button:hover{
-    background:#eee;
-}
-
-.options button.selected{
-    border-color:#9d0000;
-    background:#ffe2e2;
-}
-
-.next{
-    background:#111;
-    color:white;
-    margin-top:15px;
-}
-
-.next:disabled{
-    opacity:.4;
-}
-
-.review{
-    background:white;
-    border:2px solid #aaa;
-    margin-top:10px;
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:#000c;
-    z-index:100;
-    overflow:auto;
-    padding:20px;
-}
-
-.modal-content{
-    max-width:850px;
-    margin:20px auto;
-    background:white;
-    color:#111;
-    border-radius:15px;
-    padding:25px;
-    line-height:1.8;
-    white-space:pre-line;
-}
-
-.close{
-    background:#9d0000;
-    color:white;
-}
-
-.result-card{
-    background:white;
-    color:#111;
-    border-radius:15px;
-    padding:25px;
-}
-
-.score{
-    font-size:75px;
-    font-weight:900;
-    text-align:center;
-    color:#9d0000;
-}
-
-.time-result{
-    text-align:center;
-    font-size:25px;
-    margin:25px;
-}
-
-.error{
-    border-top:1px solid #ddd;
-    padding:15px 0;
-    line-height:1.6;
-}
-
-.correct{
-    color:green;
-}
-
-.wrong{
-    color:#b00000;
-}
-
-footer{
-    text-align:center;
-    margin-top:30px;
-    font-weight:bold;
-}
-
-@media(max-width:600px){
-    #app{
-        padding:10px;
-    }
-
-    .card{
-        padding:18px;
-    }
-
-    .question-header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .timer{
-        font-size:42px;
-    }
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f3f3;color:#222}
+.hidden{display:none!important}
+button{cursor:pointer;border:0}
+#home{min-height:100vh;background:#c40000;color:white;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
+.watermark{position:absolute;font-size:20vw;font-weight:900;opacity:.08;transform:rotate(-15deg)}
+.home{position:relative;z-index:2;background:#0003;padding:35px;border-radius:20px;text-align:center;width:min(600px,100%)}
+.home h1{font-size:clamp(30px,7vw,55px);margin:0}
+.home input{width:100%;padding:15px;margin:20px 0;border:0;border-radius:10px;font-size:17px}
+.start,.skip,.next{padding:14px 22px;border-radius:9px;font-weight:bold}
+.start{background:white;color:#b00000}
+#test{min-height:100vh}
+.bar{position:sticky;top:0;z-index:10;background:#111;color:white;padding:12px;display:flex;justify-content:space-between;gap:8px}
+.timer{color:#ff5555;font-weight:bold;font-size:20px}
+.reading,.questions{max-width:950px;margin:auto;padding:25px}
+.text{background:white;padding:25px;border-radius:14px;line-height:1.75;font-size:17px;max-height:65vh;overflow:auto}
+.warning{background:#fff3cd;padding:15px;margin:15px 0;border-left:5px solid #e0a000}
+.actions{margin-top:20px;text-align:center}.skip{background:#b00000;color:white}
+.card{background:white;padding:25px;border-radius:15px;box-shadow:0 3px 15px #0001}
+.q{font-size:21px;line-height:1.5;margin:20px 0}
+.answers{display:grid;gap:10px}.answer{padding:15px;text-align:left;background:#f5f5f5;border:2px solid #ddd;border-radius:9px;font-size:16px}.answer.selected{border-color:#b00000;background:#ffe0e0}
+.bottom{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.next{background:#111;color:white}.look{padding:14px;border-radius:9px}
+#results{padding:30px 15px}.result{max-width:1000px;margin:auto}
+.total{background:#111;color:white;padding:25px;text-align:center;border-radius:15px;margin-bottom:25px}.big{font-size:48px;font-weight:bold}
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.subject{background:white;padding:20px;border-radius:13px;box-shadow:0 3px 10px #0001}.subject h3{color:#b00000}
+.errors{background:white;padding:25px;border-radius:15px;margin-top:25px}.error{background:#fff5f5;border-left:5px solid #d00000;padding:15px;margin:15px 0}.ok{color:green;font-weight:bold}.bad{color:#c00000;font-weight:bold}
+.exp{background:#eee;padding:10px;margin-top:8px;border-radius:6px}
+.modal{position:fixed;inset:0;background:#000b;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}.modalbox{background:white;padding:25px;border-radius:15px;max-width:900px;max-height:85vh;overflow:auto;line-height:1.7}.close{float:right;background:#b00000;color:white;padding:8px;border-radius:6px}
+footer{text-align:center;margin:30px;font-weight:bold;color:#555}
 </style>
 </head>
 
 <body>
 
-<div id="app"></div>
+<section id="home">
+<div class="watermark">NATHAN</div>
+<div class="home">
+<h1>PRÉPA EXCELLENTIA</h1>
+<h2>WANTANSHI</h2>
+<p><b>Test avancé — 100 QCM</b></p>
+<p>Anglais • Français • Maths • Culture générale</p>
+<input id="name" placeholder="Nom complet">
+<button class="start" onclick="start()">COMMENCER</button>
+</div>
+</section>
+
+<section id="test" class="hidden">
+<div class="bar">
+<span id="sub"></span>
+<span id="prog"></span>
+<span class="timer" id="timer">01:00</span>
+</div>
+
+<div id="reading" class="reading hidden">
+<h1 id="rtitle"></h1>
+<div class="warning">
+<b>Lecture : 15 minutes maximum.</b><br>
+Vous pouvez lire le texte ou passer immédiatement aux questions.
+Le temps réellement utilisé est comptabilisé.
+</div>
+<div id="rtext" class="text"></div>
+<div class="actions">
+<button class="skip" onclick="skip()">PASSER AUX QUESTIONS →</button>
+</div>
+</div>
+
+<div id="questions" class="questions hidden">
+<div class="card">
+<b id="qn"></b>
+<div id="qt" class="q"></div>
+<div id="answers" class="answers"></div>
+<div class="bottom">
+<button id="look" class="look" onclick="showText()">👁 Texte</button>
+<button class="next" onclick="next()">QUESTION SUIVANTE →</button>
+</div>
+</div>
+</div>
+</section>
+
+<div id="modal" class="modal hidden">
+<div class="modalbox">
+<button class="close" onclick="closeModal()">Fermer</button>
+<h2 id="mt"></h2><div id="mx"></div>
+</div>
+</div>
+
+<section id="results" class="hidden">
+<div class="result">
+<h1 style="text-align:center">RÉSULTATS</h1>
+<p style="text-align:center" id="participant"></p>
+
+<div class="total">
+<div>Score total</div>
+<div class="big" id="score"></div>
+<div id="percent"></div>
+<div id="mistakes"></div>
+<div id="spent"></div>
+</div>
+
+<h2>📊 Résultats par matière</h2>
+<div id="subjects" class="subjects"></div>
+
+<div class="errors">
+<h2>❌ Points à corriger</h2>
+<p>Chaque erreur est accompagnée de la bonne réponse et de son explication.</p>
+<div id="errors"></div>
+</div>
+
+<footer>by Nathan</footer>
+</div>
+</section>
 
 <script>
 
-/* =========================================================
-   TEXTES
-========================================================= */
+/* ==========================================================
+   TEXTES DE LECTURE
+========================================================== */
 
-const TEXT_EN = `
-A DIFFERENT KIND OF SUCCESS
+const englishText=`
+THE VALUE OF INTELLECTUAL CURIOSITY
 
-Daniel had always believed that success meant being the best in everything he did. At school, he compared his grades with those of his classmates and became frustrated whenever someone performed better than him. Even when he achieved good results, he rarely felt satisfied because he was already thinking about the next person he had to beat.
+In many schools, students are encouraged to obtain good grades, follow
+instructions and prepare carefully for examinations. These objectives
+are important, but they do not necessarily define what it means to learn.
+A student may obtain excellent marks while remembering very little a few
+months later. Another student may initially struggle with a subject and
+yet develop a much deeper understanding of it.
 
-One afternoon, his science teacher asked him to help a younger student who was struggling with a difficult lesson. At first, Daniel considered the task a waste of time. He wanted to use the afternoon to prepare for an important test. However, he eventually agreed.
+Daniel, a seventeen-year-old student, discovered this difference during
+his final year of secondary school. He had always considered himself a
+successful student because his grades were usually among the highest in
+his class. He rarely questioned information presented by his teachers,
+however. His main strategy was to memorise definitions, reproduce methods
+and revise exactly what he expected to find in examinations.
 
-To his surprise, explaining the lesson made Daniel understand several ideas that he had never completely mastered himself. More importantly, he realized that helping someone improve did not make his own achievements less valuable.
+At first, this strategy seemed effective. Daniel could remember a large
+number of facts and formulas. Yet he became uncomfortable whenever an
+exercise was presented in an unfamiliar way. If a problem looked
+different from the examples he had memorised, he often did not know how
+to begin.
 
-From that day on, Daniel began to see success differently. Competition still mattered to him, but it was no longer the only measure he used to judge his progress.
+One day, his mathematics teacher gave the class a difficult problem that
+had several possible approaches. Daniel immediately looked for a formula
+that he could apply. When he could not find one, he concluded that the
+problem was probably too complicated. Another student, Amina, approached
+it differently. She wrote down what she knew, identified what she did not
+know and began testing simple possibilities.
 
-Over the following weeks, Daniel changed the way he studied. Instead of comparing every mark with those of his classmates, he began comparing his current performance with his previous results. When he made a mistake, he tried to understand its cause rather than simply feeling disappointed.
+After several attempts, Amina found a solution. It was not the shortest
+method, but it demonstrated that she understood the structure of the
+problem. Daniel was surprised. He had spent more time memorising formulas,
+yet Amina was better prepared to deal with something she had never seen
+before.
 
-His teacher noticed the change. Daniel was still ambitious, but his ambition had become healthier. He wanted to improve, not simply to defeat other students. He also discovered that explaining difficult ideas to others was one of the best ways to test his own understanding.
+The experience changed Daniel's attitude. He began asking questions that
+were not directly connected with examinations. Instead of asking only
+“What do I need to remember?”, he started asking “Why does this work?”,
+“What would happen if one condition changed?” and “Can I find another
+way to reach the same conclusion?”
 
-This new attitude did not make Daniel less serious about school. On the contrary, he became more organized. He planned his study sessions, revised regularly and asked questions whenever something was unclear.
+His progress was slow at first. Questioning familiar ideas sometimes
+made his studies more difficult because he discovered gaps in his
+knowledge. Nevertheless, those gaps became useful. They showed him
+precisely what he needed to investigate.
 
-After several months, his grades improved. More importantly, he became calmer before examinations. He no longer believed that one bad result meant that he had failed completely.
+Daniel also changed the way he studied with other students. Previously,
+he had regarded classmates with lower marks as students who needed his
+help. He eventually realised that academic performance in one subject
+did not determine the intellectual abilities of a person. A classmate
+who struggled with mathematics might be exceptionally good at languages,
+history or explaining complicated ideas.
 
-Daniel finally understood that success could have several meanings. Winning a competition was one possible achievement, but learning from mistakes, helping others and becoming better than before were also forms of success.
+The students therefore created discussion groups in which each person
+had to defend an answer and explain the reasoning behind it. They were
+allowed to disagree, provided that they could support their opinions with
+evidence. Sometimes the group discovered that an apparently convincing
+answer was based on an incorrect assumption.
+
+This process taught them an important lesson: changing one's mind after
+discovering stronger evidence is not a sign of weakness. On the contrary,
+it can be a sign of intellectual honesty.
+
+By the end of the school year, Daniel's examination results had remained
+excellent, but this was no longer his only objective. He had developed
+something that could not easily be measured by a mark: intellectual
+curiosity.
+
+He understood that education should not simply produce students who know
+many answers. It should also produce people who know how to formulate
+good questions, examine evidence, recognise uncertainty and revise their
+conclusions when necessary.
+
+For Daniel, the most valuable lesson was therefore not a particular
+formula or historical date. It was the habit of thinking carefully before
+accepting an answer.
 `;
 
-const TEXT_FR = `
-APPRENDRE À PROGRESSER
+const frenchText=`
+LA CURIOSITÉ INTELLECTUELLE
 
-Lorsque Mathieu commença sa préparation aux examens, il croyait que les meilleurs élèves étaient ceux qui ne commettaient presque jamais d'erreurs. Il comparait régulièrement ses résultats à ceux de ses camarades et se sentait découragé lorsqu'il obtenait une note inférieure.
+Dans de nombreuses écoles, les élèves sont encouragés à obtenir de bonnes
+notes, à respecter les consignes et à préparer sérieusement les examens.
+Ces objectifs sont importants, mais ils ne suffisent pas à définir ce que
+signifie apprendre. Un élève peut obtenir d'excellents résultats tout en
+oubliant une grande partie de ce qu'il a mémorisé quelques mois plus tard.
+À l'inverse, un élève qui éprouve d'abord des difficultés peut finir par
+développer une compréhension beaucoup plus profonde.
 
-Un jour, après une évaluation particulièrement difficile, Mathieu resta seul dans la salle de classe. Son professeur remarqua son inquiétude et lui demanda ce qui n'allait pas. Mathieu répondit qu'il avait peur de ne jamais atteindre le niveau des meilleurs élèves.
+Daniel, un élève de dix-sept ans, découvrit cette différence pendant sa
+dernière année d'études secondaires. Il s'était toujours considéré comme
+un bon élève parce que ses notes figuraient généralement parmi les
+meilleures de sa classe. Pourtant, il remettait rarement en question les
+informations présentées par ses enseignants. Sa principale méthode
+consistait à mémoriser les définitions, à reproduire les méthodes et à
+réviser exactement ce qu'il pensait retrouver aux examens.
 
-Le professeur lui expliqua alors que l'erreur n'était pas nécessairement le signe d'un manque d'intelligence. Elle pouvait au contraire devenir un outil permettant de comprendre ce qui devait être amélioré.
+Au début, cette stratégie semblait efficace. Daniel pouvait retenir un
+grand nombre de faits et de formules. Cependant, il se sentait démuni
+lorsqu'un exercice était présenté d'une manière inhabituelle. Si un
+problème ne ressemblait pas aux exemples qu'il avait mémorisés, il ne
+savait souvent pas comment commencer.
 
-À partir de ce jour, Mathieu décida de modifier sa méthode de travail. Il commença par conserver ses anciennes évaluations. Pour chaque erreur, il écrivait la cause probable de celle-ci et cherchait une manière de ne plus la reproduire.
+Un jour, son professeur de mathématiques proposa à la classe un problème
+difficile pouvant être résolu de plusieurs façons. Daniel chercha
+immédiatement une formule à appliquer. Comme il n'en trouvait aucune, il
+conclut que le problème était probablement trop compliqué. Une autre
+élève, Amina, procéda différemment. Elle écrivit ce qu'elle savait,
+identifia ce qu'elle ignorait puis commença à tester des possibilités
+simples.
 
-Il découvrit rapidement que certaines erreurs provenaient d'un manque de connaissances, tandis que d'autres étaient simplement dues à une lecture trop rapide des consignes. Il apprit donc à prendre quelques secondes supplémentaires pour comprendre exactement ce que chaque question demandait.
+Après plusieurs tentatives, Amina trouva une solution. Ce n'était pas la
+méthode la plus courte, mais elle démontrait qu'elle comprenait la
+structure du problème. Daniel fut surpris. Il avait consacré davantage de
+temps à mémoriser des formules, mais Amina était mieux préparée à résoudre
+une situation qu'elle n'avait jamais rencontrée.
 
-Progressivement, ses résultats commencèrent à s'améliorer. Pourtant, le changement le plus important ne concernait pas ses notes. Mathieu était devenu plus patient avec lui-même. Lorsqu'un exercice lui semblait difficile, il ne concluait plus immédiatement qu'il en était incapable.
+Cette expérience modifia progressivement son attitude. Il commença à poser
+des questions qui n'étaient pas directement liées aux examens. Au lieu de
+demander seulement « Que dois-je retenir ? », il se demanda : « Pourquoi
+cela fonctionne-t-il ? », « Que se passerait-il si une condition changeait ? »
+et « Existe-t-il une autre manière de parvenir à la même conclusion ? »
 
-Il comprit également que la réussite d'un camarade ne diminuait pas la sienne. Au contraire, observer les méthodes des autres pouvait lui permettre de découvrir de nouvelles stratégies.
+Son progrès fut d'abord lent. Remettre en question des idées familières
+rendait parfois son travail plus difficile parce qu'il découvrait des
+lacunes dans ses connaissances. Pourtant, ces lacunes devinrent utiles :
+elles lui indiquaient précisément ce qu'il devait approfondir.
 
-Quelques semaines avant les examens, Mathieu établit un programme de révision. Il alternait les matières, consacrait davantage de temps aux notions qu'il maîtrisait mal et réservait régulièrement des moments pour refaire les exercices dans lesquels il avait échoué.
+Daniel changea également sa manière de travailler avec les autres élèves.
+Auparavant, il considérait les camarades ayant de moins bonnes notes comme
+des élèves qui avaient surtout besoin de son aide. Il comprit finalement
+que les résultats obtenus dans une matière ne permettent pas de mesurer
+toutes les capacités intellectuelles d'une personne. Un élève qui éprouve
+des difficultés en mathématiques peut être remarquable en langues, en
+histoire ou dans l'explication d'idées complexes.
 
-Le jour de l'examen, il ressentit naturellement une certaine inquiétude. Cependant, cette inquiétude ne le paralysa pas. Il relut attentivement les consignes, géra son temps et revint sur les questions difficiles lorsque cela était nécessaire.
+Les élèves créèrent alors des groupes de discussion dans lesquels chacun
+devait défendre une réponse et expliquer son raisonnement. Ils avaient le
+droit de ne pas être d'accord, à condition de pouvoir appuyer leur opinion
+sur des éléments précis. Il leur arrivait ainsi de découvrir qu'une réponse
+apparemment convaincante reposait en réalité sur une hypothèse incorrecte.
 
-À la fin de l'épreuve, Mathieu comprit qu'il avait appris quelque chose de plus important qu'une simple méthode pour obtenir une bonne note. Il avait appris que progresser ne signifie pas être parfait. Progresser signifie reconnaître ses faiblesses, apprendre de ses erreurs et continuer à avancer.
+Cette expérience leur enseigna une leçon essentielle : modifier son opinion
+après avoir découvert des preuves plus solides n'est pas un signe de
+faiblesse. C'est parfois une preuve d'honnêteté intellectuelle.
+
+À la fin de l'année scolaire, les résultats de Daniel étaient toujours
+excellents, mais ce n'était plus son seul objectif. Il avait développé
+quelque chose de plus difficile à mesurer par une note : la curiosité
+intellectuelle.
+
+Il comprit que l'éducation ne devait pas simplement former des élèves
+capables de connaître beaucoup de réponses. Elle devait également former
+des personnes capables de poser de bonnes questions, d'examiner les
+preuves, de reconnaître l'incertitude et de modifier leurs conclusions
+lorsque de nouveaux éléments l'exigent.
+
+Pour Daniel, la leçon la plus précieuse ne fut donc ni une formule ni une
+date historique particulière. Ce fut l'habitude de réfléchir attentivement
+avant d'accepter une réponse.
 `;
 
 
-/* =========================================================
+/* ==========================================================
    QUESTIONS
-========================================================= */
+   c = index de la bonne réponse
+========================================================== */
 
-const QUESTIONS = [
+const Q=[
 
-/* ================= ANGLAIS ================= */
+/* ===================== ANGLAIS 1-10 COMPRÉHENSION ===================== */
 
-{subject:"Anglais",q:"What did Daniel originally believe success meant?",o:["Helping others","Being the best","Avoiding school","Making friends"],a:1,e:"Daniel initially believed that success meant being the best."},
+["Anglais","What was Daniel's initial main strategy for studying?",
+["Understanding every idea deeply","Memorising definitions and expected examination material","Avoiding examinations","Discussing every lesson with classmates"],1,"The text states that Daniel mainly memorised definitions, methods and expected examination content."],
 
-{subject:"Anglais",q:"Why did Daniel become frustrated?",o:["Other students sometimes performed better","He hated science","He never studied","His teacher punished him"],a:0,e:"He was frustrated when other students performed better than him."},
+["Anglais","Why did Daniel struggle with unfamiliar exercises?",
+["He had never attended mathematics lessons","He refused to use formulas","He relied heavily on memorised methods","He disliked his teacher"],2,"He was comfortable reproducing known methods but struggled when a problem required adaptation."],
 
-{subject:"Anglais",q:"Why did Daniel hesitate to help the younger student?",o:["He was tired","He wanted to prepare for a test","He disliked children","He had forgotten the lesson"],a:1,e:"He wanted to use the afternoon to prepare for an important test."},
+["Anglais","What did Amina do differently when faced with the difficult problem?",
+["She immediately asked the teacher for the answer","She tested simple possibilities after identifying what she knew","She memorised a new formula","She abandoned the problem"],1,"Amina identified known and unknown information and tested possible approaches."],
 
-{subject:"Anglais",q:"What did explaining the lesson help Daniel do?",o:["Understand ideas better","Avoid the test","Become a teacher","Forget his mistakes"],a:0,e:"Explaining the lesson helped him understand ideas he had not completely mastered."},
+["Anglais","What surprised Daniel about Amina's solution?",
+["It required no reasoning","It was the shortest possible method","It showed genuine understanding of the problem","It used a formula he had memorised"],2,"Her method was not necessarily the shortest, but it demonstrated understanding."],
 
-{subject:"Anglais",q:"What did Daniel realize about helping others?",o:["It wastes time","It makes success less valuable","It does not diminish his own achievements","It prevents competition"],a:2,e:"Helping another student did not make his own achievements less valuable."},
+["Anglais","Which question best represents Daniel's new attitude?",
+["How can I avoid studying?","What exact sentence will be on the examination?","Why does this work?","Who obtained the highest mark?"],2,"Daniel began asking questions about reasons, conditions and alternative approaches."],
 
-{subject:"Anglais",q:"How did Daniel change his definition of success?",o:["He stopped studying","He valued personal progress","He rejected competition completely","He wanted to become a teacher"],a:1,e:"He began to value progress in addition to competition."},
+["Anglais","Why did discovering gaps in his knowledge become useful?",
+["They allowed him to avoid difficult subjects","They showed him what he needed to investigate","They guaranteed higher marks","They proved that school was unnecessary"],1,"The gaps indicated precisely what he needed to study further."],
 
-{subject:"Anglais",q:"What did Daniel do when he made mistakes?",o:["He ignored them","He tried to understand their causes","He blamed his classmates","He stopped studying"],a:1,e:"He tried to understand why the mistakes occurred."},
+["Anglais","What did Daniel eventually understand about students with lower marks?",
+["They were always less intelligent","They needed his help in every subject","Marks in one subject do not measure all intellectual abilities","They should not participate in discussion groups"],2,"The text explicitly says performance in one subject does not determine overall intellectual ability."],
 
-{subject:"Anglais",q:"How did Daniel's study habits change?",o:["He studied only before exams","He became more organized","He stopped asking questions","He studied less"],a:1,e:"He planned his sessions and revised regularly."},
+["Anglais","What rule did the discussion groups establish?",
+["Nobody could disagree","Students had to defend answers with reasoning or evidence","Only Daniel could answer","Every answer had to be memorised"],1,"Students could disagree if they could support their opinions with evidence."],
 
-{subject:"Anglais",q:"What happened after several months?",o:["His grades improved","He left school","He stopped competing","He failed all exams"],a:0,e:"The text explicitly says his grades improved."},
+["Anglais","According to the text, changing one's mind after finding stronger evidence can show:",
+["weakness","intellectual honesty","lack of preparation","indifference"],1,"The text explicitly describes this as a possible sign of intellectual honesty."],
 
-{subject:"Anglais",q:"What is the main message of the text?",o:["Competition is always bad","Success can include learning and helping others","Grades are useless","Students should never compete"],a:1,e:"The text presents a broader definition of success."},
+["Anglais","What does the author present as Daniel's most valuable lesson?",
+["Memorising more formulas","Obtaining the highest mark","Thinking carefully before accepting an answer","Avoiding uncertainty"],2,"The final paragraph identifies careful thinking before accepting an answer as his most valuable lesson."],
 
-{subject:"Anglais",q:"The word 'struggling' means:",o:["having difficulty","winning","celebrating","refusing"],a:0,e:"To struggle means to have difficulty."},
+/* ===================== ANGLAIS 11-25 ===================== */
 
-{subject:"Anglais",q:"'Achievement' is closest in meaning to:",o:["failure","accomplishment","punishment","delay"],a:1,e:"Achievement means accomplishment."},
+["Anglais","In the sentence 'The strategy seemed effective', 'effective' most nearly means:",
+["useless","successful in producing the desired result","dangerous","temporary"],1,"Effective means capable of producing the intended result."],
 
-{subject:"Anglais",q:"'Eventually' means:",o:["immediately","finally","rarely","never"],a:1,e:"Eventually means finally."},
+["Anglais","The word 'unfamiliar' is closest in meaning to:",
+["unknown","obvious","famous","repeated"],0,"Unfamiliar describes something not known or not previously encountered."],
 
-{subject:"Anglais",q:"'Valuable' means:",o:["useless","important","ordinary","temporary"],a:1,e:"Valuable can mean important or precious."},
+["Anglais","The expression 'dealt with' is closest in meaning to:",
+["ignored completely","handled","invented","memorised"],1,"To deal with a problem means to handle or address it."],
 
-{subject:"Anglais",q:"'Improve' means:",o:["become better","become worse","stop","forget"],a:0,e:"Improve means become better."},
+["Anglais","Choose the correct sentence:",
+["If Daniel had questioned the method earlier, he would have progressed faster.","If Daniel would question the method, he progressed faster.","If Daniel questioned the method, he would have progressed yesterday.","If Daniel has questioned, he would progress."],0,"This is a correct third conditional structure: if + past perfect, would have + past participle."],
 
-{subject:"Anglais",q:"She ___ English every day.",o:["study","studies","studying","studied"],a:1,e:"With she in the present simple, the verb takes -s."},
+["Anglais","Choose the correct form: 'By the end of the year, Daniel ___ several new methods.'",
+["will learn","will have learned","has learn","would learning"],1,"'By the end' referring to a future point calls for the future perfect."],
 
-{subject:"Anglais",q:"Listen! The students ___.",o:["talk","talked","are talking","have talked"],a:2,e:"The present continuous describes an action happening now."},
+["Anglais","Which sentence correctly uses inversion after a negative adverbial?",
+["Never Daniel had questioned his assumptions.","Never had Daniel questioned his assumptions.","Never Daniel has questioned his assumptions.","Never did Daniel questioned his assumptions."],1,"After 'never' in this structure, auxiliary and subject are inverted: Never had Daniel..." ],
 
-{subject:"Anglais",q:"Yesterday, Daniel ___ for three hours.",o:["studies","studied","has studied","is studying"],a:1,e:"Yesterday requires the past simple."},
+["Anglais","Choose the correct passive form: 'The teacher presented the problem.'",
+["The problem presented the teacher.","The problem was presented by the teacher.","The teacher was presented by the problem.","The problem has presenting the teacher."],1,"The passive uses be + past participle: was presented."],
 
-{subject:"Anglais",q:"While I was reading, my friend ___.",o:["arrived","has arrived","arrives","will arrive"],a:0,e:"Past continuous + past simple is used for an interrupted action."},
+["Anglais","'Students who can defend their opinions...' The word 'who' introduces:",
+["a relative clause","a conditional clause","an adverb","a direct object"],0,"'Who can defend...' is a relative clause modifying students."],
 
-{subject:"Anglais",q:"She ___ her homework already.",o:["has finished","finish","finished tomorrow","is finish"],a:0,e:"Present perfect is appropriate with already."},
+["Anglais","Choose the grammatically correct sentence:",
+["Despite he was tired, he continued.","Despite being tired, he continued.","Despite he tired, he continued.","Despite to be tired, he continued."],1,"'Despite' can be followed by a noun or gerund phrase: despite being tired."],
 
-{subject:"Anglais",q:"By next June, he ___ the course.",o:["completes","will have completed","completed","has completed"],a:1,e:"Future perfect expresses completion before a future time."},
+["Anglais","Which modal expresses deduction about the present?",
+["must","would","used to","shall"],0,"'Must' can express a strong logical deduction."],
 
-{subject:"Anglais",q:"You ___ respect your teachers.",o:["should","should to","must to","would to"],a:0,e:"A modal verb is followed by the base form."},
+["Anglais","Choose the correct reported speech: He said, 'I understand the problem.'",
+["He said that he understood the problem.","He said that I understand the problem.","He said that he has understand the problem.","He said he understanding the problem."],0,"With normal backshift, present simple becomes past simple."],
 
-{subject:"Anglais",q:"If I had more time, I ___ another book.",o:["will read","would read","read yesterday","have read"],a:1,e:"This is the second conditional."},
+["Anglais","Which word best completes the sentence? 'The evidence was ___ to ignore.'",
+["too compelling","enough compelling","so compellingly","very enough"],0,"'Too + adjective + to...' is grammatically correct."],
 
-{subject:"Anglais",q:"This exercise is ___ than the previous one.",o:["easy","easier","easiest","more easiest"],a:1,e:"The comparative form is easier."},
+["Anglais","Choose the correct form: 'Had I known the truth, I ___ differently.'",
+["would act","would have acted","will act","acted"],1,"In a third conditional inversion, 'Had I known...' is followed by 'would have + past participle'."],
 
-{subject:"Anglais",q:"I wish I ___ more time yesterday.",o:["have","had","had had","will have"],a:2,e:"I wish + past perfect expresses regret about the past."},
+["Anglais","Which sentence is correct?",
+["Neither the teacher nor the students was ready.","Neither the teacher nor the students were ready.","Neither the teacher or the students were ready.","Neither teacher nor students is ready."],1,"With 'neither...nor', the verb generally agrees with the nearer subject: students were."],
 
+["Anglais","Choose the best completion: 'The more carefully you examine the evidence, ___ your conclusion becomes.'",
+["the more reliable","more reliable","the most reliable","reliably"],0,"The correlative comparative structure is 'the more..., the more...'."],
 
-/* ================= FRANÇAIS ================= */
+/* ===================== FRANÇAIS 1-10 ===================== */
 
-{subject:"Français",q:"Pourquoi Mathieu se sent-il découragé au début ?",o:["Il compare ses résultats à ceux des autres","Il ne veut plus étudier","Il déteste son professeur","Il ne vient jamais en classe"],a:0,e:"Il compare ses résultats à ceux de ses camarades."},
+["Français","Pourquoi Daniel était-il d'abord considéré comme un bon élève ?",
+["Il posait beaucoup de questions","Ses notes étaient généralement parmi les meilleures","Il aidait tous ses camarades","Il refusait les examens"],1,"Daniel associait sa réussite à ses excellentes notes."],
 
-{subject:"Français",q:"Que lui explique son professeur ?",o:["L'erreur est toujours grave","L'erreur peut servir à progresser","Les notes ne servent à rien","Il doit abandonner"],a:1,e:"Le professeur présente l'erreur comme un outil d'apprentissage."},
+["Français","Quelle faiblesse sa méthode de travail révélait-elle ?",
+["Il ne savait pas mémoriser","Il avait du mal à adapter une méthode à une situation nouvelle","Il refusait d'apprendre les définitions","Il ne travaillait jamais"],1,"Il savait reproduire des méthodes mais était démuni face à un problème inhabituel."],
 
-{subject:"Français",q:"Que décide de faire Mathieu ?",o:["Ignorer ses évaluations","Conserver ses anciennes évaluations","Arrêter de travailler","Copier ses camarades"],a:1,e:"Il conserve ses anciennes évaluations pour analyser ses erreurs."},
+["Français","Comment Amina abordait-elle le problème ?",
+["Elle cherchait immédiatement la réponse du professeur","Elle identifiait ce qu'elle savait et testait des possibilités","Elle abandonnait rapidement","Elle mémorisait une formule"],1,"Amina procédait par analyse et essais successifs."],
 
-{subject:"Français",q:"Quelle est une cause de ses erreurs ?",o:["Une lecture trop rapide","Un manque total de travail","L'absence de professeur","Le bruit uniquement"],a:0,e:"Certaines erreurs viennent d'une lecture trop rapide des consignes."},
+["Français","Pourquoi Daniel fut-il surpris par Amina ?",
+["Elle avait obtenu la réponse sans réfléchir","Elle avait utilisé une méthode plus longue mais comprenait la structure du problème","Elle connaissait déjà le problème","Elle avait copié Daniel"],1,"Sa solution démontrait une compréhension réelle, même si elle n'était pas la plus courte."],
 
-{subject:"Français",q:"Que fait Mathieu pour éviter de répéter ses erreurs ?",o:["Il analyse leurs causes","Il les cache","Il les oublie","Il accuse ses camarades"],a:0,e:"Il cherche la cause de chaque erreur et une solution."},
+["Français","Quelle transformation Daniel connaît-il ?",
+["Il cesse de poser des questions","Il commence à chercher les raisons et les conséquences","Il ne révise plus","Il décide de ne plus travailler avec les autres"],1,"Il passe de la mémorisation à une attitude plus analytique."],
 
-{subject:"Français",q:"Comment évolue son attitude ?",o:["Il devient plus patient","Il devient plus agressif","Il abandonne","Il travaille moins"],a:0,e:"Il devient plus patient avec lui-même."},
+["Français","Pourquoi ses lacunes deviennent-elles utiles ?",
+["Elles lui permettent d'éviter les cours","Elles indiquent ce qu'il doit approfondir","Elles augmentent automatiquement ses notes","Elles remplacent les exercices"],1,"Les lacunes lui servent de repères pour orienter son apprentissage."],
 
-{subject:"Français",q:"Que pense-t-il de la réussite d'un camarade ?",o:["Elle diminue la sienne","Elle peut lui apprendre quelque chose","Elle est inutile","Elle doit être combattue"],a:1,e:"Il apprend à observer les méthodes des autres."},
+["Français","Que comprend Daniel à propos des élèves moins performants dans une matière ?",
+["Ils sont nécessairement moins intelligents","Leurs notes ne résument pas toutes leurs capacités","Ils ne doivent pas participer","Ils ont toujours besoin d'un professeur particulier"],1,"Le texte insiste sur la diversité des capacités intellectuelles."],
 
-{subject:"Français",q:"Comment organise-t-il ses révisions ?",o:["Il étudie seulement la veille","Il alterne les matières","Il ne révise que les matières faciles","Il ne fait aucun exercice"],a:1,e:"Il établit un programme équilibré de révision."},
+["Français","Quelle condition permettait aux élèves de ne pas être d'accord ?",
+["Avoir une meilleure note","Pouvoir appuyer leur opinion sur des éléments précis","Être plus âgé","Connaître le professeur"],1,"Le désaccord était accepté lorsqu'il était argumenté."],
 
-{subject:"Français",q:"Comment Mathieu gère-t-il l'examen ?",o:["Il abandonne les questions difficiles","Il lit attentivement les consignes et gère son temps","Il répond sans lire","Il demande les réponses"],a:1,e:"Il relit les consignes et gère son temps."},
+["Français","Comment le texte considère-t-il le fait de changer d'avis face à de nouvelles preuves ?",
+["Comme une faiblesse","Comme une forme possible d'honnêteté intellectuelle","Comme un échec scolaire","Comme une perte de temps"],1,"Le texte présente cette attitude comme une preuve d'honnêteté intellectuelle."],
 
-{subject:"Français",q:"Quelle leçon principale Mathieu apprend-il ?",o:["Il faut être parfait","Progresser signifie apprendre de ses erreurs","Les notes sont inutiles","Il ne faut jamais échouer"],a:1,e:"La progression passe par la reconnaissance des faiblesses et l'apprentissage."},
+["Français","Quelle idée principale résume le texte ?",
+["Réussir signifie seulement avoir de bonnes notes","L'apprentissage exige aussi curiosité, raisonnement et remise en question","La mémorisation est inutile","Les examens ne servent à rien"],1,"Le texte oppose la simple mémorisation à une compréhension active et critique."],
 
-{subject:"Français",q:"Une « lacune » désigne :",o:["un manque","une réussite","une récompense","une certitude"],a:0,e:"Une lacune est un manque, notamment de connaissances."},
+/* ===================== FRANÇAIS 11-25 ===================== */
 
-{subject:"Français",q:"Dans « Il travaille régulièrement », « régulièrement » est :",o:["un nom","un adverbe","un adjectif","un pronom"],a:1,e:"Il modifie le verbe travailler : c'est un adverbe."},
+["Français","Dans « une compréhension beaucoup plus profonde », « profonde » est :",
+["un adverbe","un adjectif qualificatif","un pronom","une préposition"],1,"« Profonde » qualifie le nom « compréhension »."],
 
-{subject:"Français",q:"Dans « les matières difficiles », « difficiles » est :",o:["un déterminant","un adjectif qualificatif","un pronom","une préposition"],a:1,e:"Difficiles qualifie le nom matières."},
+["Français","Dans « bien qu'il éprouve des difficultés », « bien que » introduit :",
+["une cause","une concession","une conséquence","une comparaison"],1,"« Bien que » introduit une proposition subordonnée circonstancielle de concession."],
 
-{subject:"Français",q:"Dans « ses évaluations », « ses » est :",o:["un pronom","un déterminant possessif","un adverbe","un verbe"],a:1,e:"Ses est un déterminant possessif."},
+["Français","Quelle phrase contient un subjonctif correctement employé ?",
+["Il faut qu'il comprend.","Il faut qu'il comprenne.","Il faut qu'il comprendra.","Il faut qu'il comprenait."],1,"Après « il faut que », le subjonctif est requis : qu'il comprenne."],
 
-{subject:"Français",q:"Dans « les erreurs qu'il analyse », « que » est :",o:["un pronom relatif","un déterminant","un adverbe","une préposition"],a:0,e:"Que est un pronom relatif."},
+["Français","Dans « les informations présentées par les enseignants », « présentées » s'accorde avec :",
+["enseignants","informations","les","par"],1,"Le participe passé employé comme adjectif s'accorde avec « informations », féminin pluriel."],
 
-{subject:"Français",q:"Quelle phrase contient une comparaison ?",o:["Il travaille comme un forçat.","Il est une machine.","Le silence règne.","La classe dort."],a:0,e:"Comme introduit une comparaison."},
+["Français","Quelle phrase respecte la concordance des temps ?",
+["Il expliqua qu'il comprend le problème.","Il expliqua qu'il comprenait le problème.","Il expliqua qu'il comprendra le problème hier.","Il expliqua qu'il comprendre le problème."],1,"Après un verbe principal au passé, l'imparfait convient pour une simultanéité dans le passé."],
 
-{subject:"Français",q:"Les lettres que j'ai ___ sont longues.",o:["écrit","écrites","écrits","écrite"],a:1,e:"Le COD que est placé avant le participe passé : accord avec lettres."},
+["Français","Dans « Il se demanda pourquoi cela fonctionnait », la proposition « pourquoi cela fonctionnait » est :",
+["une interrogative indirecte","une relative","une circonstancielle de but","une infinitive"],0,"Elle rapporte indirectement une question."],
 
-{subject:"Français",q:"Il faut que tu ___ davantage.",o:["travaille","travailles","travailleras","travaillais"],a:1,e:"Il faut que est suivi du subjonctif."},
+["Français","Dans « une méthode qui permet de comprendre », « qui » est :",
+["un pronom relatif sujet","un pronom personnel","un déterminant","une conjonction de coordination"],0,"« Qui » reprend « méthode » et est sujet de « permet »."],
 
-{subject:"Français",q:"Si elle avait étudié, elle ___ plus confiante.",o:["sera","serait","aurait été","est"],a:2,e:"Condition irréelle passée : plus-que-parfait + conditionnel passé."},
+["Français","Quelle est la valeur de « pourtant » dans le texte ?",
+["addition","opposition","cause","but"],1,"« Pourtant » marque une opposition ou une contradiction."],
 
-{subject:"Français",q:"Dès qu'il ___ son travail, il sortira.",o:["aura terminé","terminait","aurait terminé","termine"],a:0,e:"Le futur antérieur exprime l'action accomplie avant une autre au futur."},
+["Français","Dans « Il avait consacré davantage de temps », le temps verbal est :",
+["passé composé","plus-que-parfait","passé simple","conditionnel passé"],1,"« Avait consacré » est au plus-que-parfait."],
 
-{subject:"Français",q:"Bien qu'il ___ fatigué, il continue.",o:["est","soit","sera","était"],a:1,e:"Bien que est suivi du subjonctif."},
+["Français","Quelle phrase contient un conditionnel présent ?",
+["Il aurait compris.","Il comprendrait mieux avec davantage de temps.","Il comprit mieux.","Il avait compris."],1,"« Comprendrait » est au conditionnel présent."],
 
-{subject:"Français",q:"Dans « Le professeur aide l'élève », « l'élève » est :",o:["COD","COI","sujet","attribut"],a:0,e:"Le professeur aide qui ? L'élève : COD."},
+["Français","Dans « Les résultats que Daniel a obtenus », l'accord de « obtenus » s'explique parce que :",
+["le COD est placé avant le verbe","le sujet est pluriel","Daniel est masculin","le verbe est à l'imparfait"],0,"Avec avoir, le participe passé s'accorde avec le COD placé avant : « que », masculin pluriel."],
 
-{subject:"Français",q:"« Ils se sont parlé » est correct parce que « se » est :",o:["COD","COI","sujet","attribut"],a:1,e:"On dit parler à quelqu'un : le pronom est donc COI."},
+["Français","Quelle formulation est correcte ?",
+["Malgré qu'il soit fatigué, il travaille.","Bien qu'il soit fatigué, il travaille.","Malgré il soit fatigué, il travaille.","Bien qu'il est fatigué, il travaille."],1,"« Bien que » est suivi du subjonctif."],
 
-{subject:"Français",q:"Dans « Je pense qu'il viendra », la proposition « qu'il viendra » est :",o:["complétive","relative","circonstancielle de cause","indépendante"],a:0,e:"Elle complète le verbe penser."},
+["Français","Dans « Il travaille afin de progresser », « afin de progresser » exprime :",
+["la cause","le but","la conséquence","l'opposition"],1,"« Afin de » introduit le but."],
 
-{subject:"Français",q:"« La leçon est expliquée par le professeur » est à la voix :",o:["active","passive","pronominale","impersonnelle"],a:1,e:"Le sujet subit l'action : voix passive."},
+["Français","Quelle phrase est à la voix passive ?",
+["Le professeur explique le problème.","Le problème est expliqué par le professeur.","Le professeur expliquera le problème.","Le professeur a expliqué le problème."],1,"Le sujet « problème » subit l'action : c'est la voix passive."],
 
+["Français","Dans « Ce que Daniel apprend est important », « Ce que Daniel apprend » est :",
+["le sujet du verbe « est »","un COD","un COI","un complément circonstanciel"],0,"Le groupe entier constitue le sujet de « est »."],
 
-/* ================= MATHS ================= */
+/* ===================== MATHS ===================== */
 
-{subject:"Mathématiques",q:"Le domaine de définition de √(2x−6) est :",o:["x≥3","x>3","x≤3","R"],a:0,e:"Le radicand doit être supérieur ou égal à zéro."},
+["Maths","Quel est le domaine de définition de f(x)=√(5−2x) ?",
+["x≥5/2","x≤5/2","x>5","R"],1,"Il faut 5−2x≥0, donc x≤5/2."],
 
-{subject:"Mathématiques",q:"Le domaine de 1/(x−4) est :",o:["R","R privé de 4","R privé de −4","[4,+∞["],a:1,e:"Le dénominateur ne doit pas être nul."},
+["Maths","Le domaine de f(x)=ln(x²−4) est :",
+["R","]-2,2[","]-∞,-2[ ∪ ]2,+∞[","]-∞,2[ ∪ ]2,+∞["],2,"Il faut x²−4>0, donc |x|>2."],
 
-{subject:"Mathématiques",q:"Si f(x)=2x+1 et g(x)=x², alors g∘f(x) vaut :",o:["2x²+1","(2x+1)²","x²+2x","x²+1"],a:1,e:"g(f(x))=(2x+1)²."},
+["Maths","lim x→+∞ de (2x²+3x−1)/(x²−5) vaut :",
+["0","1","2","+∞"],2,"Les degrés sont égaux, donc la limite est le rapport des coefficients dominants : 2."],
 
-{subject:"Mathématiques",q:"La limite de (3x²+1)/(x²−2) quand x→+∞ vaut :",o:["0","1","3","+∞"],a:2,e:"On compare les coefficients des termes de plus haut degré."},
+["Maths","lim x→+∞ de (3x²−1)/(x+2) vaut :",
+["0","3","+∞","−∞"],2,"Le numérateur est de degré 2 et le dénominateur de degré 1 : la limite est +∞."],
 
-{subject:"Mathématiques",q:"Si lim f(x)=+∞ lorsque x→2, la droite x=2 est :",o:["une asymptote horizontale","une asymptote verticale","une asymptote oblique","une tangente"],a:1,e:"Une divergence vers l'infini près de x=2 donne une asymptote verticale."},
+["Maths","Pour f(x)=x+1/x, la dérivée sur R\\{0} est :",
+["1+1/x²","1−1/x²","x−1/x²","1+1/x"],1,"La dérivée de x est 1 et celle de x⁻¹ est −x⁻²."],
 
-{subject:"Mathématiques",q:"La dérivée de x³ est :",o:["3x²","x²","3x","x³"],a:0,e:"(x^n)'=nx^(n−1)."},
+["Maths","La dérivée de f(x)=ln(x²+1) est :",
+["1/(x²+1)","2x/(x²+1)","ln(2x)","2/(x²+1)"],1,"Avec u=x²+1, u'=2x, donc f'=u'/u."],
 
-{subject:"Mathématiques",q:"Pour x>0, (ln x)' vaut :",o:["x","1/x","ln x","e^x"],a:1,e:"Dérivée fondamentale de ln."},
+["Maths","La dérivée de f(x)=√(3x+1) est :",
+["3/√(3x+1)","3/[2√(3x+1)]","1/[2√(3x+1)]","√(3x+1)/3"],1,"La dérivée de √u est u'/(2√u), avec u'=3."],
 
-{subject:"Mathématiques",q:"La dérivée de ln(3x+1) est :",o:["1/(3x+1)","3/(3x+1)","3x+1","ln 3"],a:1,e:"Formule u'/u."},
+["Maths","Si f'(x)>0 sur un intervalle, alors f y est :",
+["strictement décroissante","constante","strictement croissante","non définie"],2,"Une dérivée strictement positive indique une croissance stricte."],
 
-{subject:"Mathématiques",q:"L'axe de symétrie de y=x²−6x+5 est :",o:["x=−3","x=3","x=5","x=6"],a:1,e:"x=−b/(2a)=3."},
+["Maths","La fonction f(x)=x²−6x+5 admet son minimum pour :",
+["x=−3","x=2","x=3","x=6"],2,"Le sommet est à x=−b/(2a)=6/2=3."],
 
-{subject:"Mathématiques",q:"La fonction f(x)=x² est :",o:["impaire","paire","strictement croissante sur R","constante"],a:1,e:"f(−x)=f(x), donc elle est paire."},
+["Maths","Pour f(x)=x²−6x+5, la valeur minimale est :",
+["−4","−3","−1","5"],0,"f(3)=9−18+5=−4."],
 
-{subject:"Mathématiques",q:"x²−25 se factorise en :",o:["(x−5)(x+5)","(x−25)(x+1)","(x−5)²","(x+5)²"],a:0,e:"Différence de deux carrés."},
+["Maths","Résoudre (x−2)(x+3)≤0 donne :",
+["x≤−3 ou x≥2","−3≤x≤2","x<−3","x>2"],1,"Le produit est négatif ou nul entre les deux racines."],
 
-{subject:"Mathématiques",q:"(x−3)(x+2) se développe en :",o:["x²−x−6","x²+5x+6","x²−6","x²+x−6"],a:0,e:"x²+2x−3x−6=x²−x−6."},
+["Maths","Pour x≠2, (x²−4)/(x−2) vaut :",
+["x−2","x+2","x²+2","2x"],1,"x²−4=(x−2)(x+2)." ],
 
-{subject:"Mathématiques",q:"(x−1)(x+4)>0 lorsque :",o:["−4<x<1","x<−4 ou x>1","x<1","x>−4"],a:1,e:"Le produit est positif à l'extérieur des racines."},
+["Maths","Résoudre 1/(x−3)>0 donne :",
+["x>3","x<3","x≠3","x≥3"],0,"Le numérateur est positif, donc le quotient est positif lorsque x−3>0."],
 
-{subject:"Mathématiques",q:"(x+2)/(x−5) existe pour :",o:["x=5","x≠5","x≠−2","x>5"],a:1,e:"Le dénominateur doit être non nul."},
+["Maths","Si f(x)=(x−1)/(x+2), alors son asymptote verticale est :",
+["x=−2","x=−1","x=1","y=1"],0,"Le dénominateur s'annule en x=−2."],
 
-{subject:"Mathématiques",q:"(x²−9)/(x−3), x≠3, se simplifie en :",o:["x−3","x+3","x²+3","3x"],a:1,e:"x²−9=(x−3)(x+3)."},
+["Maths","Une asymptote horizontale de f(x)=(3x+1)/(x−2) est :",
+["x=3","y=−2","y=3","y=1"],2,"À l'infini, le quotient des coefficients dominants vaut 3."],
 
-{subject:"Mathématiques",q:"Dans un triangle rectangle de côtés 6 et 8, l'hypoténuse vaut :",o:["10","12","14","48"],a:0,e:"6²+8²=100, donc hypoténuse=10."},
+["Maths","Dans un triangle rectangle, si l'hypoténuse vaut 13 et un côté vaut 5, l'autre vaut :",
+["8","10","12","14"],2,"Par Pythagore : x²=13²−5²=169−25=144, donc x=12."],
 
-{subject:"Mathématiques",q:"Le théorème de Thalès permet d'établir :",o:["des rapports de longueurs proportionnelles","uniquement des aires","uniquement des angles","uniquement des périmètres"],a:0,e:"Thalès établit des rapports de longueurs."},
+["Maths","Dans une configuration de Thalès, si AM/AB=2/5 et AC=15, alors AN vaut :",
+["5","6","8","10"],1,"AN/AC=2/5, donc AN=15×2/5=6."],
 
-{subject:"Mathématiques",q:"A(1,2) et B(4,6). Les coordonnées de AB sont :",o:["(3,4)","(5,8)","(−3,−4)","(4,6)"],a:0,e:"AB=(4−1,6−2)=(3,4)."},
+["Maths","Si u=(2,−1) et v=(−3,4), alors u+v vaut :",
+["(−1,3)","(5,−5)","(1,3)","(−6,−4)"],0,"On additionne les coordonnées : (2−3,−1+4)=(−1,3)." ],
 
-{subject:"Mathématiques",q:"sin(30°) vaut :",o:["0","1/2","√2/2","1"],a:1,e:"Valeur trigonométrique remarquable."},
+["Maths","Si deux vecteurs non nuls sont colinéaires, alors :",
+["leur déterminant est nul","leur produit scalaire est toujours nul","ils sont toujours orthogonaux","leurs normes sont égales"],0,"Deux vecteurs du plan sont colinéaires si leur déterminant est nul."],
 
-{subject:"Mathématiques",q:"Si cos θ=3/5 et θ est aigu, alors sin θ vaut :",o:["2/5","3/5","4/5","5/3"],a:2,e:"sin²θ=1−cos²θ=16/25."},
+["Maths","Si cos(x)=3/5 et x est aigu, alors sin(x) vaut :",
+["2/5","3/5","4/5","5/3"],2,"sin²x=1−cos²x=1−9/25=16/25, donc sin x=4/5."],
 
-{subject:"Mathématiques",q:"Une urne contient 4 boules rouges et 6 bleues. P(rouge) vaut :",o:["2/5","3/5","2/3","4/6"],a:0,e:"P=4/(4+6)=2/5."},
+["Maths","Une urne contient 3 boules rouges et 2 bleues. La probabilité de tirer une rouge est :",
+["2/5","3/5","1/2","3/2"],1,"Il y a 3 issues favorables sur 5."],
 
-{subject:"Mathématiques",q:"Pour deux événements indépendants A et B :",o:["P(A∩B)=P(A)P(B)","P(A∩B)=P(A)+P(B)","P(A∩B)=0","P(A)=P(B)"],a:0,e:"C'est la définition de l'indépendance."},
+["Maths","On lance deux fois une pièce équilibrée. La probabilité d'obtenir deux fois pile est :",
+["1/2","1/3","1/4","3/4"],2,"Les deux événements indépendants ont chacun une probabilité 1/2 : 1/2×1/2=1/4."],
 
-{subject:"Mathématiques",q:"La négation de « Tous les élèves réussissent » est :",o:["Tous échouent","Au moins un élève ne réussit pas","Personne ne réussit","Tous réussissent"],a:1,e:"La négation de ∀ est une existence d'un contre-exemple."},
+["Maths","La négation de « Il existe au moins un x tel que P(x) » est :",
+["Tous les x vérifient P(x)","Pour tout x, non P(x)","Il existe x tel que non P(x)","Aucun énoncé"],1,"La négation de ∃x P(x) est ∀x non P(x)." ],
 
-{subject:"Mathématiques",q:"L'implication P⇒Q est fausse lorsque :",o:["P est vraie et Q fausse","P est fausse et Q vraie","P et Q sont vraies","P et Q sont fausses"],a:0,e:"C'est le seul cas où une implication est fausse."},
+["Maths","Si P⇒Q et Q⇒P, alors on peut conclure :",
+["P et Q sont incompatibles","P⇔Q","P est toujours fausse","Q est toujours vraie"],1,"Deux implications réciproques donnent l'équivalence."],
 
-{subject:"Mathématiques",q:"uₙ=5+3n est une suite :",o:["géométrique","arithmétique de raison 3","arithmétique de raison 5","constante"],a:1,e:"uₙ₊₁−uₙ=3."},
+["Maths","Une suite arithmétique vérifie u₁=7 et r=−3. Quelle est u₆ ?",
+["−5","−8","−11","10"],1,"u₆=u₁+5r=7−15=−8."],
 
+/* ===================== CULTURE ===================== */
 
-/* ================= CULTURE GENERALE ================= */
+["Culture générale","Quel parc national de RDC est particulièrement associé aux gorilles de montagne ?",
+["Virunga","Salonga","Garamba","Kundelungu"],0,"Virunga est mondialement connu notamment pour ses gorilles de montagne."],
 
-{subject:"Culture générale",q:"Quel parc de la RDC est célèbre pour les gorilles de montagne ?",o:["Virunga","Garamba","Salonga","Kundelungu"],a:0,e:"Le parc des Virunga est mondialement connu pour ses gorilles de montagne."},
+["Culture générale","Le parc national de Kahuzi-Biega est notamment réputé pour la protection :",
+["des gorilles de Grauer","des manchots","des dromadaires","des lions du Kalahari"],0,"Kahuzi-Biega est un habitat majeur du gorille de Grauer."],
 
-{subject:"Culture générale",q:"Kahuzi-Biega est notamment célèbre pour :",o:["les gorilles de Grauer","les pingouins","les chameaux","les récifs coralliens"],a:0,e:"Le parc protège notamment le gorille de Grauer."},
+["Culture générale","Le parc national de la Salonga se trouve principalement dans :",
+["le bassin forestier du Congo","le Sahara","la vallée du Nil","le désert du Namib"],0,"La Salonga protège une immense forêt du bassin du Congo."],
 
-{subject:"Culture générale",q:"Le parc national de la Salonga est principalement constitué :",o:["de forêt tropicale","de désert","de glaciers","de savane sahélienne"],a:0,e:"La Salonga protège une immense forêt tropicale."},
+["Culture générale","Le parc national de Garamba se situe dans quelle grande région de la RDC ?",
+["Nord-est","Sud-ouest","Centre-ouest","Kongo-Central"],0,"Garamba est situé dans le nord-est de la RDC."],
 
-{subject:"Culture générale",q:"Le parc national de Garamba se trouve principalement :",o:["dans le nord-est de la RDC","dans le Kongo-Central","à Kinshasa","dans le sud-ouest"],a:0,e:"Garamba est situé dans le nord-est."},
+["Culture générale","Le parc national d'Upemba est principalement associé à quelle partie de la RDC ?",
+["Sud-est","Nord-ouest","Ouest côtier","Kinshasa"],0,"Upemba se trouve dans le sud-est de la RDC."],
 
-{subject:"Culture générale",q:"Kinshasa était autrefois appelée :",o:["Léopoldville","Élisabethville","Stanleyville","Coquilhatville"],a:0,e:"Léopoldville est l'ancienne appellation coloniale de Kinshasa."},
+["Culture générale","L'ancienne Léopoldville correspond aujourd'hui à :",
+["Kinshasa","Kisangani","Lubumbashi","Mbandaka"],0,"Léopoldville est l'ancienne appellation coloniale de Kinshasa."],
 
-{subject:"Culture générale",q:"Lubumbashi était autrefois appelée :",o:["Élisabethville","Léopoldville","Stanleyville","Thysville"],a:0,e:"Lubumbashi était appelée Élisabethville."},
+["Culture générale","Élisabethville correspond aujourd'hui à :",
+["Kolwezi","Lubumbashi","Goma","Kananga"],1,"Élisabethville est l'ancienne appellation de Lubumbashi."],
 
-{subject:"Culture générale",q:"Kisangani était autrefois appelée :",o:["Stanleyville","Léopoldville","Élisabethville","Boma"],a:0,e:"Kisangani était appelée Stanleyville."},
+["Culture générale","Stanleyville correspond aujourd'hui à :",
+["Kisangani","Mbuji-Mayi","Bukavu","Matadi"],0,"Stanleyville est l'ancienne appellation de Kisangani."],
 
-{subject:"Culture générale",q:"Le chef-lieu du Haut-Katanga est :",o:["Lubumbashi","Kolwezi","Likasi","Kalemie"],a:0,e:"Lubumbashi est le chef-lieu du Haut-Katanga."},
+["Culture générale","Quel est le chef-lieu du Haut-Katanga ?",
+["Kolwezi","Lubumbashi","Likasi","Kalemie"],1,"Lubumbashi est le chef-lieu du Haut-Katanga."],
 
-{subject:"Culture générale",q:"Le chef-lieu du Lualaba est :",o:["Kolwezi","Goma","Kindu","Kananga"],a:0,e:"Kolwezi est le chef-lieu du Lualaba."},
+["Culture générale","Quel est le chef-lieu du Lualaba ?",
+["Lubumbashi","Kolwezi","Goma","Kindu"],1,"Kolwezi est le chef-lieu du Lualaba."],
 
-{subject:"Culture générale",q:"Combien de provinces compte actuellement la RDC ?",o:["10","15","26","30"],a:2,e:"La RDC compte 26 provinces."},
+["Culture générale","Quel est le chef-lieu du Sud-Kivu ?",
+["Goma","Bukavu","Bunia","Beni"],1,"Bukavu est le chef-lieu du Sud-Kivu."],
 
-{subject:"Culture générale",q:"L'indépendance de la RDC a été proclamée le :",o:["30 juin 1960","24 avril 1990","17 mai 1997","1 janvier 1965"],a:0,e:"La RDC a accédé à l'indépendance le 30 juin 1960."},
+["Culture générale","Quel événement majeur a lieu le 30 juin 1960 ?",
+["La création de la MONUSCO","L'indépendance du Congo belge","La chute de Mobutu","La création de l'Union africaine"],1,"Le Congo accède à l'indépendance le 30 juin 1960."],
 
-{subject:"Culture générale",q:"Le premier Premier ministre du Congo indépendant fut :",o:["Patrice Lumumba","Joseph Kasa-Vubu","Mobutu","Moïse Tshombe"],a:0,e:"Patrice Lumumba fut le premier Premier ministre."},
+["Culture générale","Patrice Emery Lumumba fut principalement :",
+["le premier Premier ministre du Congo indépendant","le premier président de la RDC après 1997","le fondateur de l'Union africaine","un explorateur européen"],0,"Lumumba devient le premier Premier ministre du Congo indépendant."],
 
-{subject:"Culture générale",q:"Le fleuve Congo se jette dans :",o:["l'océan Atlantique","l'océan Indien","la mer Rouge","la Méditerranée"],a:0,e:"Le fleuve Congo se jette dans l'océan Atlantique."},
+["Culture générale","Quel fleuve traverse une grande partie de la RDC avant de se jeter dans l'Atlantique ?",
+["Le Congo","Le Nil","Le Niger","Le Zambèze"],0,"Le fleuve Congo se jette dans l'océan Atlantique."],
 
-{subject:"Culture générale",q:"Le lac Tanganyika est notamment partagé avec :",o:["la Tanzanie","le Sénégal","le Maroc","le Ghana"],a:0,e:"La Tanzanie est l'un des pays riverains du lac Tanganyika."},
+["Culture générale","Le lac Tanganyika est notamment partagé par la RDC et :",
+["la Tanzanie","le Ghana","le Nigeria","le Maroc"],0,"La Tanzanie borde notamment le lac Tanganyika avec la RDC."],
 
-{subject:"Culture générale",q:"Quel est le chef-lieu du Nord-Kivu ?",o:["Goma","Bukavu","Beni","Butembo"],a:0,e:"Goma est le chef-lieu du Nord-Kivu."},
+["Culture générale","Quel est le siège de l'Union africaine ?",
+["Addis-Abeba","Nairobi","Kinshasa","Dakar"],0,"Le siège de l'Union africaine se trouve à Addis-Abeba."],
 
-{subject:"Culture générale",q:"Quel est le chef-lieu du Sud-Kivu ?",o:["Bukavu","Goma","Uvira","Kindu"],a:0,e:"Bukavu est le chef-lieu du Sud-Kivu."},
+["Culture générale","Sony Labou Tansi est principalement connu comme :",
+["écrivain et dramaturge congolais","président africain","explorateur britannique","scientifique égyptien"],0,"Sony Labou Tansi est une figure majeure de la littérature congolaise."],
 
-{subject:"Culture générale",q:"Qui a écrit « Une saison au Congo » ?",o:["Aimé Césaire","Sony Labou Tansi","V.Y. Mudimbe","Henri Lopes"],a:0,e:"Une saison au Congo est une pièce d'Aimé Césaire."},
+["Culture générale","Chinua Achebe est un grand écrivain :",
+["nigérian","congolais","algérien","éthiopien"],0,"Chinua Achebe est un écrivain nigérian majeur."],
 
-{subject:"Culture générale",q:"Qui a écrit « La Vie et demie » ?",o:["Sony Labou Tansi","Chinua Achebe","Wole Soyinka","Ngũgĩ wa Thiong'o"],a:0,e:"La Vie et demie est un roman de Sony Labou Tansi."},
+["Culture générale","Qui a écrit « Les Misérables » ?",
+["Victor Hugo","Aimé Césaire","Chinua Achebe","Sony Labou Tansi"],0,"Les Misérables est une œuvre majeure de Victor Hugo."],
 
-{subject:"Culture générale",q:"Qui a écrit « Things Fall Apart » ?",o:["Chinua Achebe","Wole Soyinka","Nelson Mandela","Nadine Gordimer"],a:0,e:"Things Fall Apart est un roman de Chinua Achebe."},
+["Culture générale","Aimé Césaire est notamment associé au mouvement de :",
+["la Négritude","la Renaissance européenne","l'impressionnisme","la Révolution industrielle"],0,"Aimé Césaire est une figure majeure de la Négritude."],
 
-{subject:"Culture générale",q:"Qui a écrit « Les Misérables » ?",o:["Victor Hugo","Albert Camus","Molière","Flaubert"],a:0,e:"Les Misérables est un roman de Victor Hugo."},
+["Culture générale","Quel organe de l'ONU est chargé principalement du maintien de la paix et de la sécurité internationales ?",
+["Conseil de sécurité","Cour internationale de Justice","Conseil économique et social","Secrétariat uniquement"],0,"Le Conseil de sécurité a la responsabilité principale du maintien de la paix et de la sécurité internationales."],
 
-{subject:"Culture générale",q:"Quel est le plus grand océan du monde ?",o:["Atlantique","Indien","Pacifique","Arctique"],a:2,e:"Le Pacifique est le plus vaste océan."},
+["Culture générale","En octobre 2026, le Conseil de sécurité de l'ONU a notamment réitéré son appel concernant :",
+["le retrait des forces rwandaises de l'est de la RDC","la suppression de toutes les frontières africaines","la fermeture de l'ONU","l'abandon des négociations de paix"],0,"Les informations d'octobre 2026 mentionnent un appel au retrait immédiat et sans condition des forces rwandaises et à la cessation du soutien à l'AFC/M23."],
 
-{subject:"Culture générale",q:"L'organe principal de l'ONU chargé de la paix et de la sécurité est :",o:["le Conseil de sécurité","l'UNESCO","le FMI","l'OMS"],a:0,e:"Le Conseil de sécurité a la responsabilité principale du maintien de la paix et de la sécurité internationales."},
+["Culture générale","Quels processus de paix concernant la RDC étaient notamment encouragés en octobre 2026 ?",
+["Washington et Doha","Paris et Rome","Londres et Madrid","Tokyo et Pékin"],0,"Les processus de Washington et de Doha figuraient parmi les efforts diplomatiques mentionnés."],
 
-{subject:"Culture générale",q:"Le siège de l'Union africaine se trouve à :",o:["Addis-Abeba","Nairobi","Kinshasa","Le Caire"],a:0,e:"Le siège de l'Union africaine se trouve à Addis-Abeba."},
+["Culture générale","Combien de biens naturels de la RDC figurent sur la Liste du patrimoine mondial de l'UNESCO ?",
+["2","3","5","8"],2,"La RDC compte cinq biens naturels inscrits : Virunga, Garamba, Kahuzi-Biega, Salonga et la Réserve de faune à okapis."],
 
-{subject:"Culture générale",q:"La Première Guerre mondiale a commencé en :",o:["1912","1914","1916","1918"],a:1,e:"La Première Guerre mondiale a commencé en 1914."},
-
-{subject:"Culture générale",q:"La Seconde Guerre mondiale s'est terminée en :",o:["1943","1944","1945","1946"],a:2,e:"La Seconde Guerre mondiale s'est terminée en 1945."}
+["Culture générale","Quel est le plus vaste océan de la planète ?",
+["Atlantique","Indien","Pacifique","Arctique"],2,"Le Pacifique est le plus vaste océan du monde."]
 
 ];
 
 
-/* =========================================================
-   VERIFICATION
-========================================================= */
+/* ==========================================================
+   CONVERSION DES QUESTIONS
+========================================================== */
 
-if(QUESTIONS.length !== 100){
-    alert("Erreur : le test doit contenir exactement 100 questions.");
+let bank=Q.map(x=>({
+s:x[0],q:x[1],a:x[2],c:x[3],e:x[4]
+}));
+
+
+/* ==========================================================
+   ÉTAT
+========================================================== */
+
+let name="";
+let list=[];
+let i=0;
+let ans=[];
+let qTimer=null;
+let rTimer=null;
+let qLeft=60;
+let rLeft=900;
+let totalTime=0;
+let active=false;
+
+const subjects=["Anglais","Français","Maths","Culture générale"];
+
+const stats={
+"Anglais":{correct:0,wrong:0},
+"Français":{correct:0,wrong:0},
+"Maths":{correct:0,wrong:0},
+"Culture générale":{correct:0,wrong:0}
+};
+
+
+/* ==========================================================
+   MÉLANGE
+========================================================== */
+
+function shuffle(a){
+a=[...a];
+for(let j=a.length-1;j>0;j--){
+let k=Math.floor(Math.random()*(j+1));
+[a[j],a[k]]=[a[k],a[j]];
+}
+return a;
+}
+
+function prepare(){
+
+list=[];
+
+subjects.forEach(s=>{
+let x=shuffle(bank.filter(q=>q.s===s));
+
+x=x.map(q=>{
+let opts=q.a.map((text,n)=>({
+text,
+correct:n===q.c
+}));
+opts=shuffle(opts);
+return {...q,opts};
+});
+
+list.push(...x);
+});
+
+ans=Array(list.length).fill(null);
 }
 
 
-/* =========================================================
-   MELANGE DES REPONSES
-========================================================= */
+/* ==========================================================
+   DÉMARRAGE
+========================================================== */
 
-function shuffleAnswers(){
+function start(){
 
-    QUESTIONS.forEach(question=>{
+name=document.getElementById("name").value.trim();
 
-        const correctText=question.o[question.a];
-
-        for(let i=question.o.length-1;i>0;i--){
-
-            const j=Math.floor(Math.random()*(i+1));
-
-            [question.o[i],question.o[j]]
-            =
-            [question.o[j],question.o[i]];
-        }
-
-        question.a=question.o.indexOf(correctText);
-
-    });
-
+if(!name){
+alert("Veuillez entrer votre nom complet.");
+return;
 }
 
-shuffleAnswers();
+prepare();
 
+i=0;
+totalTime=0;
+active=true;
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+document.getElementById("home").classList.add("hidden");
+document.getElementById("test").classList.remove("hidden");
 
-const app=document.getElementById("app");
-
-let current=0;
-
-let answers=new Array(100).fill(null);
-
-let questionSeconds=60;
-
-let readingSeconds=900;
-
-let questionTimer=null;
-
-let readingTimer=null;
-
-let totalQuestionTime=0;
-
-let testFinished=false;
-
-
-/* =========================================================
-   UTILITAIRES
-========================================================= */
-
-function formatTime(seconds){
-
-    const min=Math.floor(seconds/60);
-
-    const sec=seconds%60;
-
-    return String(min).padStart(2,"0")+":"+String(sec).padStart(2,"0");
+section();
 }
 
 
-function escapeHTML(text){
+function hasText(s){
+return s==="Anglais"||s==="Français";
+}
 
-    return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function section(){
 
+let s=list[i].s;
+
+document.getElementById("sub").textContent=s;
+
+if(hasText(s)) readingStart();
+else questionStart();
 }
 
 
-function stopTimers(){
-
-    clearInterval(questionTimer);
-
-    clearInterval(readingTimer);
-
-}
-
-
-/* =========================================================
-   ACCUEIL
-========================================================= */
-
-function showHome(){
-
-    stopTimers();
-
-    app.innerHTML=`
-
-    <div class="home">
-
-        <div class="watermark">
-            NATHAN
-        </div>
-
-        <div class="home-content">
-
-            <h2>PRÉPA EXCELLENTIA WANTANSHI</h2>
-
-            <h1>
-                TEST BLANC
-                <br>
-                100 QUESTIONS
-            </h1>
-
-            <p>
-                Mathématiques • Français • Anglais • Culture générale
-            </p>
-
-            <input
-                id="candidateName"
-                placeholder="Nom complet du participant"
-            >
-
-            <br>
-
-            <button
-                class="start"
-                onclick="startTest()"
-            >
-                COMMENCER LE TEST
-            </button>
-
-            <p>
-                1 minute par question
-            </p>
-
-            <p>
-                Textes anglais et français :
-                15 minutes maximum de lecture
-            </p>
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   DEMARRAGE
-========================================================= */
-
-function startTest(){
-
-    const name=
-        document.getElementById("candidateName").value.trim();
-
-    if(!name){
-
-        alert("Veuillez entrer le nom complet du participant.");
-
-        return;
-
-    }
-
-    current=0;
-
-    answers.fill(null);
-
-    totalQuestionTime=0;
-
-    testFinished=false;
-
-    startReading("Anglais");
-
-}
-
-
-/* =========================================================
+/* ==========================================================
    LECTURE
-========================================================= */
+========================================================== */
 
-function startReading(language){
+function readingStart(){
 
-    stopTimers();
+clearInterval(rTimer);
+clearInterval(qTimer);
 
-    readingSeconds=900;
+rLeft=900;
 
-    const text=
-        language==="Anglais"
-        ?
-        TEXT_EN
-        :
-        TEXT_FR;
+document.getElementById("questions").classList.add("hidden");
+document.getElementById("reading").classList.remove("hidden");
 
-    app.innerHTML=`
+let english=list[i].s==="Anglais";
 
-    <div class="reading">
+document.getElementById("rtitle").textContent=
+english?"Reading comprehension":"Compréhension de texte";
 
-        <h1>
-            ${language}
-        </h1>
+document.getElementById("rtext").innerHTML=
+(english?englishText:frenchText).replace(/\n/g,"<br>");
 
-        <div class="card">
+readClock();
 
-            <h2>
-                TEMPS DE LECTURE
-            </h2>
+rTimer=setInterval(()=>{
+rLeft--;
+totalTime++;
+readClock();
 
-            <div
-                id="readingTimer"
-                class="timer"
-            >
-                15:00
-            </div>
+if(rLeft<=0){
+clearInterval(rTimer);
+questionStart();
+}
+},1000);
+}
 
-            <p class="reading-info">
+function readClock(){
 
-                Tu disposes de 15 minutes maximum
-                pour lire le texte.
+let m=Math.floor(rLeft/60);
+let s=rLeft%60;
 
-                <br><br>
+document.getElementById("timer").textContent=
+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
 
-                <b>
-                Tu peux cependant passer aux questions
-                immédiatement si tu le souhaites.
-                </b>
+document.getElementById("prog").textContent="Lecture";
+}
 
-            </p>
-
-            <button
-                class="skip"
-                onclick="skipReading()"
-            >
-                PASSER DIRECTEMENT AUX QUESTIONS →
-            </button>
-
-            <hr>
-
-            <div class="reading-text">
-
-                ${escapeHTML(text)}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-
-    readingTimer=setInterval(()=>{
-
-        readingSeconds--;
-
-        const timer=
-            document.getElementById("readingTimer");
-
-        if(timer){
-
-            timer.textContent=
-                formatTime(readingSeconds);
-
-        }
-
-        if(readingSeconds<=0){
-
-            stopTimers();
-
-            beginQuestion();
-
-        }
-
-    },1000);
-
+function skip(){
+clearInterval(rTimer);
+questionStart();
 }
 
 
-/* =========================================================
-   PASSER LA LECTURE
-========================================================= */
+/* ==========================================================
+   QUESTIONS
+========================================================== */
 
-function skipReading(){
+function questionStart(){
 
-    stopTimers();
+clearInterval(qTimer);
+clearInterval(rTimer);
 
-    beginQuestion();
+qLeft=60;
 
+document.getElementById("reading").classList.add("hidden");
+document.getElementById("questions").classList.remove("hidden");
+
+render();
+
+qClock();
+
+qTimer=setInterval(()=>{
+qLeft--;
+totalTime++;
+qClock();
+
+if(qLeft<=0){
+clearInterval(qTimer);
+advance(true);
+}
+},1000);
+}
+
+function qClock(){
+
+document.getElementById("timer").textContent=
+"00:"+String(qLeft).padStart(2,"0");
+
+document.getElementById("prog").textContent=
+"Question "+(i+1)+"/100";
+}
+
+function render(){
+
+let q=list[i];
+
+document.getElementById("sub").textContent=q.s;
+
+document.getElementById("qn").textContent=
+"Question "+(i+1)+" / 100";
+
+document.getElementById("qt").textContent=q.q;
+
+let box=document.getElementById("answers");
+box.innerHTML="";
+
+q.opts.forEach((o,n)=>{
+
+let b=document.createElement("button");
+
+b.className="answer";
+
+b.textContent=
+String.fromCharCode(65+n)+". "+o.text;
+
+if(ans[i]===n)b.classList.add("selected");
+
+b.onclick=()=>{
+ans[i]=n;
+document.querySelectorAll(".answer").forEach((x,z)=>{
+x.classList.toggle("selected",z===n);
+});
+};
+
+box.appendChild(b);
+});
+
+document.getElementById("look").style.display=
+hasText(q.s)?"block":"none";
 }
 
 
-/* =========================================================
-   QUESTION
-========================================================= */
+/* ==========================================================
+   AVANCER
+========================================================== */
 
-function beginQuestion(){
+function next(){
 
-    stopTimers();
+if(ans[i]===null){
+alert("Sélectionnez une réponse avant de continuer.");
+return;
+}
 
-    questionSeconds=60;
+advance(false);
+}
 
-    const question=QUESTIONS[current];
+function advance(){
 
-    const percent=
-        ((current+1)/100)*100;
+clearInterval(qTimer);
 
+let q=list[i];
 
-    let reviewButton="";
+if(ans[i]!==null && q.opts[ans[i]].correct)
+stats[q.s].correct++;
+else
+stats[q.s].wrong++;
 
-    if(
-        question.subject==="Anglais" ||
-        question.subject==="Français"
-    ){
+let old=q.s;
 
-        reviewButton=`
+i++;
 
-        <button
-            class="review"
-            onclick="showTextAgain()"
-        >
-            👁 JETER UN COUP D'ŒIL AU TEXTE
-        </button>
+if(i>=list.length){
+finish();
+return;
+}
 
-        `;
+let nextSubject=list[i].s;
 
-    }
-
-
-    app.innerHTML=`
-
-    <div>
-
-        <div class="question-header">
-
-            <div>
-
-                <b>
-                    ${question.subject}
-                </b>
-
-                <br>
-
-                Question
-                ${current+1}
-                /100
-
-            </div>
-
-            <div
-                id="questionTimer"
-                class="question-timer"
-            >
-                01:00
-            </div>
-
-        </div>
-
-
-        <div class="progress">
-
-            <div
-                class="progress-bar"
-                style="width:${percent}%"
-            ></div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>
-                ${escapeHTML(question.q)}
-            </h2>
-
-            <div class="options">
-
-                ${question.o.map((option,index)=>`
-
-                    <button
-                        data-index="${index}"
-                        onclick="selectAnswer(${index})"
-                    >
-
-                        <b>
-                            ${String.fromCharCode(65+index)}.
-                        </b>
-
-                        ${escapeHTML(option)}
-
-                    </button>
-
-                `).join("")}
-
-            </div>
-
-
-            ${reviewButton}
-
-
-            <br>
-
-            <button
-                id="nextButton"
-                class="next"
-                disabled
-                onclick="nextQuestion()"
-            >
-                ${current===99 ? "TERMINER LE TEST" : "QUESTION SUIVANTE →"}
-            </button>
-
-        </div>
-
-    </div>
-
-    `;
-
-
-    questionTimer=setInterval(()=>{
-
-        questionSeconds--;
-
-        totalQuestionTime++;
-
-        const timer=
-            document.getElementById("questionTimer");
-
-        if(timer){
-
-            timer.textContent=
-                formatTime(questionSeconds);
-
-        }
-
-        if(questionSeconds<=0){
-
-            nextQuestion();
-
-        }
-
-    },1000);
-
+if(nextSubject!==old && hasText(nextSubject))
+readingStart();
+else
+questionStart();
 }
 
 
-/* =========================================================
-   CHOIX REPONSE
-========================================================= */
+/* ==========================================================
+   VOIR LE TEXTE
+========================================================== */
 
-function selectAnswer(index){
+function showText(){
 
-    answers[current]=index;
+let english=list[i].s==="Anglais";
 
-    document
-        .querySelectorAll(".options button")
-        .forEach(button=>{
+document.getElementById("mt").textContent=
+english?"English text":"Texte français";
 
-            button.classList.remove("selected");
+document.getElementById("mx").innerHTML=
+(english?englishText:frenchText).replace(/\n/g,"<br>");
 
-        });
+document.getElementById("modal").classList.remove("hidden");
+}
 
-
-    const selected=
-        document.querySelector(
-            `.options button[data-index="${index}"]`
-        );
-
-    if(selected){
-
-        selected.classList.add("selected");
-
-    }
-
-
-    document.getElementById("nextButton")
-        .disabled=false;
-
+function closeModal(){
+document.getElementById("modal").classList.add("hidden");
 }
 
 
-/* =========================================================
-   QUESTION SUIVANTE
-========================================================= */
+/* ==========================================================
+   RÉSULTATS
+========================================================== */
 
-function nextQuestion(){
+function finish(){
 
-    stopTimers();
+active=false;
+clearInterval(qTimer);
+clearInterval(rTimer);
 
-    if(answers[current]===null){
+document.getElementById("test").classList.add("hidden");
+document.getElementById("results").classList.remove("hidden");
 
-        if(questionSeconds>0){
+let total=0;
+let wrong=0;
 
-            alert(
-                "Veuillez choisir une réponse avant de continuer."
-            );
+subjects.forEach(s=>{
+total+=stats[s].correct;
+wrong+=stats[s].wrong;
+});
 
-            beginQuestion();
+document.getElementById("participant").textContent=
+"Participant : "+name;
 
-            return;
+document.getElementById("score").textContent=
+total+" / 100";
 
-        }
+document.getElementById("percent").textContent=
+Math.round(total)+" %";
 
-        /*
-        Si le temps est terminé et aucune réponse
-        n'a été choisie, la question est comptée
-        comme non répondue.
-        */
+document.getElementById("mistakes").textContent=
+wrong+" erreur(s)";
 
-    }
+document.getElementById("spent").textContent=
+"⏱ Temps réellement passé : "+formatTime(totalTime);
 
+let html="";
 
-    current++;
+subjects.forEach(s=>{
 
+let c=stats[s].correct;
+let w=stats[s].wrong;
+let p=Math.round(c/25*100);
 
-    if(current>=100){
+html+=`
+<div class="subject">
+<h3>${s}</h3>
+<p><b>Score :</b> ${c}/25</p>
+<p><b>Pourcentage :</b> ${p}%</p>
+<p><b>Erreurs :</b> ${w}</p>
+</div>
+`;
+});
 
-        finishTest();
+document.getElementById("subjects").innerHTML=html;
 
-        return;
-
-    }
-
-
-    /*
-    Après les 25 questions d'anglais,
-    on ouvre la lecture française.
-    */
-
-    if(current===25){
-
-        startReading("Français");
-
-        return;
-
-    }
-
-
-    beginQuestion();
-
+showErrors();
 }
 
 
-/* =========================================================
-   REVOIR LE TEXTE
-========================================================= */
+/* ==========================================================
+   ERREURS ET EXPLICATIONS
+========================================================== */
 
-function showTextAgain(){
+function showErrors(){
 
-    const question=QUESTIONS[current];
+let html="";
+let n=0;
 
-    const text=
-        question.subject==="Anglais"
-        ?
-        TEXT_EN
-        :
-        TEXT_FR;
+list.forEach((q,k)=>{
 
+let correct=ans[k]!==null && q.opts[ans[k]].correct;
 
-    const modal=
-        document.createElement("div");
+if(!correct){
 
-    modal.className="modal";
+n++;
 
+let user=
+ans[k]===null
+?"Aucune réponse"
+:q.opts[ans[k]].text;
 
-    modal.innerHTML=`
+let right=
+q.opts.find(o=>o.correct).text;
 
-        <div class="modal-content">
+html+=`
+<div class="error">
 
-            <h2>
-                Texte —
-                ${question.subject}
-            </h2>
+<b>${n}. ${q.s}</b>
 
-            <p>
-                ${escapeHTML(text)}
-            </p>
+<p><b>Question :</b> ${q.q}</p>
 
-            <button
-                class="close"
-                onclick="this.closest('.modal').remove()"
-            >
-                FERMER LE TEXTE
-            </button>
+<p class="bad">
+❌ Votre réponse : ${user}
+</p>
 
-        </div>
+<p class="ok">
+✅ Bonne réponse : ${right}
+</p>
 
-    `;
+<div class="exp">
+<b>Explication :</b> ${q.e}
+</div>
 
+</div>
+`;
+}
+});
 
-    document.body.appendChild(modal);
+if(!html){
+html=`
+<p class="ok">
+🎉 Aucune erreur ! Excellent travail.
+</p>
+`;
+}
 
+document.getElementById("errors").innerHTML=html;
 }
 
 
-/* =========================================================
-   RESULTATS
-========================================================= */
+/* ==========================================================
+   TEMPS
+========================================================== */
 
-function finishTest(){
+function formatTime(t){
 
-    stopTimers();
+let h=Math.floor(t/3600);
+let m=Math.floor((t%3600)/60);
+let s=t%60;
 
-    testFinished=true;
+if(h>0)
+return `${h} h ${String(m).padStart(2,"0")} min ${String(s).padStart(2,"0")} s`;
 
-    let score=0;
-
-    QUESTIONS.forEach((question,index)=>{
-
-        if(answers[index]===question.a){
-
-            score++;
-
-        }
-
-    });
-
-
-    const percentage=score;
-
-    const errors=100-score;
-
-    const minutes=
-        Math.floor(totalQuestionTime/60);
-
-    const seconds=
-        totalQuestionTime%60;
-
-
-    const name=
-        document.getElementById("candidateName")
-        ?
-        document.getElementById("candidateName").value
-        :
-        "Participant";
-
-
-    let errorsHTML="";
-
-
-    QUESTIONS.forEach((question,index)=>{
-
-        if(answers[index]!==question.a){
-
-            const studentAnswer=
-                answers[index]===null
-                ?
-                "Aucune réponse"
-                :
-                String.fromCharCode(
-                    65+answers[index]
-                )+
-                ". "+
-                question.o[answers[index]];
-
-
-            const correctAnswer=
-                String.fromCharCode(
-                    65+question.a
-                )+
-                ". "+
-                question.o[question.a];
-
-
-            errorsHTML+=`
-
-                <div class="error">
-
-                    <b>
-                        Question ${index+1}
-                    </b>
-
-                    <p>
-                        ${escapeHTML(question.q)}
-                    </p>
-
-                    <p class="wrong">
-
-                        Ta réponse :
-                        ${escapeHTML(studentAnswer)}
-
-                    </p>
-
-                    <p class="correct">
-
-                        Bonne réponse :
-                        ${escapeHTML(correctAnswer)}
-
-                    </p>
-
-                    <p>
-
-                        <b>Explication :</b>
-                        ${escapeHTML(question.e)}
-
-                    </p>
-
-                </div>
-
-            `;
-
-        }
-
-    });
-
-
-    app.innerHTML=`
-
-    <div class="result-card">
-
-        <h1 style="text-align:center">
-            RÉSULTATS
-        </h1>
-
-        <h2 style="text-align:center">
-            ${escapeHTML(name)}
-        </h2>
-
-        <div class="score">
-            ${percentage}%
-        </div>
-
-        <p style="text-align:center;font-size:20px">
-
-            ${score}/100 bonnes réponses
-
-            <br>
-
-            ${errors} erreur(s)
-
-        </p>
-
-
-        <div class="time-result">
-
-            ⏱️ Temps dépensé pendant les questions :
-
-            <br>
-
-            <b>
-                ${minutes} min ${seconds} sec
-            </b>
-
-        </div>
-
-
-        <hr>
-
-
-        <h2>
-            DÉTAIL DES ERREURS
-        </h2>
-
-
-        ${
-            errorsHTML ||
-            `
-            <h2
-                class="correct"
-                style="text-align:center"
-            >
-                🎉 Félicitations !
-                Aucune erreur.
-            </h2>
-            `
-        }
-
-
-        <footer>
-            Prépa Excellentia Wantanshi
-            <br>
-            by Nathan
-        </footer>
-
-    </div>
-
-    `;
-
+return `${m} min ${String(s).padStart(2,"0")} s`;
 }
 
 
-/* =========================================================
+/* ==========================================================
    ANTI-TRICHE
-========================================================= */
+========================================================== */
 
-document.addEventListener(
-    "visibilitychange",
-    ()=>{
+let warned=false;
 
-        if(
-            document.hidden &&
-            !testFinished
-        ){
+document.addEventListener("visibilitychange",()=>{
 
-            alert(
-                "⚠️ TENTATIVE DE TRICHE DÉTECTÉE !\n\n"+
-                "Tu as quitté la page du test. "+
-                "Le chronomètre continue."
-            );
+if(document.hidden && active && !warned){
 
-        }
+warned=true;
 
-    }
+alert(
+"⚠️ TENTATIVE DE TRICHE\n\n"+
+"Vous avez quitté la page du test."
 );
 
+setTimeout(()=>warned=false,3000);
+}
+});
 
-window.addEventListener(
-    "beforeunload",
-    event=>{
+window.addEventListener("beforeunload",e=>{
 
-        if(!testFinished){
+if(active){
+e.preventDefault();
+e.returnValue="";
+}
+});
 
-            event.preventDefault();
+history.pushState(null,"",location.href);
 
-            event.returnValue="";
+window.addEventListener("popstate",()=>{
 
-        }
+if(active){
 
-    }
-);
+alert("⚠️ Le retour arrière est désactivé pendant le test.");
 
-
-/* =========================================================
-   INTERDICTION DU RETOUR
-========================================================= */
-
-history.pushState(
-    null,
-    "",
-    location.href
-);
-
-window.addEventListener(
-    "popstate",
-    ()=>{
-
-        if(!testFinished){
-
-            alert(
-                "⚠️ Retour en arrière interdit pendant le test."
-            );
-
-            history.pushState(
-                null,
-                "",
-                location.href
-            );
-
-        }
-
-    }
-);
+history.pushState(null,"",location.href);
+}
+});
 
 
-/* =========================================================
-   DEMARRAGE
-========================================================= */
+/* ==========================================================
+   CONTRÔLE
+========================================================== */
 
-showHome();
+console.log("Total :",bank.length);
+console.log("Anglais :",bank.filter(x=>x.s==="Anglais").length);
+console.log("Français :",bank.filter(x=>x.s==="Français").length);
+console.log("Maths :",bank.filter(x=>x.s==="Maths").length);
+console.log("Culture :",bank.filter(x=>x.s==="Culture générale").length);
 
 </script>
-
 </body>
-</html>
+    </html>
