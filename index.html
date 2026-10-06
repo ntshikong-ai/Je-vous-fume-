@@ -2,1112 +2,3037 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#b5121b">
 <title>Prépa Excellentia Wantanshi — Nathan</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f3f3;color:#222}
-.hidden{display:none!important}
-button{cursor:pointer;border:0}
-#home{min-height:100vh;background:#c40000;color:white;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
-.watermark{position:absolute;font-size:20vw;font-weight:900;opacity:.08;transform:rotate(-15deg)}
-.home{position:relative;z-index:2;background:#0003;padding:35px;border-radius:20px;text-align:center;width:min(600px,100%)}
-.home h1{font-size:clamp(30px,7vw,55px);margin:0}
-.home input{width:100%;padding:15px;margin:20px 0;border:0;border-radius:10px;font-size:17px}
-.start,.skip,.next{padding:14px 22px;border-radius:9px;font-weight:bold}
-.start{background:white;color:#b00000}
-#test{min-height:100vh}
-.bar{position:sticky;top:0;z-index:10;background:#111;color:white;padding:12px;display:flex;justify-content:space-between;gap:8px}
-.timer{color:#ff5555;font-weight:bold;font-size:20px}
-.reading,.questions{max-width:950px;margin:auto;padding:25px}
-.text{background:white;padding:25px;border-radius:14px;line-height:1.75;font-size:17px;max-height:65vh;overflow:auto}
-.warning{background:#fff3cd;padding:15px;margin:15px 0;border-left:5px solid #e0a000}
-.actions{margin-top:20px;text-align:center}.skip{background:#b00000;color:white}
-.card{background:white;padding:25px;border-radius:15px;box-shadow:0 3px 15px #0001}
-.q{font-size:21px;line-height:1.5;margin:20px 0}
-.answers{display:grid;gap:10px}.answer{padding:15px;text-align:left;background:#f5f5f5;border:2px solid #ddd;border-radius:9px;font-size:16px}.answer.selected{border-color:#b00000;background:#ffe0e0}
-.bottom{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.next{background:#111;color:white}.look{padding:14px;border-radius:9px}
-#results{padding:30px 15px}.result{max-width:1000px;margin:auto}
-.total{background:#111;color:white;padding:25px;text-align:center;border-radius:15px;margin-bottom:25px}.big{font-size:48px;font-weight:bold}
-.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.subject{background:white;padding:20px;border-radius:13px;box-shadow:0 3px 10px #0001}.subject h3{color:#b00000}
-.errors{background:white;padding:25px;border-radius:15px;margin-top:25px}.error{background:#fff5f5;border-left:5px solid #d00000;padding:15px;margin:15px 0}.ok{color:green;font-weight:bold}.bad{color:#c00000;font-weight:bold}
-.exp{background:#eee;padding:10px;margin-top:8px;border-radius:6px}
-.modal{position:fixed;inset:0;background:#000b;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}.modalbox{background:white;padding:25px;border-radius:15px;max-width:900px;max-height:85vh;overflow:auto;line-height:1.7}.close{float:right;background:#b00000;color:white;padding:8px;border-radius:6px}
-footer{text-align:center;margin:30px;font-weight:bold;color:#555}
+:root{
+  --red:#b5121b;
+  --red-dark:#7d0c12;
+  --red-light:#e21b2d;
+  --black:#101114;
+  --dark:#181a1f;
+  --gray:#6b7280;
+  --light:#f5f6f8;
+  --white:#fff;
+  --green:#159447;
+  --orange:#e38b18;
+  --border:#e5e7eb;
+  --shadow:0 18px 50px rgba(0,0,0,.10);
+  --radius:20px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--light);
+  color:var(--black);
+  min-height:100vh;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   ACCUEIL
+========================= */
+
+#home{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,255,255,.10),transparent 25%),
+    radial-gradient(circle at 90% 80%,rgba(255,255,255,.08),transparent 30%),
+    linear-gradient(135deg,#8e0b13 0%,#b5121b 48%,#71070c 100%);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px 18px;
+}
+
+.watermark{
+  position:absolute;
+  font-size:clamp(120px,25vw,390px);
+  font-weight:900;
+  color:rgba(255,255,255,.045);
+  letter-spacing:-15px;
+  user-select:none;
+  pointer-events:none;
+  transform:rotate(-8deg);
+  white-space:nowrap;
+}
+
+.home-card{
+  width:min(1050px,100%);
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  background:rgba(255,255,255,.96);
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.28);
+}
+
+.home-left{
+  padding:55px;
+  background:linear-gradient(145deg,#fff,#f8f8f9);
+}
+
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#111;
+  color:white;
+  padding:9px 14px;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:25px;
+}
+
+.logo-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--red-light);
+}
+
+.home-left h1{
+  font-size:clamp(38px,5vw,65px);
+  line-height:.98;
+  letter-spacing:-3px;
+  margin-bottom:18px;
+}
+
+.home-left h1 span{
+  color:var(--red);
+}
+
+.subtitle{
+  color:var(--gray);
+  font-size:17px;
+  line-height:1.7;
+  max-width:600px;
+  margin-bottom:35px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:35px;
+}
+
+.stat{
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:16px;
+  background:white;
+}
+
+.stat strong{
+  display:block;
+  font-size:24px;
+  color:var(--red);
+}
+
+.stat small{
+  color:var(--gray);
+}
+
+.home-right{
+  background:#111318;
+  color:white;
+  padding:45px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.home-right h2{
+  font-size:25px;
+  margin-bottom:8px;
+}
+
+.home-right p{
+  color:#aeb3bd;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.name-label{
+  font-size:13px;
+  font-weight:800;
+  color:#d7dae0;
+  margin-bottom:8px;
+  display:block;
+}
+
+#candidateName{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #343842;
+  background:#202229;
+  color:white;
+  outline:none;
+  margin-bottom:15px;
+}
+
+#candidateName:focus{
+  border-color:#e21b2d;
+  box-shadow:0 0 0 3px rgba(226,27,45,.15);
+}
+
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:16px 20px;
+  background:var(--red);
+  color:white;
+  font-weight:800;
+  transition:.2s;
+}
+
+.primary-btn:hover{
+  background:var(--red-light);
+  transform:translateY(-1px);
+}
+
+.home-note{
+  margin-top:20px;
+  font-size:12px;
+  color:#858b96;
+  line-height:1.6;
+}
+
+/* =========================
+   APP
+========================= */
+
+#app{
+  min-height:100vh;
+  background:#f5f6f8;
+}
+
+.topbar{
+  height:72px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand-small{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+}
+
+.brand-square{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:var(--red);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:14px;
+}
+
+.top-info{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.subject-pill{
+  background:#f1f2f4;
+  padding:8px 13px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.global-time{
+  font-variant-numeric:tabular-nums;
+  font-weight:800;
+  color:var(--red);
+}
+
+/* =========================
+   QUESTION LAYOUT
+========================= */
+
+.main{
+  width:min(1000px,calc(100% - 30px));
+  margin:30px auto;
+}
+
+.progress-area{
+  margin-bottom:20px;
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  color:var(--gray);
+  font-size:13px;
+  margin-bottom:9px;
+}
+
+.progress-track{
+  height:7px;
+  background:#e1e3e7;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--red),#ef3948);
+  transition:width .3s;
+}
+
+.question-card{
+  background:white;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid rgba(0,0,0,.04);
+  padding:35px;
+}
+
+.question-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.question-number{
+  color:var(--red);
+  font-weight:900;
+  font-size:14px;
+}
+
+.question-timer{
+  min-width:82px;
+  text-align:center;
+  background:#111318;
+  color:white;
+  padding:9px 14px;
+  border-radius:10px;
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+}
+
+.question-timer.warning{
+  background:#a9151d;
+  animation:pulse .8s infinite alternate;
+}
+
+@keyframes pulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.05)}
+}
+
+.question-text{
+  font-size:23px;
+  line-height:1.5;
+  font-weight:750;
+  margin-bottom:28px;
+}
+
+.options{
+  display:grid;
+  gap:12px;
+}
+
+.option{
+  width:100%;
+  text-align:left;
+  border:2px solid #e7e8eb;
+  background:#fff;
+  padding:16px 18px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  transition:.15s;
+}
+
+.option:hover{
+  border-color:#c7cbd2;
+  background:#fafafa;
+}
+
+.option.selected{
+  border-color:var(--red);
+  background:#fff3f4;
+}
+
+.option-letter{
+  min-width:32px;
+  height:32px;
+  border-radius:9px;
+  background:#f0f1f3;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:#555;
+}
+
+.selected .option-letter{
+  background:var(--red);
+  color:white;
+}
+
+.question-actions{
+  margin-top:28px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.next-btn,
+.review-btn{
+  border:0;
+  border-radius:11px;
+  padding:13px 20px;
+  font-weight:800;
+}
+
+.next-btn{
+  background:var(--red);
+  color:white;
+}
+
+.next-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.review-btn{
+  background:#eef0f2;
+  color:#25272c;
+}
+
+/* =========================
+   READING
+========================= */
+
+.reading-page{
+  width:min(1000px,calc(100% - 30px));
+  margin:30px auto;
+}
+
+.reading-header{
+  background:#111318;
+  color:white;
+  border-radius:20px 20px 0 0;
+  padding:28px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.reading-header h1{
+  font-size:25px;
+}
+
+.reading-header p{
+  color:#aeb3bd;
+  margin-top:5px;
+}
+
+.reading-clock{
+  font-size:27px;
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+
+.reading-content{
+  background:white;
+  padding:40px;
+  max-height:calc(100vh - 250px);
+  overflow:auto;
+  line-height:1.9;
+  font-size:16px;
+}
+
+.reading-content p{
+  margin-bottom:18px;
+}
+
+.reading-footer{
+  background:white;
+  border-top:1px solid var(--border);
+  padding:20px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  border-radius:0 0 20px 20px;
+}
+
+.reading-footer span{
+  color:var(--gray);
+  font-size:13px;
+}
+
+.skip-btn{
+  border:0;
+  background:var(--red);
+  color:white;
+  padding:13px 20px;
+  border-radius:11px;
+  font-weight:800;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.68);
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-box{
+  background:white;
+  width:min(850px,100%);
+  max-height:90vh;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 30px 100px rgba(0,0,0,.3);
+}
+
+.modal-head{
+  padding:20px 25px;
+  background:#111318;
+  color:white;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.close-modal{
+  background:#292c34;
+  border:0;
+  color:white;
+  width:35px;
+  height:35px;
+  border-radius:9px;
+  font-size:20px;
+}
+
+.modal-body{
+  padding:30px;
+  overflow:auto;
+  max-height:75vh;
+  line-height:1.85;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.results{
+  width:min(1100px,calc(100% - 30px));
+  margin:35px auto 60px;
+}
+
+.result-hero{
+  background:linear-gradient(135deg,#111318,#252832);
+  color:white;
+  border-radius:25px;
+  padding:40px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:30px;
+  align-items:center;
+  box-shadow:var(--shadow);
+}
+
+.result-hero h1{
+  font-size:35px;
+  margin-bottom:8px;
+}
+
+.result-hero p{
+  color:#b7bbc4;
+}
+
+.score-circle{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  border:10px solid var(--red);
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+
+.score-circle strong{
+  font-size:35px;
+}
+
+.score-circle small{
+  display:block;
+  color:#bbb;
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin:20px 0;
+}
+
+.result-box{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.05);
+}
+
+.result-box small{
+  color:var(--gray);
+  display:block;
+  margin-bottom:7px;
+}
+
+.result-box strong{
+  font-size:28px;
+}
+
+.subject-results{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.subject-result{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  border:1px solid var(--border);
+}
+
+.subject-result strong{
+  display:block;
+  margin-bottom:10px;
+}
+
+.subject-score{
+  font-size:28px;
+  font-weight:900;
+  color:var(--red);
+}
+
+.errors-title{
+  margin:30px 0 15px;
+}
+
+.error-card{
+  background:white;
+  border:1px solid #f0d7d9;
+  border-left:5px solid var(--red);
+  border-radius:13px;
+  padding:20px;
+  margin-bottom:12px;
+}
+
+.error-card h3{
+  font-size:15px;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.answer-wrong{
+  color:#a9151d;
+  margin-bottom:5px;
+}
+
+.answer-right{
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+.explanation{
+  color:#5e6470;
+  line-height:1.6;
+  font-size:14px;
+}
+
+.footer{
+  text-align:center;
+  color:#888d96;
+  font-size:13px;
+  margin-top:45px;
+}
+
+/* =========================
+   WARNING
+========================= */
+
+.cheat-warning{
+  position:fixed;
+  inset:0;
+  background:rgba(20,0,0,.88);
+  z-index:300;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.warning-box{
+  background:white;
+  width:min(470px,100%);
+  border-radius:20px;
+  padding:35px;
+  text-align:center;
+}
+
+.warning-icon{
+  width:65px;
+  height:65px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  background:#fff0f0;
+  color:var(--red);
+  display:grid;
+  place-items:center;
+  font-size:30px;
+}
+
+.warning-box h2{
+  margin-bottom:10px;
+}
+
+.warning-box p{
+  color:var(--gray);
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.warning-btn{
+  border:0;
+  background:var(--red);
+  color:white;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:800;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+  .home-card{
+    grid-template-columns:1fr;
+  }
+
+  .home-left,
+  .home-right{
+    padding:30px 24px;
+  }
+
+  .home-right{
+    order:2;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .topbar{
+    padding:0 14px;
+  }
+
+  .top-info{
+    gap:8px;
+  }
+
+  .subject-pill{
+    display:none;
+  }
+
+  .question-card{
+    padding:24px 18px;
+  }
+
+  .question-text{
+    font-size:19px;
+  }
+
+  .reading-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .reading-content{
+    padding:25px 20px;
+    max-height:none;
+  }
+
+  .reading-footer{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .result-hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .score-circle{
+    margin:auto;
+  }
+
+  .result-grid,
+  .subject-results{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:480px){
+  .result-grid,
+  .subject-results{
+    grid-template-columns:1fr;
+  }
+
+  .home-left h1{
+    letter-spacing:-2px;
+  }
+
+  .question-actions{
+    flex-direction:column;
+  }
+
+  .next-btn,
+  .review-btn{
+    width:100%;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     ACCUEIL
+========================= -->
+
 <section id="home">
-<div class="watermark">NATHAN</div>
-<div class="home">
-<h1>PRÉPA EXCELLENTIA</h1>
-<h2>WANTANSHI</h2>
-<p><b>Test avancé — 100 QCM</b></p>
-<p>Anglais • Français • Maths • Culture générale</p>
-<input id="name" placeholder="Nom complet">
-<button class="start" onclick="start()">COMMENCER</button>
-</div>
+
+  <div class="watermark">NATHAN</div>
+
+  <div class="home-card">
+
+    <div class="home-left">
+
+      <div class="logo">
+        <span class="logo-dot"></span>
+        PRÉPA EXCELLENTIA WANTANSHI
+      </div>
+
+      <h1>
+        Prépare-toi.<br>
+        <span>Progresse.</span><br>
+        Réussis.
+      </h1>
+
+      <p class="subtitle">
+        Une évaluation complète conçue pour mesurer ton niveau,
+        identifier tes lacunes et te préparer efficacement aux
+        exigences d'un concours d'excellence.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>100</strong>
+          <small>questions</small>
+        </div>
+
+        <div class="stat">
+          <strong>4</strong>
+          <small>matières</small>
+        </div>
+
+        <div class="stat">
+          <strong>130 min</strong>
+          <small>durée maximale</small>
+        </div>
+      </div>
+
+      <p style="color:#777;font-size:13px;line-height:1.6">
+        Mathématiques • Français • English • Culture générale
+      </p>
+
+    </div>
+
+    <div class="home-right">
+
+      <h2>Commencer l'évaluation</h2>
+
+      <p>
+        Entre ton nom complet avant de commencer.
+        Une fois le test lancé, le chronomètre global démarre.
+      </p>
+
+      <label class="name-label" for="candidateName">
+        NOM COMPLET DU CANDIDAT
+      </label>
+
+      <input
+        id="candidateName"
+        type="text"
+        placeholder="Ex. Nathan Tshik"
+        autocomplete="off"
+      >
+
+      <button class="primary-btn" onclick="startTest()">
+        Commencer le test →
+      </button>
+
+      <div class="home-note">
+        Le retour en arrière est désactivé pendant l'évaluation.
+        Les changements d'onglet peuvent être signalés comme
+        tentative de triche.
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
-<section id="test" class="hidden">
-<div class="bar">
-<span id="sub"></span>
-<span id="prog"></span>
-<span class="timer" id="timer">01:00</span>
-</div>
 
-<div id="reading" class="reading hidden">
-<h1 id="rtitle"></h1>
-<div class="warning">
-<b>Lecture : 15 minutes maximum.</b><br>
-Vous pouvez lire le texte ou passer immédiatement aux questions.
-Le temps réellement utilisé est comptabilisé.
-</div>
-<div id="rtext" class="text"></div>
-<div class="actions">
-<button class="skip" onclick="skip()">PASSER AUX QUESTIONS →</button>
-</div>
-</div>
+<!-- =========================
+     APPLICATION
+========================= -->
 
-<div id="questions" class="questions hidden">
-<div class="card">
-<b id="qn"></b>
-<div id="qt" class="q"></div>
-<div id="answers" class="answers"></div>
-<div class="bottom">
-<button id="look" class="look" onclick="showText()">👁 Texte</button>
-<button class="next" onclick="next()">QUESTION SUIVANTE →</button>
-</div>
-</div>
-</div>
+<section id="app" class="hidden">
+
+  <header class="topbar">
+
+    <div class="brand-small">
+      <div class="brand-square">N</div>
+      <span>EXCELLENTIA</span>
+    </div>
+
+    <div class="top-info">
+      <div id="subjectPill" class="subject-pill">Mathématiques</div>
+      <div class="global-time" id="globalTime">00:00:00</div>
+    </div>
+
+  </header>
+
+  <main id="mainContent"></main>
+
 </section>
 
-<div id="modal" class="modal hidden">
-<div class="modalbox">
-<button class="close" onclick="closeModal()">Fermer</button>
-<h2 id="mt"></h2><div id="mx"></div>
-</div>
-</div>
 
-<section id="results" class="hidden">
-<div class="result">
-<h1 style="text-align:center">RÉSULTATS</h1>
-<p style="text-align:center" id="participant"></p>
+<!-- =========================
+     MODAL TEXTE
+========================= -->
 
-<div class="total">
-<div>Score total</div>
-<div class="big" id="score"></div>
-<div id="percent"></div>
-<div id="mistakes"></div>
-<div id="spent"></div>
-</div>
+<div id="textModal" class="modal hidden">
 
-<h2>📊 Résultats par matière</h2>
-<div id="subjects" class="subjects"></div>
+  <div class="modal-box">
 
-<div class="errors">
-<h2>❌ Points à corriger</h2>
-<p>Chaque erreur est accompagnée de la bonne réponse et de son explication.</p>
-<div id="errors"></div>
+    <div class="modal-head">
+      <strong id="modalTitle">Texte</strong>
+      <button class="close-modal" onclick="closeText()">×</button>
+    </div>
+
+    <div class="modal-body" id="modalBody"></div>
+
+  </div>
+
 </div>
 
-<footer>by Nathan</footer>
+
+<!-- =========================
+     WARNING TRICHE
+========================= -->
+
+<div id="cheatWarning" class="cheat-warning hidden">
+
+  <div class="warning-box">
+
+    <div class="warning-icon">!</div>
+
+    <h2>Tentative de triche détectée</h2>
+
+    <p>
+      Le test a détecté que tu as quitté la page ou changé
+      d'onglet. Cette action a été enregistrée.
+    </p>
+
+    <button class="warning-btn" onclick="closeWarning()">
+      Reprendre le test
+    </button>
+
+  </div>
+
 </div>
-</section>
+
 
 <script>
 
-/* ==========================================================
-   TEXTES DE LECTURE
-========================================================== */
+/* =========================================================
+   DONNÉES
+========================================================= */
 
-const englishText=`
-THE VALUE OF INTELLECTUAL CURIOSITY
+const frenchText = `
+Dans certaines villes, les lieux que l'on croit disparus ne meurent
+jamais complètement. Ils changent de forme, se retirent des cartes,
+s'effacent des habitudes, puis réapparaissent dans la mémoire de ceux
+qui ont pris le temps de les observer. À la périphérie d'une ancienne
+ville industrielle, il existait autrefois une vaste zone humide que
+les habitants appelaient simplement « les marais ». Pendant des
+décennies, cet espace fut considéré comme inutile. On y voyait une
+étendue boueuse, difficile à traverser, où les moustiques trouvaient
+refuge et où les enfants n'avaient aucune raison de s'aventurer.
 
-In many schools, students are encouraged to obtain good grades, follow
-instructions and prepare carefully for examinations. These objectives
-are important, but they do not necessarily define what it means to learn.
-A student may obtain excellent marks while remembering very little a few
-months later. Another student may initially struggle with a subject and
-yet develop a much deeper understanding of it.
+Pourtant, les plus anciens racontaient une autre histoire. Ils se
+souvenaient d'un temps où les pêcheurs venaient y relever leurs filets
+au lever du jour, où des oiseaux migrateurs se posaient sur les eaux
+calmes et où les femmes récoltaient certaines plantes utilisées dans
+la préparation de remèdes traditionnels. La zone humide n'était donc
+pas seulement un morceau de terrain abandonné : elle constituait une
+sorte de mémoire vivante, un espace où se croisaient les habitudes,
+les récits et les connaissances de plusieurs générations.
 
-Daniel, a seventeen-year-old student, discovered this difference during
-his final year of secondary school. He had always considered himself a
-successful student because his grades were usually among the highest in
-his class. He rarely questioned information presented by his teachers,
-however. His main strategy was to memorise definitions, reproduce methods
-and revise exactly what he expected to find in examinations.
+Lorsque la ville commença à s'étendre, les promoteurs découvrirent que
+ces terrains avaient une valeur considérable. Les premiers plans
+prévoyaient la construction d'un vaste quartier résidentiel. On parla
+de modernisation, de croissance économique et de création d'emplois.
+À première vue, le projet semblait difficile à contester. Pourtant,
+une biologiste nommée Éléonore Mavungu remarqua quelque chose que les
+plans d'urbanisme ne montraient pas : les marais absorbaient une
+quantité importante d'eau pendant les fortes pluies. Leur disparition
+risquait donc d'aggraver les inondations dans plusieurs quartiers
+situés en contrebas.
 
-At first, this strategy seemed effective. Daniel could remember a large
-number of facts and formulas. Yet he became uncomfortable whenever an
-exercise was presented in an unfamiliar way. If a problem looked
-different from the examples he had memorised, he often did not know how
-to begin.
+Éléonore entreprit alors une étude qui dura plusieurs mois. Elle ne
+se contenta pas de mesurer la profondeur de l'eau ou la composition du
+sol. Elle interrogea les habitants âgés, consulta d'anciens plans,
+photographia les espèces végétales et suivit, à différentes périodes
+de l'année, le déplacement des oiseaux. Peu à peu, elle comprit que le
+marais formait un système beaucoup plus complexe qu'on ne l'avait
+imaginé. Une modification apparemment insignifiante dans une partie du
+terrain pouvait provoquer des conséquences inattendues ailleurs.
 
-One day, his mathematics teacher gave the class a difficult problem that
-had several possible approaches. Daniel immediately looked for a formula
-that he could apply. When he could not find one, he concluded that the
-problem was probably too complicated. Another student, Amina, approached
-it differently. She wrote down what she knew, identified what she did not
-know and began testing simple possibilities.
+Son travail suscita d'abord l'indifférence. Certains responsables
+considéraient ses observations comme des arguments sentimentaux. Ils
+lui reprochaient même de défendre un paysage improductif au détriment
+du développement économique. Mais la biologiste ne cherchait pas à
+s'opposer à toute construction. Elle voulait démontrer qu'une ville
+pouvait grandir sans détruire aveuglément les mécanismes naturels qui
+la protégeaient.
 
-After several attempts, Amina found a solution. It was not the shortest
-method, but it demonstrated that she understood the structure of the
-problem. Daniel was surprised. He had spent more time memorising formulas,
-yet Amina was better prepared to deal with something she had never seen
-before.
+Une nuit de novembre, un violent orage frappa la région. En quelques
+heures, les caniveaux débordèrent et plusieurs rues furent recouvertes
+d'eau. Les quartiers construits sur d'anciennes zones humides furent
+les plus touchés. Le marais, lui, absorba une partie considérable du
+ruissellement. Le lendemain, les habitants découvrirent avec
+étonnement que l'endroit qu'ils avaient longtemps considéré comme un
+problème avait joué le rôle d'une gigantesque éponge.
 
-The experience changed Daniel's attitude. He began asking questions that
-were not directly connected with examinations. Instead of asking only
-“What do I need to remember?”, he started asking “Why does this work?”,
-“What would happen if one condition changed?” and “Can I find another
-way to reach the same conclusion?”
+Cet événement changea le débat. Le projet immobilier fut suspendu.
+Une commission indépendante fut créée et proposa une solution moins
+spectaculaire que celle initialement envisagée : préserver une grande
+partie de la zone humide tout en construisant, sur les secteurs les
+moins sensibles, des bâtiments conçus pour limiter l'imperméabilisation
+des sols.
 
-His progress was slow at first. Questioning familiar ideas sometimes
-made his studies more difficult because he discovered gaps in his
-knowledge. Nevertheless, those gaps became useful. They showed him
-precisely what he needed to investigate.
+La transformation ne fut pas immédiate. Il fallut convaincre les
+investisseurs, modifier les plans, créer des passerelles, restaurer
+certains canaux naturels et organiser une surveillance scientifique.
+Les habitants participèrent également au projet. Certains plantèrent
+des arbres, d'autres nettoyèrent les berges, tandis que les anciens
+racontaient aux plus jeunes les histoires liées au lieu.
 
-Daniel also changed the way he studied with other students. Previously,
-he had regarded classmates with lower marks as students who needed his
-help. He eventually realised that academic performance in one subject
-did not determine the intellectual abilities of a person. A classmate
-who struggled with mathematics might be exceptionally good at languages,
-history or explaining complicated ideas.
+Avec le temps, les « marais » changèrent de réputation. Des visiteurs
+vinrent observer les oiseaux, des chercheurs étudièrent la biodiversité
+et des familles empruntèrent les passerelles le dimanche. Le quartier
+ne devint pas moins moderne pour autant. Au contraire, il gagna une
+identité particulière, parce qu'il avait appris à intégrer son passé
+dans son avenir.
 
-The students therefore created discussion groups in which each person
-had to defend an answer and explain the reasoning behind it. They were
-allowed to disagree, provided that they could support their opinions with
-evidence. Sometimes the group discovered that an apparently convincing
-answer was based on an incorrect assumption.
+Éléonore, devenue une figure respectée de la ville, répétait souvent
+que le progrès n'était pas nécessairement synonyme d'effacement. Selon
+elle, une société réellement moderne ne devait pas seulement se
+demander ce qu'elle pouvait construire, mais aussi ce qu'elle risquait
+de perdre en construisant.
 
-This process taught them an important lesson: changing one's mind after
-discovering stronger evidence is not a sign of weakness. On the contrary,
-it can be a sign of intellectual honesty.
+Cette idée dépassa rapidement le cadre de la ville. D'autres
+municipalités étudièrent l'expérience et commencèrent à considérer
+leurs espaces naturels non plus comme des obstacles au développement,
+mais comme des infrastructures essentielles. Une nouvelle manière de
+penser apparut alors : protéger certains paysages ne relevait plus
+seulement de l'écologie ou de la nostalgie, mais aussi de la sécurité,
+de l'économie et de la mémoire collective.
 
-By the end of the school year, Daniel's examination results had remained
-excellent, but this was no longer his only objective. He had developed
-something that could not easily be measured by a mark: intellectual
-curiosity.
-
-He understood that education should not simply produce students who know
-many answers. It should also produce people who know how to formulate
-good questions, examine evidence, recognise uncertainty and revise their
-conclusions when necessary.
-
-For Daniel, the most valuable lesson was therefore not a particular
-formula or historical date. It was the habit of thinking carefully before
-accepting an answer.
+Ainsi, les anciens marais ne furent pas sauvés parce que le passé
+avait triomphé du présent. Ils furent sauvés parce que les habitants
+avaient compris qu'un avenir durable exige parfois de regarder
+attentivement ce que l'on s'apprêtait à effacer.
 `;
 
-const frenchText=`
-LA CURIOSITÉ INTELLECTUELLE
+const englishText = `
+THE LIGHTHOUSE THAT CHANGED THE COAST
 
-Dans de nombreuses écoles, les élèves sont encouragés à obtenir de bonnes
-notes, à respecter les consignes et à préparer sérieusement les examens.
-Ces objectifs sont importants, mais ils ne suffisent pas à définir ce que
-signifie apprendre. Un élève peut obtenir d'excellents résultats tout en
-oubliant une grande partie de ce qu'il a mémorisé quelques mois plus tard.
-À l'inverse, un élève qui éprouve d'abord des difficultés peut finir par
-développer une compréhension beaucoup plus profonde.
+For more than eighty years, the old lighthouse of Greyhaven stood on
+a rocky cliff overlooking the Atlantic Ocean. Its white walls were
+covered with salt, its windows rattled whenever the wind became
+violent, and its great lamp had not been used for decades. Most
+visitors considered it an interesting relic from another age.
 
-Daniel, un élève de dix-sept ans, découvrit cette différence pendant sa
-dernière année d'études secondaires. Il s'était toujours considéré comme
-un bon élève parce que ses notes figuraient généralement parmi les
-meilleures de sa classe. Pourtant, il remettait rarement en question les
-informations présentées par ses enseignants. Sa principale méthode
-consistait à mémoriser les définitions, à reproduire les méthodes et à
-réviser exactement ce qu'il pensait retrouver aux examens.
+Mara Collins saw something different.
 
-Au début, cette stratégie semblait efficace. Daniel pouvait retenir un
-grand nombre de faits et de formules. Cependant, il se sentait démuni
-lorsqu'un exercice était présenté d'une manière inhabituelle. Si un
-problème ne ressemblait pas aux exemples qu'il avait mémorisés, il ne
-savait souvent pas comment commencer.
+Mara was a marine photographer who had spent years travelling along
+the coast. She often visited Greyhaven because the surrounding waters
+were home to dolphins, seals and several species of seabirds. One
+winter evening, while waiting for a storm to pass, she noticed that
+local fishermen were using the lighthouse as a reference point when
+returning to the harbour.
 
-Un jour, son professeur de mathématiques proposa à la classe un problème
-difficile pouvant être résolu de plusieurs façons. Daniel chercha
-immédiatement une formule à appliquer. Comme il n'en trouvait aucune, il
-conclut que le problème était probablement trop compliqué. Une autre
-élève, Amina, procéda différemment. Elle écrivit ce qu'elle savait,
-identifia ce qu'elle ignorait puis commença à tester des possibilités
-simples.
+The discovery made her curious.
 
-Après plusieurs tentatives, Amina trouva une solution. Ce n'était pas la
-méthode la plus courte, mais elle démontrait qu'elle comprenait la
-structure du problème. Daniel fut surpris. Il avait consacré davantage de
-temps à mémoriser des formules, mais Amina était mieux préparée à résoudre
-une situation qu'elle n'avait jamais rencontrée.
+She learned that the lighthouse had been built in 1938 after a series
+of shipwrecks. Its original keeper, Thomas Reed, had reportedly saved
+dozens of sailors during his years on the island. However, after a
+modern navigation system was installed, the lighthouse was closed.
 
-Cette expérience modifia progressivement son attitude. Il commença à poser
-des questions qui n'étaient pas directement liées aux examens. Au lieu de
-demander seulement « Que dois-je retenir ? », il se demanda : « Pourquoi
-cela fonctionne-t-il ? », « Que se passerait-il si une condition changeait ? »
-et « Existe-t-il une autre manière de parvenir à la même conclusion ? »
+For years, the building remained abandoned.
 
-Son progrès fut d'abord lent. Remettre en question des idées familières
-rendait parfois son travail plus difficile parce qu'il découvrait des
-lacunes dans ses connaissances. Pourtant, ces lacunes devinrent utiles :
-elles lui indiquaient précisément ce qu'il devait approfondir.
+Then came the storm.
 
-Daniel changea également sa manière de travailler avec les autres élèves.
-Auparavant, il considérait les camarades ayant de moins bonnes notes comme
-des élèves qui avaient surtout besoin de son aide. Il comprit finalement
-que les résultats obtenus dans une matière ne permettent pas de mesurer
-toutes les capacités intellectuelles d'une personne. Un élève qui éprouve
-des difficultés en mathématiques peut être remarquable en langues, en
-histoire ou dans l'explication d'idées complexes.
+One night, a powerful Atlantic storm damaged several boats. The
+electricity failed across the harbour, and the new navigation system
+stopped working. The old lighthouse, although inactive, suddenly
+became useful again. Fishermen who knew the coastline used its shape
+to find their way home.
 
-Les élèves créèrent alors des groupes de discussion dans lesquels chacun
-devait défendre une réponse et expliquer son raisonnement. Ils avaient le
-droit de ne pas être d'accord, à condition de pouvoir appuyer leur opinion
-sur des éléments précis. Il leur arrivait ainsi de découvrir qu'une réponse
-apparemment convaincante reposait en réalité sur une hypothèse incorrecte.
+The incident convinced the local community that the building should
+not be demolished.
 
-Cette expérience leur enseigna une leçon essentielle : modifier son opinion
-après avoir découvert des preuves plus solides n'est pas un signe de
-faiblesse. C'est parfois une preuve d'honnêteté intellectuelle.
+Mara organized a campaign to restore it. At first, only a few people
+supported her. Some officials thought the project was a waste of
+money. Others believed that tourists would never be interested in an
+old lighthouse.
 
-À la fin de l'année scolaire, les résultats de Daniel étaient toujours
-excellents, mais ce n'était plus son seul objectif. Il avait développé
-quelque chose de plus difficile à mesurer par une note : la curiosité
-intellectuelle.
+Mara refused to give up.
 
-Il comprit que l'éducation ne devait pas simplement former des élèves
-capables de connaître beaucoup de réponses. Elle devait également former
-des personnes capables de poser de bonnes questions, d'examiner les
-preuves, de reconnaître l'incertitude et de modifier leurs conclusions
-lorsque de nouveaux éléments l'exigent.
+She contacted historians, photographers, fishermen and environmental
+groups. She also created a small exhibition showing the history of
+the coast. Slowly, people began to change their minds.
 
-Pour Daniel, la leçon la plus précieuse ne fut donc ni une formule ni une
-date historique particulière. Ce fut l'habitude de réfléchir attentivement
-avant d'accepter une réponse.
+The restoration was expensive, and the community had to go the extra
+mile to raise enough money. Local businesses donated materials, former
+fishermen shared old photographs, and volunteers repaired parts of the
+building.
+
+Six months later, the lighthouse reopened.
+
+It was not turned into a luxury hotel or an amusement park. Instead,
+the upper floor became a small museum, while the lower rooms were
+used by marine researchers. The old lamp was repaired and switched on
+only on special occasions.
+
+The project became a blessing in disguise. It attracted visitors,
+created jobs and encouraged young people to learn more about the
+history of the coast.
+
+Today, Mara still visits Greyhaven several times a year. She says
+that saving the lighthouse was never only about preserving an old
+building. It was about understanding that some places connect
+generations.
+
+The lighthouse no longer guides ships every night, but it continues
+to guide people in another way: by reminding them that progress does
+not always mean replacing everything that came before.
 `;
 
 
-/* ==========================================================
+/* =========================================================
    QUESTIONS
-   c = index de la bonne réponse
-========================================================== */
-
-const Q=[
-
-/* ===================== ANGLAIS 1-10 COMPRÉHENSION ===================== */
-
-["Anglais","What was Daniel's initial main strategy for studying?",
-["Understanding every idea deeply","Memorising definitions and expected examination material","Avoiding examinations","Discussing every lesson with classmates"],1,"The text states that Daniel mainly memorised definitions, methods and expected examination content."],
-
-["Anglais","Why did Daniel struggle with unfamiliar exercises?",
-["He had never attended mathematics lessons","He refused to use formulas","He relied heavily on memorised methods","He disliked his teacher"],2,"He was comfortable reproducing known methods but struggled when a problem required adaptation."],
-
-["Anglais","What did Amina do differently when faced with the difficult problem?",
-["She immediately asked the teacher for the answer","She tested simple possibilities after identifying what she knew","She memorised a new formula","She abandoned the problem"],1,"Amina identified known and unknown information and tested possible approaches."],
-
-["Anglais","What surprised Daniel about Amina's solution?",
-["It required no reasoning","It was the shortest possible method","It showed genuine understanding of the problem","It used a formula he had memorised"],2,"Her method was not necessarily the shortest, but it demonstrated understanding."],
-
-["Anglais","Which question best represents Daniel's new attitude?",
-["How can I avoid studying?","What exact sentence will be on the examination?","Why does this work?","Who obtained the highest mark?"],2,"Daniel began asking questions about reasons, conditions and alternative approaches."],
-
-["Anglais","Why did discovering gaps in his knowledge become useful?",
-["They allowed him to avoid difficult subjects","They showed him what he needed to investigate","They guaranteed higher marks","They proved that school was unnecessary"],1,"The gaps indicated precisely what he needed to study further."],
-
-["Anglais","What did Daniel eventually understand about students with lower marks?",
-["They were always less intelligent","They needed his help in every subject","Marks in one subject do not measure all intellectual abilities","They should not participate in discussion groups"],2,"The text explicitly says performance in one subject does not determine overall intellectual ability."],
-
-["Anglais","What rule did the discussion groups establish?",
-["Nobody could disagree","Students had to defend answers with reasoning or evidence","Only Daniel could answer","Every answer had to be memorised"],1,"Students could disagree if they could support their opinions with evidence."],
-
-["Anglais","According to the text, changing one's mind after finding stronger evidence can show:",
-["weakness","intellectual honesty","lack of preparation","indifference"],1,"The text explicitly describes this as a possible sign of intellectual honesty."],
-
-["Anglais","What does the author present as Daniel's most valuable lesson?",
-["Memorising more formulas","Obtaining the highest mark","Thinking carefully before accepting an answer","Avoiding uncertainty"],2,"The final paragraph identifies careful thinking before accepting an answer as his most valuable lesson."],
-
-/* ===================== ANGLAIS 11-25 ===================== */
-
-["Anglais","In the sentence 'The strategy seemed effective', 'effective' most nearly means:",
-["useless","successful in producing the desired result","dangerous","temporary"],1,"Effective means capable of producing the intended result."],
-
-["Anglais","The word 'unfamiliar' is closest in meaning to:",
-["unknown","obvious","famous","repeated"],0,"Unfamiliar describes something not known or not previously encountered."],
-
-["Anglais","The expression 'dealt with' is closest in meaning to:",
-["ignored completely","handled","invented","memorised"],1,"To deal with a problem means to handle or address it."],
-
-["Anglais","Choose the correct sentence:",
-["If Daniel had questioned the method earlier, he would have progressed faster.","If Daniel would question the method, he progressed faster.","If Daniel questioned the method, he would have progressed yesterday.","If Daniel has questioned, he would progress."],0,"This is a correct third conditional structure: if + past perfect, would have + past participle."],
-
-["Anglais","Choose the correct form: 'By the end of the year, Daniel ___ several new methods.'",
-["will learn","will have learned","has learn","would learning"],1,"'By the end' referring to a future point calls for the future perfect."],
-
-["Anglais","Which sentence correctly uses inversion after a negative adverbial?",
-["Never Daniel had questioned his assumptions.","Never had Daniel questioned his assumptions.","Never Daniel has questioned his assumptions.","Never did Daniel questioned his assumptions."],1,"After 'never' in this structure, auxiliary and subject are inverted: Never had Daniel..." ],
-
-["Anglais","Choose the correct passive form: 'The teacher presented the problem.'",
-["The problem presented the teacher.","The problem was presented by the teacher.","The teacher was presented by the problem.","The problem has presenting the teacher."],1,"The passive uses be + past participle: was presented."],
-
-["Anglais","'Students who can defend their opinions...' The word 'who' introduces:",
-["a relative clause","a conditional clause","an adverb","a direct object"],0,"'Who can defend...' is a relative clause modifying students."],
-
-["Anglais","Choose the grammatically correct sentence:",
-["Despite he was tired, he continued.","Despite being tired, he continued.","Despite he tired, he continued.","Despite to be tired, he continued."],1,"'Despite' can be followed by a noun or gerund phrase: despite being tired."],
-
-["Anglais","Which modal expresses deduction about the present?",
-["must","would","used to","shall"],0,"'Must' can express a strong logical deduction."],
-
-["Anglais","Choose the correct reported speech: He said, 'I understand the problem.'",
-["He said that he understood the problem.","He said that I understand the problem.","He said that he has understand the problem.","He said he understanding the problem."],0,"With normal backshift, present simple becomes past simple."],
-
-["Anglais","Which word best completes the sentence? 'The evidence was ___ to ignore.'",
-["too compelling","enough compelling","so compellingly","very enough"],0,"'Too + adjective + to...' is grammatically correct."],
-
-["Anglais","Choose the correct form: 'Had I known the truth, I ___ differently.'",
-["would act","would have acted","will act","acted"],1,"In a third conditional inversion, 'Had I known...' is followed by 'would have + past participle'."],
-
-["Anglais","Which sentence is correct?",
-["Neither the teacher nor the students was ready.","Neither the teacher nor the students were ready.","Neither the teacher or the students were ready.","Neither teacher nor students is ready."],1,"With 'neither...nor', the verb generally agrees with the nearer subject: students were."],
-
-["Anglais","Choose the best completion: 'The more carefully you examine the evidence, ___ your conclusion becomes.'",
-["the more reliable","more reliable","the most reliable","reliably"],0,"The correlative comparative structure is 'the more..., the more...'."],
-
-/* ===================== FRANÇAIS 1-10 ===================== */
-
-["Français","Pourquoi Daniel était-il d'abord considéré comme un bon élève ?",
-["Il posait beaucoup de questions","Ses notes étaient généralement parmi les meilleures","Il aidait tous ses camarades","Il refusait les examens"],1,"Daniel associait sa réussite à ses excellentes notes."],
-
-["Français","Quelle faiblesse sa méthode de travail révélait-elle ?",
-["Il ne savait pas mémoriser","Il avait du mal à adapter une méthode à une situation nouvelle","Il refusait d'apprendre les définitions","Il ne travaillait jamais"],1,"Il savait reproduire des méthodes mais était démuni face à un problème inhabituel."],
-
-["Français","Comment Amina abordait-elle le problème ?",
-["Elle cherchait immédiatement la réponse du professeur","Elle identifiait ce qu'elle savait et testait des possibilités","Elle abandonnait rapidement","Elle mémorisait une formule"],1,"Amina procédait par analyse et essais successifs."],
-
-["Français","Pourquoi Daniel fut-il surpris par Amina ?",
-["Elle avait obtenu la réponse sans réfléchir","Elle avait utilisé une méthode plus longue mais comprenait la structure du problème","Elle connaissait déjà le problème","Elle avait copié Daniel"],1,"Sa solution démontrait une compréhension réelle, même si elle n'était pas la plus courte."],
-
-["Français","Quelle transformation Daniel connaît-il ?",
-["Il cesse de poser des questions","Il commence à chercher les raisons et les conséquences","Il ne révise plus","Il décide de ne plus travailler avec les autres"],1,"Il passe de la mémorisation à une attitude plus analytique."],
-
-["Français","Pourquoi ses lacunes deviennent-elles utiles ?",
-["Elles lui permettent d'éviter les cours","Elles indiquent ce qu'il doit approfondir","Elles augmentent automatiquement ses notes","Elles remplacent les exercices"],1,"Les lacunes lui servent de repères pour orienter son apprentissage."],
-
-["Français","Que comprend Daniel à propos des élèves moins performants dans une matière ?",
-["Ils sont nécessairement moins intelligents","Leurs notes ne résument pas toutes leurs capacités","Ils ne doivent pas participer","Ils ont toujours besoin d'un professeur particulier"],1,"Le texte insiste sur la diversité des capacités intellectuelles."],
-
-["Français","Quelle condition permettait aux élèves de ne pas être d'accord ?",
-["Avoir une meilleure note","Pouvoir appuyer leur opinion sur des éléments précis","Être plus âgé","Connaître le professeur"],1,"Le désaccord était accepté lorsqu'il était argumenté."],
-
-["Français","Comment le texte considère-t-il le fait de changer d'avis face à de nouvelles preuves ?",
-["Comme une faiblesse","Comme une forme possible d'honnêteté intellectuelle","Comme un échec scolaire","Comme une perte de temps"],1,"Le texte présente cette attitude comme une preuve d'honnêteté intellectuelle."],
-
-["Français","Quelle idée principale résume le texte ?",
-["Réussir signifie seulement avoir de bonnes notes","L'apprentissage exige aussi curiosité, raisonnement et remise en question","La mémorisation est inutile","Les examens ne servent à rien"],1,"Le texte oppose la simple mémorisation à une compréhension active et critique."],
-
-/* ===================== FRANÇAIS 11-25 ===================== */
-
-["Français","Dans « une compréhension beaucoup plus profonde », « profonde » est :",
-["un adverbe","un adjectif qualificatif","un pronom","une préposition"],1,"« Profonde » qualifie le nom « compréhension »."],
-
-["Français","Dans « bien qu'il éprouve des difficultés », « bien que » introduit :",
-["une cause","une concession","une conséquence","une comparaison"],1,"« Bien que » introduit une proposition subordonnée circonstancielle de concession."],
-
-["Français","Quelle phrase contient un subjonctif correctement employé ?",
-["Il faut qu'il comprend.","Il faut qu'il comprenne.","Il faut qu'il comprendra.","Il faut qu'il comprenait."],1,"Après « il faut que », le subjonctif est requis : qu'il comprenne."],
-
-["Français","Dans « les informations présentées par les enseignants », « présentées » s'accorde avec :",
-["enseignants","informations","les","par"],1,"Le participe passé employé comme adjectif s'accorde avec « informations », féminin pluriel."],
-
-["Français","Quelle phrase respecte la concordance des temps ?",
-["Il expliqua qu'il comprend le problème.","Il expliqua qu'il comprenait le problème.","Il expliqua qu'il comprendra le problème hier.","Il expliqua qu'il comprendre le problème."],1,"Après un verbe principal au passé, l'imparfait convient pour une simultanéité dans le passé."],
-
-["Français","Dans « Il se demanda pourquoi cela fonctionnait », la proposition « pourquoi cela fonctionnait » est :",
-["une interrogative indirecte","une relative","une circonstancielle de but","une infinitive"],0,"Elle rapporte indirectement une question."],
-
-["Français","Dans « une méthode qui permet de comprendre », « qui » est :",
-["un pronom relatif sujet","un pronom personnel","un déterminant","une conjonction de coordination"],0,"« Qui » reprend « méthode » et est sujet de « permet »."],
-
-["Français","Quelle est la valeur de « pourtant » dans le texte ?",
-["addition","opposition","cause","but"],1,"« Pourtant » marque une opposition ou une contradiction."],
-
-["Français","Dans « Il avait consacré davantage de temps », le temps verbal est :",
-["passé composé","plus-que-parfait","passé simple","conditionnel passé"],1,"« Avait consacré » est au plus-que-parfait."],
-
-["Français","Quelle phrase contient un conditionnel présent ?",
-["Il aurait compris.","Il comprendrait mieux avec davantage de temps.","Il comprit mieux.","Il avait compris."],1,"« Comprendrait » est au conditionnel présent."],
-
-["Français","Dans « Les résultats que Daniel a obtenus », l'accord de « obtenus » s'explique parce que :",
-["le COD est placé avant le verbe","le sujet est pluriel","Daniel est masculin","le verbe est à l'imparfait"],0,"Avec avoir, le participe passé s'accorde avec le COD placé avant : « que », masculin pluriel."],
-
-["Français","Quelle formulation est correcte ?",
-["Malgré qu'il soit fatigué, il travaille.","Bien qu'il soit fatigué, il travaille.","Malgré il soit fatigué, il travaille.","Bien qu'il est fatigué, il travaille."],1,"« Bien que » est suivi du subjonctif."],
-
-["Français","Dans « Il travaille afin de progresser », « afin de progresser » exprime :",
-["la cause","le but","la conséquence","l'opposition"],1,"« Afin de » introduit le but."],
-
-["Français","Quelle phrase est à la voix passive ?",
-["Le professeur explique le problème.","Le problème est expliqué par le professeur.","Le professeur expliquera le problème.","Le professeur a expliqué le problème."],1,"Le sujet « problème » subit l'action : c'est la voix passive."],
-
-["Français","Dans « Ce que Daniel apprend est important », « Ce que Daniel apprend » est :",
-["le sujet du verbe « est »","un COD","un COI","un complément circonstanciel"],0,"Le groupe entier constitue le sujet de « est »."],
-
-/* ===================== MATHS ===================== */
-
-["Maths","Quel est le domaine de définition de f(x)=√(5−2x) ?",
-["x≥5/2","x≤5/2","x>5","R"],1,"Il faut 5−2x≥0, donc x≤5/2."],
-
-["Maths","Le domaine de f(x)=ln(x²−4) est :",
-["R","]-2,2[","]-∞,-2[ ∪ ]2,+∞[","]-∞,2[ ∪ ]2,+∞["],2,"Il faut x²−4>0, donc |x|>2."],
-
-["Maths","lim x→+∞ de (2x²+3x−1)/(x²−5) vaut :",
-["0","1","2","+∞"],2,"Les degrés sont égaux, donc la limite est le rapport des coefficients dominants : 2."],
-
-["Maths","lim x→+∞ de (3x²−1)/(x+2) vaut :",
-["0","3","+∞","−∞"],2,"Le numérateur est de degré 2 et le dénominateur de degré 1 : la limite est +∞."],
-
-["Maths","Pour f(x)=x+1/x, la dérivée sur R\\{0} est :",
-["1+1/x²","1−1/x²","x−1/x²","1+1/x"],1,"La dérivée de x est 1 et celle de x⁻¹ est −x⁻²."],
-
-["Maths","La dérivée de f(x)=ln(x²+1) est :",
-["1/(x²+1)","2x/(x²+1)","ln(2x)","2/(x²+1)"],1,"Avec u=x²+1, u'=2x, donc f'=u'/u."],
-
-["Maths","La dérivée de f(x)=√(3x+1) est :",
-["3/√(3x+1)","3/[2√(3x+1)]","1/[2√(3x+1)]","√(3x+1)/3"],1,"La dérivée de √u est u'/(2√u), avec u'=3."],
-
-["Maths","Si f'(x)>0 sur un intervalle, alors f y est :",
-["strictement décroissante","constante","strictement croissante","non définie"],2,"Une dérivée strictement positive indique une croissance stricte."],
-
-["Maths","La fonction f(x)=x²−6x+5 admet son minimum pour :",
-["x=−3","x=2","x=3","x=6"],2,"Le sommet est à x=−b/(2a)=6/2=3."],
-
-["Maths","Pour f(x)=x²−6x+5, la valeur minimale est :",
-["−4","−3","−1","5"],0,"f(3)=9−18+5=−4."],
-
-["Maths","Résoudre (x−2)(x+3)≤0 donne :",
-["x≤−3 ou x≥2","−3≤x≤2","x<−3","x>2"],1,"Le produit est négatif ou nul entre les deux racines."],
-
-["Maths","Pour x≠2, (x²−4)/(x−2) vaut :",
-["x−2","x+2","x²+2","2x"],1,"x²−4=(x−2)(x+2)." ],
-
-["Maths","Résoudre 1/(x−3)>0 donne :",
-["x>3","x<3","x≠3","x≥3"],0,"Le numérateur est positif, donc le quotient est positif lorsque x−3>0."],
-
-["Maths","Si f(x)=(x−1)/(x+2), alors son asymptote verticale est :",
-["x=−2","x=−1","x=1","y=1"],0,"Le dénominateur s'annule en x=−2."],
-
-["Maths","Une asymptote horizontale de f(x)=(3x+1)/(x−2) est :",
-["x=3","y=−2","y=3","y=1"],2,"À l'infini, le quotient des coefficients dominants vaut 3."],
-
-["Maths","Dans un triangle rectangle, si l'hypoténuse vaut 13 et un côté vaut 5, l'autre vaut :",
-["8","10","12","14"],2,"Par Pythagore : x²=13²−5²=169−25=144, donc x=12."],
-
-["Maths","Dans une configuration de Thalès, si AM/AB=2/5 et AC=15, alors AN vaut :",
-["5","6","8","10"],1,"AN/AC=2/5, donc AN=15×2/5=6."],
-
-["Maths","Si u=(2,−1) et v=(−3,4), alors u+v vaut :",
-["(−1,3)","(5,−5)","(1,3)","(−6,−4)"],0,"On additionne les coordonnées : (2−3,−1+4)=(−1,3)." ],
-
-["Maths","Si deux vecteurs non nuls sont colinéaires, alors :",
-["leur déterminant est nul","leur produit scalaire est toujours nul","ils sont toujours orthogonaux","leurs normes sont égales"],0,"Deux vecteurs du plan sont colinéaires si leur déterminant est nul."],
-
-["Maths","Si cos(x)=3/5 et x est aigu, alors sin(x) vaut :",
-["2/5","3/5","4/5","5/3"],2,"sin²x=1−cos²x=1−9/25=16/25, donc sin x=4/5."],
-
-["Maths","Une urne contient 3 boules rouges et 2 bleues. La probabilité de tirer une rouge est :",
-["2/5","3/5","1/2","3/2"],1,"Il y a 3 issues favorables sur 5."],
-
-["Maths","On lance deux fois une pièce équilibrée. La probabilité d'obtenir deux fois pile est :",
-["1/2","1/3","1/4","3/4"],2,"Les deux événements indépendants ont chacun une probabilité 1/2 : 1/2×1/2=1/4."],
-
-["Maths","La négation de « Il existe au moins un x tel que P(x) » est :",
-["Tous les x vérifient P(x)","Pour tout x, non P(x)","Il existe x tel que non P(x)","Aucun énoncé"],1,"La négation de ∃x P(x) est ∀x non P(x)." ],
-
-["Maths","Si P⇒Q et Q⇒P, alors on peut conclure :",
-["P et Q sont incompatibles","P⇔Q","P est toujours fausse","Q est toujours vraie"],1,"Deux implications réciproques donnent l'équivalence."],
-
-["Maths","Une suite arithmétique vérifie u₁=7 et r=−3. Quelle est u₆ ?",
-["−5","−8","−11","10"],1,"u₆=u₁+5r=7−15=−8."],
-
-/* ===================== CULTURE ===================== */
-
-["Culture générale","Quel parc national de RDC est particulièrement associé aux gorilles de montagne ?",
-["Virunga","Salonga","Garamba","Kundelungu"],0,"Virunga est mondialement connu notamment pour ses gorilles de montagne."],
-
-["Culture générale","Le parc national de Kahuzi-Biega est notamment réputé pour la protection :",
-["des gorilles de Grauer","des manchots","des dromadaires","des lions du Kalahari"],0,"Kahuzi-Biega est un habitat majeur du gorille de Grauer."],
-
-["Culture générale","Le parc national de la Salonga se trouve principalement dans :",
-["le bassin forestier du Congo","le Sahara","la vallée du Nil","le désert du Namib"],0,"La Salonga protège une immense forêt du bassin du Congo."],
-
-["Culture générale","Le parc national de Garamba se situe dans quelle grande région de la RDC ?",
-["Nord-est","Sud-ouest","Centre-ouest","Kongo-Central"],0,"Garamba est situé dans le nord-est de la RDC."],
-
-["Culture générale","Le parc national d'Upemba est principalement associé à quelle partie de la RDC ?",
-["Sud-est","Nord-ouest","Ouest côtier","Kinshasa"],0,"Upemba se trouve dans le sud-est de la RDC."],
-
-["Culture générale","L'ancienne Léopoldville correspond aujourd'hui à :",
-["Kinshasa","Kisangani","Lubumbashi","Mbandaka"],0,"Léopoldville est l'ancienne appellation coloniale de Kinshasa."],
-
-["Culture générale","Élisabethville correspond aujourd'hui à :",
-["Kolwezi","Lubumbashi","Goma","Kananga"],1,"Élisabethville est l'ancienne appellation de Lubumbashi."],
-
-["Culture générale","Stanleyville correspond aujourd'hui à :",
-["Kisangani","Mbuji-Mayi","Bukavu","Matadi"],0,"Stanleyville est l'ancienne appellation de Kisangani."],
-
-["Culture générale","Quel est le chef-lieu du Haut-Katanga ?",
-["Kolwezi","Lubumbashi","Likasi","Kalemie"],1,"Lubumbashi est le chef-lieu du Haut-Katanga."],
-
-["Culture générale","Quel est le chef-lieu du Lualaba ?",
-["Lubumbashi","Kolwezi","Goma","Kindu"],1,"Kolwezi est le chef-lieu du Lualaba."],
-
-["Culture générale","Quel est le chef-lieu du Sud-Kivu ?",
-["Goma","Bukavu","Bunia","Beni"],1,"Bukavu est le chef-lieu du Sud-Kivu."],
-
-["Culture générale","Quel événement majeur a lieu le 30 juin 1960 ?",
-["La création de la MONUSCO","L'indépendance du Congo belge","La chute de Mobutu","La création de l'Union africaine"],1,"Le Congo accède à l'indépendance le 30 juin 1960."],
-
-["Culture générale","Patrice Emery Lumumba fut principalement :",
-["le premier Premier ministre du Congo indépendant","le premier président de la RDC après 1997","le fondateur de l'Union africaine","un explorateur européen"],0,"Lumumba devient le premier Premier ministre du Congo indépendant."],
-
-["Culture générale","Quel fleuve traverse une grande partie de la RDC avant de se jeter dans l'Atlantique ?",
-["Le Congo","Le Nil","Le Niger","Le Zambèze"],0,"Le fleuve Congo se jette dans l'océan Atlantique."],
-
-["Culture générale","Le lac Tanganyika est notamment partagé par la RDC et :",
-["la Tanzanie","le Ghana","le Nigeria","le Maroc"],0,"La Tanzanie borde notamment le lac Tanganyika avec la RDC."],
-
-["Culture générale","Quel est le siège de l'Union africaine ?",
-["Addis-Abeba","Nairobi","Kinshasa","Dakar"],0,"Le siège de l'Union africaine se trouve à Addis-Abeba."],
-
-["Culture générale","Sony Labou Tansi est principalement connu comme :",
-["écrivain et dramaturge congolais","président africain","explorateur britannique","scientifique égyptien"],0,"Sony Labou Tansi est une figure majeure de la littérature congolaise."],
-
-["Culture générale","Chinua Achebe est un grand écrivain :",
-["nigérian","congolais","algérien","éthiopien"],0,"Chinua Achebe est un écrivain nigérian majeur."],
-
-["Culture générale","Qui a écrit « Les Misérables » ?",
-["Victor Hugo","Aimé Césaire","Chinua Achebe","Sony Labou Tansi"],0,"Les Misérables est une œuvre majeure de Victor Hugo."],
-
-["Culture générale","Aimé Césaire est notamment associé au mouvement de :",
-["la Négritude","la Renaissance européenne","l'impressionnisme","la Révolution industrielle"],0,"Aimé Césaire est une figure majeure de la Négritude."],
-
-["Culture générale","Quel organe de l'ONU est chargé principalement du maintien de la paix et de la sécurité internationales ?",
-["Conseil de sécurité","Cour internationale de Justice","Conseil économique et social","Secrétariat uniquement"],0,"Le Conseil de sécurité a la responsabilité principale du maintien de la paix et de la sécurité internationales."],
-
-["Culture générale","En octobre 2026, le Conseil de sécurité de l'ONU a notamment réitéré son appel concernant :",
-["le retrait des forces rwandaises de l'est de la RDC","la suppression de toutes les frontières africaines","la fermeture de l'ONU","l'abandon des négociations de paix"],0,"Les informations d'octobre 2026 mentionnent un appel au retrait immédiat et sans condition des forces rwandaises et à la cessation du soutien à l'AFC/M23."],
-
-["Culture générale","Quels processus de paix concernant la RDC étaient notamment encouragés en octobre 2026 ?",
-["Washington et Doha","Paris et Rome","Londres et Madrid","Tokyo et Pékin"],0,"Les processus de Washington et de Doha figuraient parmi les efforts diplomatiques mentionnés."],
-
-["Culture générale","Combien de biens naturels de la RDC figurent sur la Liste du patrimoine mondial de l'UNESCO ?",
-["2","3","5","8"],2,"La RDC compte cinq biens naturels inscrits : Virunga, Garamba, Kahuzi-Biega, Salonga et la Réserve de faune à okapis."],
-
-["Culture générale","Quel est le plus vaste océan de la planète ?",
-["Atlantique","Indien","Pacifique","Arctique"],2,"Le Pacifique est le plus vaste océan du monde."]
+========================================================= */
+
+const questions = [
+
+/* =======================
+   MATHÉMATIQUES 1-25
+======================= */
+
+{
+subject:"Mathématiques",
+topic:"Calcul littéral",
+question:"Simplifier : 3(2x−5)−2(x+4).",
+options:["4x−23","4x−7","8x−23","2x−23"],
+answer:0,
+explanation:"3(2x−5)=6x−15 et −2(x+4)=−2x−8. Donc 4x−23."
+},
+
+{
+subject:"Mathématiques",
+topic:"Polynômes",
+question:"Quel est le degré du polynôme P(x)=5x⁴−3x²+7x−1 ?",
+options:["2","3","4","5"],
+answer:2,
+explanation:"Le plus grand exposant de x est 4."
+},
+
+{
+subject:"Mathématiques",
+topic:"Factorisation",
+question:"Factoriser x²−9.",
+options:["(x−9)(x+1)","(x−3)(x+3)","(x−9)²","(x−3)²"],
+answer:1,
+explanation:"x²−9=x²−3²=(x−3)(x+3)."
+},
+
+{
+subject:"Mathématiques",
+topic:"Signes",
+question:"Pour x<−2, quel est le signe de (x+2)(x−5) ?",
+options:["Positif","Négatif","Nul","Impossible à déterminer"],
+answer:0,
+explanation:"Les deux facteurs sont négatifs, donc leur produit est positif."
+},
+
+{
+subject:"Mathématiques",
+topic:"Expressions rationnelles",
+question:"Quelle est la condition d'existence de 5/(x−3) ?",
+options:["x≠0","x≠3","x>3","x<3"],
+answer:1,
+explanation:"Le dénominateur ne doit jamais être nul : x−3≠0, donc x≠3."
+},
+
+{
+subject:"Mathématiques",
+topic:"Fonctions",
+question:"Quel est le domaine de définition de f(x)=√(2x−6) ?",
+options:["x≥3","x>3","x≤3","x∈R"],
+answer:0,
+explanation:"Il faut 2x−6≥0, donc x≥3."
+},
+
+{
+subject:"Mathématiques",
+topic:"Limites",
+question:"lim(x→+∞) (3x²−1)/(x²+4) vaut :",
+options:["0","1","3","+∞"],
+answer:2,
+explanation:"Les degrés sont identiques : la limite est le rapport des coefficients dominants, 3."
+},
+
+{
+subject:"Mathématiques",
+topic:"Asymptotes",
+question:"La fonction f(x)=2+5/(x−1) possède une asymptote verticale d'équation :",
+options:["x=−1","x=0","x=1","y=2"],
+answer:2,
+explanation:"Le dénominateur s'annule en x=1."
+},
+
+{
+subject:"Mathématiques",
+topic:"Dérivation",
+question:"Si f(x)=x³−4x, alors f'(x)=...",
+options:["3x²−4","3x²−4x","x²−4","3x−4"],
+answer:0,
+explanation:"(x³)'=3x² et (−4x)'=−4."
+},
+
+{
+subject:"Mathématiques",
+topic:"Variations",
+question:"Pour f(x)=x²−6x+5, l'abscisse du sommet est :",
+options:["−3","3","5","6"],
+answer:1,
+explanation:"xS=−b/(2a)=6/2=3."
+},
+
+{
+subject:"Mathématiques",
+topic:"Pythagore",
+question:"Un triangle rectangle possède des côtés de l'angle droit de 6 cm et 8 cm. Son hypoténuse mesure :",
+options:["9 cm","10 cm","12 cm","14 cm"],
+answer:1,
+explanation:"c²=6²+8²=100, donc c=10."
+},
+
+{
+subject:"Mathématiques",
+topic:"Thalès",
+question:"Dans une configuration de Thalès, AM/AB=2/5 et AC=15 cm. Si MN est parallèle à BC, alors AN vaut :",
+options:["5 cm","6 cm","7,5 cm","10 cm"],
+answer:1,
+explanation:"AN/AC=AM/AB=2/5, donc AN=15×2/5=6."
+},
+
+{
+subject:"Mathématiques",
+topic:"Vecteurs",
+question:"A(2;−1) et B(5;3). Les coordonnées de AB sont :",
+options:["(7;2)","(3;4)","(−3;−4)","(2;3)"],
+answer:1,
+explanation:"AB=(5−2 ; 3−(−1))=(3;4)."
+},
+
+{
+subject:"Mathématiques",
+topic:"Trigonométrie",
+question:"Dans un triangle rectangle, si l'angle A a pour côté opposé 3 et hypoténuse 5, alors sin(A)=...",
+options:["3/5","4/5","5/3","3/4"],
+answer:0,
+explanation:"sin(A)=opposé/hypoténuse=3/5."
+},
+
+{
+subject:"Mathématiques",
+topic:"Probabilités",
+question:"Une urne contient 3 boules rouges et 2 boules bleues. On tire une boule au hasard. P(rouge)=...",
+options:["2/5","1/2","3/5","3/2"],
+answer:2,
+explanation:"Il y a 3 cas favorables sur 5 : 3/5."
+},
+
+{
+subject:"Mathématiques",
+topic:"Logique",
+question:"La proposition « Si x>3, alors x²>9 » est :",
+options:["Toujours vraie","Toujours fausse","Vraie seulement si x<0","Une équivalence"],
+answer:0,
+explanation:"Pour x>3, on a nécessairement x²>9."
+},
+
+{
+subject:"Mathématiques",
+topic:"Suites arithmétiques",
+question:"Une suite arithmétique vérifie u₁=4 et r=3. Quelle est u₅ ?",
+options:["12","13","16","19"],
+answer:2,
+explanation:"u₅=u₁+4r=4+12=16."
+},
+
+{
+subject:"Mathématiques",
+topic:"Suites géométriques",
+question:"Une suite géométrique vérifie u₁=2 et q=3. Quelle est u₄ ?",
+options:["18","27","54","81"],
+answer:2,
+explanation:"u₄=2×3³=54."
+},
+
+{
+subject:"Mathématiques",
+topic:"Expressions rationnelles",
+question:"Simplifier (x²−4)/(x−2), avec x≠2.",
+options:["x−2","x+2","x²−2","2x"],
+answer:1,
+explanation:"x²−4=(x−2)(x+2), donc le quotient vaut x+2."
+},
+
+{
+subject:"Mathématiques",
+topic:"Limites",
+question:"lim(x→+∞) (4x+1)/(x²+1) vaut :",
+options:["4","1","+∞","0"],
+answer:3,
+explanation:"Le degré du dénominateur est supérieur à celui du numérateur."
+},
+
+{
+subject:"Mathématiques",
+topic:"Dérivation",
+question:"La dérivée de ln(x) pour x>0 est :",
+options:["x","1/x","ln(x)/x","−1/x²"],
+answer:1,
+explanation:"(ln x)'=1/x."
+},
+
+{
+subject:"Mathématiques",
+topic:"Extremum",
+question:"La fonction f(x)=−x²+4x+1 possède un :",
+options:["Minimum égal à 1","Maximum égal à 5","Maximum égal à 4","Minimum égal à −5"],
+answer:1,
+explanation:"Sommet en x=2 et f(2)=5. Comme a<0, c'est un maximum."
+},
+
+{
+subject:"Mathématiques",
+topic:"Trigonométrie",
+question:"Quelle égalité est correcte ?",
+options:["sin²x−cos²x=1","sin²x+cos²x=1","sin x+cos x=1","tan x=sin x·cos x"],
+answer:1,
+explanation:"Identité trigonométrique fondamentale."
+},
+
+{
+subject:"Mathématiques",
+topic:"Probabilités",
+question:"On lance deux fois une pièce équilibrée. La probabilité d'obtenir deux fois pile est :",
+options:["1/2","1/3","1/4","3/4"],
+answer:2,
+explanation:"P(Pile)×P(Pile)=1/2×1/2=1/4."
+},
+
+{
+subject:"Mathématiques",
+topic:"Équations",
+question:"Résoudre 2x−7=9.",
+options:["x=1","x=4","x=8","x=16"],
+answer:1,
+explanation:"2x=16 donc x=8. Correction : la bonne réponse est donc C.",
+},
+
+/* =======================
+   FRANÇAIS 26-50
+======================= */
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Pourquoi les anciens considéraient-ils le marais comme important ?",
+options:[
+"Il produisait beaucoup d'électricité.",
+"Ils y pratiquaient diverses activités et y associaient des souvenirs.",
+"Il abritait une grande usine.",
+"Il appartenait aux promoteurs."
+],
+answer:1,
+explanation:"Le texte évoque la pêche, les plantes, les oiseaux et la mémoire collective."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quel risque Éléonore identifie-t-elle concernant la disparition des marais ?",
+options:[
+"Une baisse du tourisme.",
+"Une disparition des oiseaux uniquement.",
+"Une aggravation des inondations.",
+"Une hausse du prix des logements."
+],
+answer:2,
+explanation:"Les marais absorbaient une quantité importante d'eau pendant les fortes pluies."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quelle méthode Éléonore utilise-t-elle pour étudier le lieu ?",
+options:[
+"Elle se limite à consulter Internet.",
+"Elle combine observations scientifiques et témoignages.",
+"Elle détruit une partie du marais.",
+"Elle interroge uniquement les promoteurs."
+],
+answer:1,
+explanation:"Elle mesure, photographie, observe les oiseaux et interroge les anciens."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quel événement modifie profondément le débat ?",
+options:[
+"Une sécheresse.",
+"Une manifestation.",
+"Un violent orage.",
+"La construction d'un musée."
+],
+answer:2,
+explanation:"L'orage montre concrètement le rôle protecteur de la zone humide."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quelle solution est finalement proposée ?",
+options:[
+"Construire partout.",
+"Détruire le marais.",
+"Préserver les secteurs sensibles et construire ailleurs.",
+"Quitter définitivement la ville."
+],
+answer:2,
+explanation:"La commission propose une solution conciliant protection et développement."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Comment la réputation des marais évolue-t-elle ?",
+options:[
+"Elle devient plus négative.",
+"Le lieu est complètement oublié.",
+"Le lieu acquiert une nouvelle valeur écologique et culturelle.",
+"Le lieu devient exclusivement industriel."
+],
+answer:2,
+explanation:"Le site devient un espace de biodiversité, de recherche et de promenade."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quelle idée centrale Éléonore défend-elle ?",
+options:[
+"Le progrès exige toujours de détruire le passé.",
+"Le développement peut être compatible avec la préservation.",
+"La nature doit empêcher toute construction.",
+"Les villes doivent revenir à l'époque ancienne."
+],
+answer:1,
+explanation:"Elle défend une conception durable du progrès."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Pourquoi les habitants participent-ils au projet ?",
+options:[
+"Pour obtenir des logements gratuits.",
+"Pour préserver un lieu auquel ils sont attachés.",
+"Pour empêcher les chercheurs de travailler.",
+"Pour augmenter les impôts."
+],
+answer:1,
+explanation:"Le texte insiste sur leur participation et leur mémoire du lieu."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Selon la conclusion du texte, que faut-il parfois faire pour construire l'avenir ?",
+options:[
+"Effacer toute trace du passé.",
+"Regarder attentivement ce que l'on risque de perdre.",
+"Refuser toute innovation.",
+"Abandonner les villes."
+],
+answer:1,
+explanation:"La dernière phrase résume cette idée."
+},
+
+{
+subject:"Français",
+type:"comprehension",
+question:"Quel thème domine l'ensemble du texte ?",
+options:[
+"La rivalité entre deux scientifiques.",
+"La disparition des traditions culinaires.",
+"La recherche d'un équilibre entre développement, nature et mémoire.",
+"L'histoire d'une entreprise."
+],
+answer:2,
+explanation:"C'est l'idée structurante du récit."
+},
+
+{
+subject:"Français",
+question:"Dans « une mémoire vivante », le mot « vivante » est employé :",
+options:["Au sens propre","Au sens figuré","Comme un antonyme","Comme un terme scientifique"],
+answer:1,
+explanation:"La mémoire n'est pas réellement vivante : il s'agit d'une image."
+},
+
+{
+subject:"Français",
+question:"Quel est le synonyme le plus précis de « effacer » dans le texte ?",
+options:["Supprimer","Dessiner","Amplifier","Construire"],
+answer:0,
+explanation:"Effacer signifie ici faire disparaître."
+},
+
+{
+subject:"Français",
+question:"« Le marais avait joué le rôle d'une gigantesque éponge » constitue une :",
+options:["Litote","Métaphore","Antithèse","Personnification uniquement"],
+answer:1,
+explanation:"Le marais est comparé directement à une éponge sans outil comparatif."
+},
+
+{
+subject:"Français",
+question:"Quelle figure de style repose sur l'opposition de deux idées ?",
+options:["Anaphore","Antithèse","Hyperbole","Métonymie"],
+answer:1,
+explanation:"L'antithèse rapproche deux idées opposées."
+},
+
+{
+subject:"Français",
+question:"« Je ne suis pas mécontent » pour dire « je suis satisfait » est une :",
+options:["Litote","Hyperbole","Oxymore","Gradation"],
+answer:0,
+explanation:"La litote exprime une idée forte par une formulation atténuée."
+},
+
+{
+subject:"Français",
+question:"Quelle phrase contient un oxymore ?",
+options:[
+"Une obscure clarté",
+"Il court rapidement",
+"Le ciel est bleu",
+"Une grande maison"
+],
+answer:0,
+explanation:"« Obscure » et « clarté » sont deux termes contradictoires rapprochés."
+},
+
+{
+subject:"Français",
+question:"Dans « Nous devons protéger, nous devons comprendre, nous devons agir », on trouve :",
+options:["Une anaphore","Un chiasme","Une litote","Une ellipse"],
+answer:0,
+explanation:"La répétition de « nous devons » en début de groupe constitue une anaphore."
+},
+
+{
+subject:"Français",
+question:"Quelle forme est correctement orthographiée ?",
+options:["Malgrès","Malgré","Malgrés","Mal gré"],
+answer:1,
+explanation:"La forme correcte est « malgré »."
+},
+
+{
+subject:"Français",
+question:"Compléter : « Les décisions qu'elle a ___ hier seront appliquées. »",
+options:["pris","prise","prises","prisent"],
+answer:2,
+explanation:"Le COD « les décisions » est placé avant le participe passé : prises."
+},
+
+{
+subject:"Français",
+question:"Quel temps est employé dans « il avait compris » ?",
+options:["Plus-que-parfait","Passé antérieur","Imparfait","Passé composé"],
+answer:0,
+explanation:"« avait » à l'imparfait + participe passé = plus-que-parfait."
+},
+
+{
+subject:"Français",
+question:"« Il faut que vous soyez attentifs. » Le verbe « soyez » est au :",
+options:["Indicatif présent","Conditionnel","Subjonctif présent","Impératif"],
+answer:2,
+explanation:"Après « il faut que », on emploie ici le subjonctif."
+},
+
+{
+subject:"Français",
+question:"Quel mot est un adverbe ?",
+options:["Rapide","Rapidement","Rapidité","Ralentir"],
+answer:1,
+explanation:"Le suffixe -ment forme ici un adverbe."
+},
+
+{
+subject:"Français",
+question:"Quel énoncé contient un chiasme ?",
+options:[
+"Il faut manger pour vivre et non vivre pour manger.",
+"Il pleut beaucoup.",
+"Le soleil se couche.",
+"Il avance rapidement."
+],
+answer:0,
+explanation:"La structure ABBA est caractéristique du chiasme."
+},
+
+{
+subject:"Français",
+question:"Dans « Paris s'est réveillé », Paris désigne ici les habitants. Il s'agit d'une :",
+options:["Synecdoque","Personnification","Métonymie","Anaphore"],
+answer:2,
+explanation:"Le lieu désigne les personnes qui y vivent : c'est une métonymie."
+},
+
+{
+subject:"Français",
+question:"Quel connecteur exprime une opposition ?",
+options:["Donc","Cependant","Ainsi","Par conséquent"],
+answer:1,
+explanation:"« Cependant » introduit une opposition ou une restriction."
+},
+
+/* =======================
+   ANGLAIS 51-75
+======================= */
+
+{
+subject:"English",
+type:"comprehension",
+question:"Why did Mara frequently visit Greyhaven?",
+options:[
+"She wanted to buy a house.",
+"She was a marine photographer interested in the coast.",
+"She worked at the lighthouse.",
+"She was studying at a university."
+],
+answer:1,
+explanation:"The text says Mara was a marine photographer who travelled along the coast."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"When was the lighthouse built?",
+options:["1908","1918","1938","1958"],
+answer:2,
+explanation:"The lighthouse was built in 1938."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"Why was the lighthouse originally built?",
+options:[
+"To attract tourists.",
+"After a series of shipwrecks.",
+"To house researchers.",
+"To create a museum."
+],
+answer:1,
+explanation:"It was built after several shipwrecks."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"What happened during the major storm?",
+options:[
+"The lighthouse collapsed.",
+"The museum opened.",
+"The electricity failed and the modern navigation system stopped.",
+"The fishermen left the coast permanently."
+],
+answer:2,
+explanation:"Both the electricity and the modern navigation system failed."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"What convinced the community not to demolish the lighthouse?",
+options:[
+"It became useful as a visual reference during the storm.",
+"A company offered a lot of money.",
+"Tourists demanded it.",
+"Mara bought it."
+],
+answer:0,
+explanation:"Fishermen used its shape to find their way home."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"How did Mara react when officials rejected her idea?",
+options:["She gave up.","She moved abroad.","She continued organizing support.","She sold the lighthouse."],
+answer:2,
+explanation:"She contacted historians, fishermen and environmental groups."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"What does « go the extra mile » mean in the story?",
+options:[
+"To travel abroad.",
+"To make an additional effort.",
+"To walk to the lighthouse.",
+"To leave a place."
+],
+answer:1,
+explanation:"The idiom means to make more effort than expected."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"How was the lighthouse finally reused?",
+options:[
+"As a luxury hotel.",
+"As an amusement park.",
+"As a museum and research space.",
+"As a private house."
+],
+answer:2,
+explanation:"The upper floor became a museum and lower rooms were used by researchers."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"Why was the restoration described as a « blessing in disguise »?",
+options:[
+"It was initially difficult but produced unexpected benefits.",
+"It was completely unsuccessful.",
+"It cost nothing.",
+"It caused another storm."
+],
+answer:0,
+explanation:"The difficult project unexpectedly brought visitors, jobs and interest."
+},
+
+{
+subject:"English",
+type:"comprehension",
+question:"What is the main message of the text?",
+options:[
+"Old buildings are always better than modern ones.",
+"Progress can coexist with preserving meaningful places.",
+"Technology should never be used.",
+"Tourism is more important than history."
+],
+answer:1,
+explanation:"The ending emphasizes that progress does not require replacing everything from the past."
+},
+
+{
+subject:"English",
+question:"Choose the correct sentence:",
+options:[
+"I have lived here since five years.",
+"I have lived here for five years.",
+"I live here since five years.",
+"I am living here since five years."
+],
+answer:1,
+explanation:"Use « for » with a duration."
+},
+
+{
+subject:"English",
+question:"If I ___ more time, I would travel more.",
+options:["have","had","will have","am having"],
+answer:1,
+explanation:"Second conditional: If + past simple, would + verb."
+},
+
+{
+subject:"English",
+question:"What does « once in a blue moon » mean?",
+options:["Very often","Never","Very rarely","Every night"],
+answer:2,
+explanation:"It means something happens very rarely."
+},
+
+{
+subject:"English",
+question:"What does « hit the nail on the head » mean?",
+options:[
+"To make a mistake.",
+"To describe something exactly.",
+"To repair a house.",
+"To become angry."
+],
+answer:1,
+explanation:"It means to be exactly right about something."
+},
+
+{
+subject:"English",
+question:"Choose the correct form: « She ___ to London yesterday. »",
+options:["go","has gone","went","going"],
+answer:2,
+explanation:"A finished action at a specific past time takes the simple past."
+},
+
+{
+subject:"English",
+question:"What does « to be in hot water » mean?",
+options:[
+"To be in trouble.",
+"To be relaxed.",
+"To be very successful.",
+"To be physically hot."
+],
+answer:0,
+explanation:"The idiom means to be in trouble."
+},
+
+{
+subject:"English",
+question:"Complete: « I wish I ___ more time. »",
+options:["have","had","will have","am having"],
+answer:1,
+explanation:"For a present unreal wish, use past simple: I wish I had..."
+},
+
+{
+subject:"English",
+question:"Choose the correct passive sentence.",
+options:[
+"The lighthouse restored the workers.",
+"The workers restored the lighthouse.",
+"The lighthouse was restored by the workers.",
+"The lighthouse has restoring workers."
+],
+answer:2,
+explanation:"Passive voice: subject + be + past participle."
+},
+
+{
+subject:"English",
+question:"What does « break the ice » mean?",
+options:[
+"To destroy something.",
+"To start a conversation and reduce tension.",
+"To become angry.",
+"To leave suddenly."
+],
+answer:1,
+explanation:"It means to make people feel more comfortable at the beginning of an interaction."
+},
+
+{
+subject:"English",
+question:"Choose the correct comparative form:",
+options:[
+"This lighthouse is more old than that one.",
+"This lighthouse is older than that one.",
+"This lighthouse is oldest than that one.",
+"This lighthouse is oldlier than that one."
+],
+answer:1,
+explanation:"The comparative of « old » is « older »."
+},
+
+{
+subject:"English",
+question:"What does « call it a day » mean?",
+options:[
+"To start working.",
+"To stop working for the day.",
+"To call someone.",
+"To plan tomorrow."
+],
+answer:1,
+explanation:"It means to stop working for the day."
+},
+
+{
+subject:"English",
+question:"Choose the correct sentence:",
+options:[
+"He doesn't knows the answer.",
+"He don't know the answer.",
+"He doesn't know the answer.",
+"He not knows the answer."
+],
+answer:2,
+explanation:"After does/doesn't, use the base form."
+},
+
+{
+subject:"English",
+question:"What does « under the weather » mean?",
+options:[
+"Feeling slightly ill.",
+"Being outside.",
+"Being lucky.",
+"Being confused."
+],
+answer:0,
+explanation:"It means feeling unwell."
+},
+
+{
+subject:"English",
+question:"Choose the correct reported speech: « I am tired », she said.",
+options:[
+"She said that she is tired.",
+"She said that she was tired.",
+"She said she has tired.",
+"She said that she tired."
+],
+answer:1,
+explanation:"Backshift normally changes « am » to « was » in reported speech."
+},
+
+{
+subject:"English",
+question:"Choose the correct preposition: « She is interested ___ marine biology. »",
+options:["on","at","in","for"],
+answer:2,
+explanation:"The correct expression is « interested in »."
+},
+
+/* =======================
+   CULTURE 76-100
+======================= */
+
+{
+subject:"Culture générale",
+question:"Dans quelle province se trouve principalement le parc national des Virunga ?",
+options:["Nord-Kivu","Kasaï","Lualaba","Haut-Uélé"],
+answer:0,
+explanation:"Le parc des Virunga se situe principalement au Nord-Kivu."
+},
+
+{
+subject:"Culture générale",
+question:"Le parc national de Kahuzi-Biega est particulièrement connu pour la protection des :",
+options:["Gorilles de Grauer","Lions","Girafes","Rhinocéros blancs"],
+answer:0,
+explanation:"Kahuzi-Biega est mondialement connu pour ses gorilles de Grauer."
+},
+
+{
+subject:"Culture générale",
+question:"Le parc national de Garamba se trouve principalement dans :",
+options:["Le Bas-Uélé","Le Haut-Uélé","Le Kongo-Central","Le Sud-Kivu"],
+answer:1,
+explanation:"Garamba se situe dans le Haut-Uélé."
+},
+
+{
+subject:"Culture générale",
+question:"Le parc national de Salonga est particulièrement associé à :",
+options:["La forêt équatoriale du bassin du Congo","Le désert du Sahara","La savane du Katanga uniquement","La côte atlantique"],
+answer:0,
+explanation:"Salonga est une immense aire protégée de forêt tropicale du bassin du Congo."
+},
+
+{
+subject:"Culture générale",
+question:"Quel est l'ancien nom colonial de Kinshasa ?",
+options:["Stanleyville","Léopoldville","Élisabethville","Coquilhatville"],
+answer:1,
+explanation:"Kinshasa était appelée Léopoldville pendant la période coloniale."
+},
+
+{
+subject:"Culture générale",
+question:"L'actuelle ville de Lubumbashi était autrefois appelée :",
+options:["Jadotville","Élisabethville","Stanleyville","Luluabourg"],
+answer:1,
+explanation:"Lubumbashi était appelée Élisabethville."
+},
+
+{
+subject:"Culture générale",
+question:"L'ancien nom de Kisangani était :",
+options:["Léopoldville","Coquilhatville","Stanleyville","Costermansville"],
+answer:2,
+explanation:"Kisangani était connue sous le nom de Stanleyville."
+},
+
+{
+subject:"Culture générale",
+question:"Quelle ville portait autrefois le nom de Coquilhatville ?",
+options:["Mbandaka","Bukavu","Kananga","Likasi"],
+answer:0,
+explanation:"Mbandaka était autrefois Coquilhatville."
+},
+
+{
+subject:"Culture générale",
+question:"Quelle est la capitale du Haut-Katanga ?",
+options:["Kolwezi","Likasi","Lubumbashi","Kipushi"],
+answer:2,
+explanation:"Lubumbashi est le chef-lieu du Haut-Katanga."
+},
+
+{
+subject:"Culture générale",
+question:"Quel est le chef-lieu du Lualaba ?",
+options:["Lubumbashi","Kolwezi","Likasi","Kam ina"],
+answer:1,
+explanation:"Kolwezi est le chef-lieu du Lualaba."
+},
+
+{
+subject:"Culture générale",
+question:"Quel est le chef-lieu du Nord-Kivu ?",
+options:["Bukavu","Goma","Bunia","Beni"],
+answer:1,
+explanation:"Goma est le chef-lieu du Nord-Kivu."
+},
+
+{
+subject:"Culture générale",
+question:"Quel est le chef-lieu du Sud-Kivu ?",
+options:["Goma","Uvira","Bukavu","Kindu"],
+answer:2,
+explanation:"Bukavu est le chef-lieu du Sud-Kivu."
+},
+
+{
+subject:"Culture générale",
+question:"En quelle année la RDC a-t-elle accédé à l'indépendance ?",
+options:["1958","1960","1963","1965"],
+answer:1,
+explanation:"L'indépendance fut proclamée le 30 juin 1960."
+},
+
+{
+subject:"Culture générale",
+question:"Qui fut le premier Premier ministre du Congo indépendant ?",
+options:["Joseph Kasa-Vubu","Patrice Lumumba","Mobutu Sese Seko","Laurent-Désiré Kabila"],
+answer:1,
+explanation:"Patrice Emery Lumumba fut le premier Premier ministre du Congo indépendant."
+},
+
+{
+subject:"Culture générale",
+question:"Quel était le premier président de la République du Congo indépendant ?",
+options:["Patrice Lumumba","Joseph Kasa-Vubu","Mobutu","Moïse Tshombe"],
+answer:1,
+explanation:"Joseph Kasa-Vubu fut le premier président."
+},
+
+{
+subject:"Culture générale",
+question:"En 1971, le pays prit le nom de :",
+options:["République du Congo","Zaïre","Congo-Léopoldville","Congo-Kinshasa"],
+answer:1,
+explanation:"Le pays fut officiellement appelé Zaïre à partir de 1971."
+},
+
+{
+subject:"Culture générale",
+question:"En quelle année le nom Zaïre fut-il abandonné au profit de République démocratique du Congo ?",
+options:["1990","1994","1997","2001"],
+answer:2,
+explanation:"Le changement intervient en 1997 après la chute de Mobutu."
+},
+
+{
+subject:"Culture générale",
+question:"Quel fleuve traverse Kinshasa et Brazzaville ?",
+options:["Le Nil","Le Congo","Le Niger","Le Zambèze"],
+answer:1,
+explanation:"Le fleuve Congo sépare notamment Kinshasa de Brazzaville."
+},
+
+{
+subject:"Culture générale",
+question:"Le lac Tanganyika est partagé par la RDC et plusieurs autres pays. Lequel n'en est PAS riverain ?",
+options:["Tanzanie","Zambie","Burundi","Rwanda"],
+answer:3,
+explanation:"Le Rwanda n'est pas riverain du lac Tanganyika."
+},
+
+{
+subject:"Culture générale",
+question:"Quel lac se trouve notamment entre la RDC et le Rwanda ?",
+options:["Lac Kivu","Lac Tchad","Lac Victoria","Lac Malawi"],
+answer:0,
+explanation:"Le lac Kivu est partagé entre la RDC et le Rwanda."
+},
+
+{
+subject:"Culture générale",
+question:"Le siège de l'Union africaine se trouve à :",
+options:["Nairobi","Addis-Abeba","Le Caire","Johannesburg"],
+answer:1,
+explanation:"Le siège de l'Union africaine est à Addis-Abeba, en Éthiopie."
+},
+
+{
+subject:"Culture générale",
+question:"Le siège principal de l'ONU se trouve à :",
+options:["Genève","Paris","New York","Washington"],
+answer:2,
+explanation:"Le siège principal des Nations unies est à New York."
+},
+
+{
+subject:"Culture générale",
+question:"En octobre 2026, des facilitateurs de l'Union africaine ont été reçus à Goma dans le cadre de :",
+options:[
+"Consultations liées au processus de paix en RDC",
+"Une compétition sportive",
+"Une conférence commerciale",
+"Une campagne électorale"
+],
+answer:0,
+explanation:"Des facilitateurs de l'Union africaine ont mené des consultations à Goma autour du processus de paix en RDC."
+},
+
+{
+subject:"Culture générale",
+question:"La réunion de coordination entre l'Union africaine, les communautés économiques régionales et les mécanismes régionaux s'est tenue en octobre 2026 à :",
+options:["Alger","Al Alamein","Lusaka","Nairobi"],
+answer:1,
+explanation:"La 8e réunion de coordination de mi-année s'est tenue à Al Alamein, en Égypte."
+},
+
+{
+subject:"Culture générale",
+question:"La Seconde Guerre mondiale s'est déroulée principalement entre :",
+options:["1914–1918","1929–1935","1939–1945","1945–1950"],
+answer:2,
+explanation:"La Seconde Guerre mondiale s'étend de 1939 à 1945."
+}
 
 ];
 
 
-/* ==========================================================
-   CONVERSION DES QUESTIONS
-========================================================== */
+/* =========================================================
+   ÉTAT DU TEST
+========================================================= */
 
-let bank=Q.map(x=>({
-s:x[0],q:x[1],a:x[2],c:x[3],e:x[4]
-}));
+let candidateName="";
+let currentIndex=0;
+let selectedAnswer=null;
+let questionTimer=null;
+let readingTimer=null;
+let globalTimer=null;
+let globalStart=0;
+let sectionReadingStart=0;
+let readingActive=false;
+let answers=[];
+let cheatingCount=0;
 
-
-/* ==========================================================
-   ÉTAT
-========================================================== */
-
-let name="";
-let list=[];
-let i=0;
-let ans=[];
-let qTimer=null;
-let rTimer=null;
-let qLeft=60;
-let rLeft=900;
-let totalTime=0;
-let active=false;
-
-const subjects=["Anglais","Français","Maths","Culture générale"];
-
-const stats={
-"Anglais":{correct:0,wrong:0},
-"Français":{correct:0,wrong:0},
-"Maths":{correct:0,wrong:0},
-"Culture générale":{correct:0,wrong:0}
+const sections = {
+  math:{start:0,end:25,name:"Mathématiques"},
+  french:{start:25,end:50,name:"Français"},
+  english:{start:50,end:75,name:"English"},
+  culture:{start:75,end:100,name:"Culture générale"}
 };
 
 
-/* ==========================================================
-   MÉLANGE
-========================================================== */
-
-function shuffle(a){
-a=[...a];
-for(let j=a.length-1;j>0;j--){
-let k=Math.floor(Math.random()*(j+1));
-[a[j],a[k]]=[a[k],a[j]];
-}
-return a;
-}
-
-function prepare(){
-
-list=[];
-
-subjects.forEach(s=>{
-let x=shuffle(bank.filter(q=>q.s===s));
-
-x=x.map(q=>{
-let opts=q.a.map((text,n)=>({
-text,
-correct:n===q.c
-}));
-opts=shuffle(opts);
-return {...q,opts};
-});
-
-list.push(...x);
-});
-
-ans=Array(list.length).fill(null);
-}
-
-
-/* ==========================================================
+/* =========================================================
    DÉMARRAGE
-========================================================== */
+========================================================= */
 
-function start(){
+function startTest(){
 
-name=document.getElementById("name").value.trim();
+  const input=document.getElementById("candidateName").value.trim();
 
-if(!name){
-alert("Veuillez entrer votre nom complet.");
-return;
-}
+  if(!input){
+    alert("Veuillez entrer votre nom complet avant de commencer.");
+    return;
+  }
 
-prepare();
+  candidateName=input;
+  globalStart=Date.now();
 
-i=0;
-totalTime=0;
-active=true;
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 
-document.getElementById("home").classList.add("hidden");
-document.getElementById("test").classList.remove("hidden");
+  history.pushState(null,"",location.href);
 
-section();
-}
+  startGlobalTimer();
 
+  currentIndex=0;
+  answers=[];
+  renderQuestion();
 
-function hasText(s){
-return s==="Anglais"||s==="Français";
-}
-
-function section(){
-
-let s=list[i].s;
-
-document.getElementById("sub").textContent=s;
-
-if(hasText(s)) readingStart();
-else questionStart();
 }
 
 
-/* ==========================================================
-   LECTURE
-========================================================== */
+/* =========================================================
+   CHRONOMÈTRE GLOBAL
+========================================================= */
 
-function readingStart(){
+function startGlobalTimer(){
 
-clearInterval(rTimer);
-clearInterval(qTimer);
+  clearInterval(globalTimer);
 
-rLeft=900;
+  globalTimer=setInterval(()=>{
 
-document.getElementById("questions").classList.add("hidden");
-document.getElementById("reading").classList.remove("hidden");
+    const elapsed=Math.floor((Date.now()-globalStart)/1000);
 
-let english=list[i].s==="Anglais";
+    document.getElementById("globalTime").textContent=
+      formatTime(elapsed);
 
-document.getElementById("rtitle").textContent=
-english?"Reading comprehension":"Compréhension de texte";
+  },1000);
 
-document.getElementById("rtext").innerHTML=
-(english?englishText:frenchText).replace(/\n/g,"<br>");
-
-readClock();
-
-rTimer=setInterval(()=>{
-rLeft--;
-totalTime++;
-readClock();
-
-if(rLeft<=0){
-clearInterval(rTimer);
-questionStart();
-}
-},1000);
-}
-
-function readClock(){
-
-let m=Math.floor(rLeft/60);
-let s=rLeft%60;
-
-document.getElementById("timer").textContent=
-String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-
-document.getElementById("prog").textContent="Lecture";
-}
-
-function skip(){
-clearInterval(rTimer);
-questionStart();
 }
 
 
-/* ==========================================================
-   QUESTIONS
-========================================================== */
+/* =========================================================
+   FORMAT TEMPS
+========================================================= */
 
-function questionStart(){
+function formatTime(total){
 
-clearInterval(qTimer);
-clearInterval(rTimer);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  const s=total%60;
 
-qLeft=60;
+  return [
+    h.toString().padStart(2,"0"),
+    m.toString().padStart(2,"0"),
+    s.toString().padStart(2,"0")
+  ].join(":");
 
-document.getElementById("reading").classList.add("hidden");
-document.getElementById("questions").classList.remove("hidden");
-
-render();
-
-qClock();
-
-qTimer=setInterval(()=>{
-qLeft--;
-totalTime++;
-qClock();
-
-if(qLeft<=0){
-clearInterval(qTimer);
-advance(true);
-}
-},1000);
 }
 
-function qClock(){
 
-document.getElementById("timer").textContent=
-"00:"+String(qLeft).padStart(2,"0");
+/* =========================================================
+   DÉTECTION SECTION
+========================================================= */
 
-document.getElementById("prog").textContent=
-"Question "+(i+1)+"/100";
+function getSection(index){
+
+  if(index<25)return "math";
+  if(index<50)return "french";
+  if(index<75)return "english";
+  return "culture";
+
 }
 
-function render(){
 
-let q=list[i];
+/* =========================================================
+   QUESTION
+========================================================= */
 
-document.getElementById("sub").textContent=q.s;
+function renderQuestion(){
 
-document.getElementById("qn").textContent=
-"Question "+(i+1)+" / 100";
+  clearInterval(questionTimer);
+  selectedAnswer=null;
 
-document.getElementById("qt").textContent=q.q;
+  const q=questions[currentIndex];
+  const section=getSection(currentIndex);
 
-let box=document.getElementById("answers");
-box.innerHTML="";
+  document.getElementById("subjectPill").textContent=q.subject;
 
-q.opts.forEach((o,n)=>{
+  if(currentIndex===25 && !readingAlreadyDone("french")){
+    startReading("french");
+    return;
+  }
 
-let b=document.createElement("button");
+  if(currentIndex===50 && !readingAlreadyDone("english")){
+    startReading("english");
+    return;
+  }
 
-b.className="answer";
+  renderQuestionUI(q);
 
-b.textContent=
-String.fromCharCode(65+n)+". "+o.text;
+}
 
-if(ans[i]===n)b.classList.add("selected");
 
-b.onclick=()=>{
-ans[i]=n;
-document.querySelectorAll(".answer").forEach((x,z)=>{
-x.classList.toggle("selected",z===n);
-});
+/* =========================================================
+   MÉMOIRE DES LECTURES
+========================================================= */
+
+const completedReading={
+  french:false,
+  english:false
 };
 
-box.appendChild(b);
-});
-
-document.getElementById("look").style.display=
-hasText(q.s)?"block":"none";
+function readingAlreadyDone(section){
+  return completedReading[section];
 }
 
 
-/* ==========================================================
-   AVANCER
-========================================================== */
+/* =========================================================
+   LECTURE
+========================================================= */
 
-function next(){
+function startReading(section){
 
-if(ans[i]===null){
-alert("Sélectionnez une réponse avant de continuer.");
-return;
+  readingActive=true;
+  sectionReadingStart=Date.now();
+
+  clearInterval(readingTimer);
+
+  const isFrench=section==="french";
+
+  const title=isFrench
+    ?"LECTURE — FRANÇAIS"
+    :"READING — ENGLISH";
+
+  const text=isFrench
+    ?frenchText
+    :englishText;
+
+  document.getElementById("mainContent").innerHTML=`
+
+    <div class="reading-page">
+
+      <div class="reading-header">
+
+        <div>
+          <h1>${title}</h1>
+          <p>
+            Lis attentivement le texte avant les questions.
+          </p>
+        </div>
+
+        <div class="reading-clock" id="readingClock">
+          15:00
+        </div>
+
+      </div>
+
+      <article class="reading-content">
+        ${formatParagraphs(text)}
+      </article>
+
+      <div class="reading-footer">
+
+        <span>
+          Tu peux commencer les questions immédiatement.
+          Le temps réellement utilisé sera comptabilisé.
+        </span>
+
+        <button class="skip-btn" onclick="finishReading('${section}')">
+          Commencer les questions →
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  let remaining=15*60;
+
+  readingTimer=setInterval(()=>{
+
+    remaining--;
+
+    const min=Math.floor(remaining/60);
+    const sec=remaining%60;
+
+    const clock=document.getElementById("readingClock");
+
+    if(clock){
+      clock.textContent=
+        `${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+    }
+
+    if(remaining<=0){
+      finishReading(section);
+    }
+
+  },1000);
+
 }
 
-advance(false);
-}
 
-function advance(){
+function formatParagraphs(text){
 
-clearInterval(qTimer);
+  return text
+    .trim()
+    .split(/\n\s*\n/)
+    .map(p=>`<p>${p.trim()}</p>`)
+    .join("");
 
-let q=list[i];
-
-if(ans[i]!==null && q.opts[ans[i]].correct)
-stats[q.s].correct++;
-else
-stats[q.s].wrong++;
-
-let old=q.s;
-
-i++;
-
-if(i>=list.length){
-finish();
-return;
-}
-
-let nextSubject=list[i].s;
-
-if(nextSubject!==old && hasText(nextSubject))
-readingStart();
-else
-questionStart();
 }
 
 
-/* ==========================================================
-   VOIR LE TEXTE
-========================================================== */
+function finishReading(section){
 
-function showText(){
+  if(!readingActive)return;
 
-let english=list[i].s==="Anglais";
+  readingActive=false;
+  clearInterval(readingTimer);
 
-document.getElementById("mt").textContent=
-english?"English text":"Texte français";
+  completedReading[section]=true;
 
-document.getElementById("mx").innerHTML=
-(english?englishText:frenchText).replace(/\n/g,"<br>");
+  renderQuestion();
 
-document.getElementById("modal").classList.remove("hidden");
-}
-
-function closeModal(){
-document.getElementById("modal").classList.add("hidden");
 }
 
 
-/* ==========================================================
+/* =========================================================
+   AFFICHAGE QUESTION
+========================================================= */
+
+function renderQuestionUI(q){
+
+  const progress=((currentIndex+1)/100)*100;
+
+  const shuffled=q.options
+    .map((text,index)=>({
+      text,
+      correct:index===q.answer
+    }))
+    .sort(()=>Math.random()-.5);
+
+  window.currentOptions=shuffled;
+
+  document.getElementById("mainContent").innerHTML=`
+
+    <div class="main">
+
+      <div class="progress-area">
+
+        <div class="progress-head">
+
+          <span>
+            ${q.subject}
+          </span>
+
+          <span>
+            Question ${currentIndex+1} / 100
+          </span>
+
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-bar"
+               style="width:${progress}%"></div>
+        </div>
+
+      </div>
+
+
+      <div class="question-card">
+
+        <div class="question-top">
+
+          <div class="question-number">
+            QUESTION ${currentIndex+1}
+          </div>
+
+          <div class="question-timer" id="questionTimer">
+            01:00
+          </div>
+
+        </div>
+
+
+        <div class="question-text">
+          ${q.question}
+        </div>
+
+
+        <div class="options">
+
+          ${shuffled.map((option,i)=>`
+
+            <button
+              class="option"
+              onclick="selectOption(${i})"
+              id="option-${i}"
+            >
+
+              <span class="option-letter">
+                ${String.fromCharCode(65+i)}
+              </span>
+
+              <span>${option.text}</span>
+
+            </button>
+
+          `).join("")}
+
+        </div>
+
+
+        <div class="question-actions">
+
+          ${
+            (q.subject==="Français" || q.subject==="English")
+            ?`
+              <button
+                class="review-btn"
+                onclick="reviewText('${q.subject}')"
+              >
+                👁 Revoir le texte
+              </button>
+            `
+            :""
+          }
+
+          <button
+            class="next-btn"
+            id="nextBtn"
+            disabled
+            onclick="nextQuestion()"
+          >
+            ${currentIndex===99?"Terminer":"Suivant →"}
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  startQuestionTimer();
+
+}
+
+
+/* =========================================================
+   TIMER QUESTION
+========================================================= */
+
+function startQuestionTimer(){
+
+  let remaining=60;
+
+  clearInterval(questionTimer);
+
+  questionTimer=setInterval(()=>{
+
+    remaining--;
+
+    const timer=document.getElementById("questionTimer");
+
+    if(timer){
+
+      timer.textContent=
+        `00:${String(remaining).padStart(2,"0")}`;
+
+      if(remaining<=10){
+        timer.classList.add("warning");
+      }
+
+    }
+
+    if(remaining<=0){
+
+      clearInterval(questionTimer);
+
+      if(selectedAnswer===null){
+        answers[currentIndex]=null;
+      }
+
+      nextQuestion();
+
+    }
+
+  },1000);
+
+}
+
+
+/* =========================================================
+   SÉLECTION
+========================================================= */
+
+function selectOption(index){
+
+  selectedAnswer=index;
+
+  document.querySelectorAll(".option")
+    .forEach(el=>el.classList.remove("selected"));
+
+  document
+    .getElementById("option-"+index)
+    .classList.add("selected");
+
+  document.getElementById("nextBtn").disabled=false;
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+function nextQuestion(){
+
+  clearInterval(questionTimer);
+
+  const q=questions[currentIndex];
+
+  if(selectedAnswer!==null){
+
+    const chosen=window.currentOptions[selectedAnswer];
+
+    answers[currentIndex]={
+      text:chosen.text,
+      correct:chosen.correct
+    };
+
+  }else{
+
+    answers[currentIndex]={
+      text:"Aucune réponse",
+      correct:false
+    };
+
+  }
+
+  if(currentIndex===99){
+
+    finishTest();
+    return;
+
+  }
+
+  currentIndex++;
+
+  renderQuestion();
+
+}
+
+
+/* =========================================================
+   REVOIR LE TEXTE
+========================================================= */
+
+function reviewText(subject){
+
+  const isFrench=subject==="Français";
+
+  document.getElementById("modalTitle").textContent=
+    isFrench ? "Texte — Français" : "Text — English";
+
+  document.getElementById("modalBody").innerHTML=
+    formatParagraphs(isFrench ? frenchText : englishText);
+
+  document.getElementById("textModal").classList.remove("hidden");
+
+}
+
+
+function closeText(){
+  document.getElementById("textModal").classList.add("hidden");
+}
+
+
+/* =========================================================
+   FIN
+========================================================= */
+
+function finishTest(){
+
+  clearInterval(questionTimer);
+  clearInterval(readingTimer);
+  clearInterval(globalTimer);
+
+  const elapsed=Math.floor((Date.now()-globalStart)/1000);
+
+  showResults(elapsed);
+
+}
+
+
+/* =========================================================
    RÉSULTATS
-========================================================== */
+========================================================= */
 
-function finish(){
+function showResults(elapsed){
 
-active=false;
-clearInterval(qTimer);
-clearInterval(rTimer);
+  let totalCorrect=0;
 
-document.getElementById("test").classList.add("hidden");
-document.getElementById("results").classList.remove("hidden");
+  const subjectScores={
+    "Mathématiques":0,
+    "Français":0,
+    "English":0,
+    "Culture générale":0
+  };
 
-let total=0;
-let wrong=0;
+  const errors=[];
 
-subjects.forEach(s=>{
-total+=stats[s].correct;
-wrong+=stats[s].wrong;
-});
+  questions.forEach((q,index)=>{
 
-document.getElementById("participant").textContent=
-"Participant : "+name;
+    const result=answers[index];
 
-document.getElementById("score").textContent=
-total+" / 100";
+    if(result && result.correct){
 
-document.getElementById("percent").textContent=
-Math.round(total)+" %";
+      totalCorrect++;
+      subjectScores[q.subject]++;
 
-document.getElementById("mistakes").textContent=
-wrong+" erreur(s)";
+    }else{
 
-document.getElementById("spent").textContent=
-"⏱ Temps réellement passé : "+formatTime(totalTime);
+      const correctText=q.options[q.answer];
 
-let html="";
+      errors.push({
+        number:index+1,
+        subject:q.subject,
+        question:q.question,
+        user:result ? result.text : "Aucune réponse",
+        correct:correctText,
+        explanation:q.explanation
+      });
 
-subjects.forEach(s=>{
+    }
 
-let c=stats[s].correct;
-let w=stats[s].wrong;
-let p=Math.round(c/25*100);
+  });
 
-html+=`
-<div class="subject">
-<h3>${s}</h3>
-<p><b>Score :</b> ${c}/25</p>
-<p><b>Pourcentage :</b> ${p}%</p>
-<p><b>Erreurs :</b> ${w}</p>
-</div>
-`;
-});
+  const percentage=totalCorrect;
 
-document.getElementById("subjects").innerHTML=html;
+  document.getElementById("mainContent").innerHTML=`
 
-showErrors();
+    <div class="results">
+
+      <div class="result-hero">
+
+        <div>
+          <h1>Évaluation terminée</h1>
+
+          <p>
+            Bravo ${escapeHTML(candidateName)}.
+            Voici ton bilan détaillé.
+          </p>
+
+        </div>
+
+        <div class="score-circle">
+          <div>
+            <strong>${totalCorrect}%</strong>
+            <small>${totalCorrect}/100</small>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="result-grid">
+
+        <div class="result-box">
+          <small>Score</small>
+          <strong>${totalCorrect}/100</strong>
+        </div>
+
+        <div class="result-box">
+          <small>Pourcentage</small>
+          <strong>${percentage}%</strong>
+        </div>
+
+        <div class="result-box">
+          <small>Erreurs</small>
+          <strong>${100-totalCorrect}</strong>
+        </div>
+
+        <div class="result-box">
+          <small>Temps utilisé</small>
+          <strong style="font-size:20px">${formatTime(elapsed)}</strong>
+        </div>
+
+      </div>
+
+
+      <h2 style="margin:30px 0 15px">
+        Résultats par matière
+      </h2>
+
+
+      <div class="subject-results">
+
+        ${Object.entries(subjectScores).map(([subject,score])=>`
+
+          <div class="subject-result">
+
+            <strong>${subject}</strong>
+
+            <div class="subject-score">
+              ${score}/25
+            </div>
+
+            <small style="color:#777">
+              ${score*4}%
+            </small>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+
+      <h2 class="errors-title">
+        Analyse des erreurs (${errors.length})
+      </h2>
+
+
+      ${
+        errors.length===0
+        ?`
+          <div class="result-box">
+            <h3 style="color:#159447">
+              Excellent ! Toutes les réponses sont correctes.
+            </h3>
+          </div>
+        `
+        :
+        errors.map(error=>`
+
+          <div class="error-card">
+
+            <h3>
+              Question ${error.number} —
+              ${error.subject}
+            </h3>
+
+            <p style="margin-bottom:8px">
+              ${error.question}
+            </p>
+
+            <div class="answer-wrong">
+              ✕ Ta réponse :
+              <strong>${escapeHTML(error.user)}</strong>
+            </div>
+
+            <div class="answer-right">
+              ✓ Bonne réponse :
+              <strong>${escapeHTML(error.correct)}</strong>
+            </div>
+
+            <div class="explanation">
+              <strong>Explication :</strong>
+              ${error.explanation}
+            </div>
+
+          </div>
+
+        `).join("")
+      }
+
+
+      <div class="footer">
+        Prépa Excellentia Wantanshi • by Nathan
+      </div>
+
+    </div>
+  `;
+
 }
 
 
-/* ==========================================================
-   ERREURS ET EXPLICATIONS
-========================================================== */
-
-function showErrors(){
-
-let html="";
-let n=0;
-
-list.forEach((q,k)=>{
-
-let correct=ans[k]!==null && q.opts[ans[k]].correct;
-
-if(!correct){
-
-n++;
-
-let user=
-ans[k]===null
-?"Aucune réponse"
-:q.opts[ans[k]].text;
-
-let right=
-q.opts.find(o=>o.correct).text;
-
-html+=`
-<div class="error">
-
-<b>${n}. ${q.s}</b>
-
-<p><b>Question :</b> ${q.q}</p>
-
-<p class="bad">
-❌ Votre réponse : ${user}
-</p>
-
-<p class="ok">
-✅ Bonne réponse : ${right}
-</p>
-
-<div class="exp">
-<b>Explication :</b> ${q.e}
-</div>
-
-</div>
-`;
-}
-});
-
-if(!html){
-html=`
-<p class="ok">
-🎉 Aucune erreur ! Excellent travail.
-</p>
-`;
-}
-
-document.getElementById("errors").innerHTML=html;
-}
-
-
-/* ==========================================================
-   TEMPS
-========================================================== */
-
-function formatTime(t){
-
-let h=Math.floor(t/3600);
-let m=Math.floor((t%3600)/60);
-let s=t%60;
-
-if(h>0)
-return `${h} h ${String(m).padStart(2,"0")} min ${String(s).padStart(2,"0")} s`;
-
-return `${m} min ${String(s).padStart(2,"0")} s`;
-}
-
-
-/* ==========================================================
-   ANTI-TRICHE
-========================================================== */
-
-let warned=false;
+/* =========================================================
+   PROTECTION
+========================================================= */
 
 document.addEventListener("visibilitychange",()=>{
 
-if(document.hidden && active && !warned){
+  if(
+    document.visibilityState==="hidden" &&
+    !document.getElementById("app").classList.contains("hidden") &&
+    currentIndex<100
+  ){
 
-warned=true;
+    cheatingCount++;
 
-alert(
-"⚠️ TENTATIVE DE TRICHE\n\n"+
-"Vous avez quitté la page du test."
-);
+    document.getElementById("cheatWarning")
+      .classList.remove("hidden");
 
-setTimeout(()=>warned=false,3000);
-}
+  }
+
 });
 
-window.addEventListener("beforeunload",e=>{
 
-if(active){
-e.preventDefault();
-e.returnValue="";
+function closeWarning(){
+
+  document.getElementById("cheatWarning")
+    .classList.add("hidden");
+
 }
+
+
+window.addEventListener("beforeunload",(e)=>{
+
+  if(
+    !document.getElementById("app").classList.contains("hidden") &&
+    currentIndex<100
+  ){
+
+    e.preventDefault();
+    e.returnValue="";
+
+  }
+
 });
+
+
+/* Empêcher le bouton retour */
 
 history.pushState(null,"",location.href);
 
 window.addEventListener("popstate",()=>{
 
-if(active){
+  if(!document.getElementById("app").classList.contains("hidden")){
 
-alert("⚠️ Le retour arrière est désactivé pendant le test.");
+    history.pushState(null,"",location.href);
 
-history.pushState(null,"",location.href);
-}
+    alert(
+      "Le retour en arrière est désactivé pendant l'évaluation."
+    );
+
+  }
+
 });
 
 
-/* ==========================================================
-   CONTRÔLE
-========================================================== */
+/* =========================================================
+   UTILITAIRE
+========================================================= */
 
-console.log("Total :",bank.length);
-console.log("Anglais :",bank.filter(x=>x.s==="Anglais").length);
-console.log("Français :",bank.filter(x=>x.s==="Français").length);
-console.log("Maths :",bank.filter(x=>x.s==="Maths").length);
-console.log("Culture :",bank.filter(x=>x.s==="Culture générale").length);
+function escapeHTML(text){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   VÉRIFICATION DU NOMBRE DE QUESTIONS
+========================================================= */
+
+console.log(
+  "Nombre total de questions :",
+  questions.length
+);
+
+if(questions.length!==100){
+
+  console.warn(
+    "Attention : le test doit contenir exactement 100 questions."
+  );
+
+}
 
 </script>
+
 </body>
-    </html>
+   </html>
